@@ -12,16 +12,21 @@
   ],
   "scripts": {
     "build": "tsc --project .",
+    "test": "jest",
     "lint": "eslint . --ext .ts,.js"
   },
   "license": "MIT",
   "private": false,
   "devDependencies": {
     "@metamask/eslint-config": "^3.2.0",
+    "@types/jest": "^26.0.13",
     "@typescript-eslint/eslint-plugin": "^2.20.0",
     "@typescript-eslint/parser": "^2.17.0",
     "eslint": "^6.8.0",
     "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jest": "^23.6.0",
+    "jest": "^26.4.2",
+    "ts-jest": "^26.3.0",
     "typescript": "^4.0.2"
   },
   "dependencies": {
