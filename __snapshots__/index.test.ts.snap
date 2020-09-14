@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sort JSON should sort unsorted JSON 1`] = `
+"{
+  \\"0\\": \\"0\\",
+  \\"a\\": \\"a\\",
+  \\"b\\": \\"b\\",
+  \\"c\\": \\"c\\"
+}
+"
+`;
+
+exports[`Sort JSON should validate sorted JSON 1`] = `
+"{
+  \\"0\\": \\"0\\",
+  \\"a\\": \\"a\\",
+  \\"b\\": \\"b\\",
+  \\"c\\": \\"c\\"
+}
+"
+`;
