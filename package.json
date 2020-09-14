@@ -11,7 +11,8 @@
     "index.js.map"
   ],
   "scripts": {
-    "build": "tsc --project ."
+    "build": "tsc --project .",
+    "lint": "eslint . --ext .ts,.js"
   },
   "license": "MIT",
   "private": false,

@@ -5,6 +5,9 @@
 *.d.ts
 *.map
 
+# Configuration files
+!.eslintrc.js
+
 # Logs
 logs
 *.log
