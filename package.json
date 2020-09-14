@@ -5,6 +5,17 @@
   "main": "index.js",
   "repository": "https://github.com/Gudahtt/prettier-plugin-sorted-json",
   "author": "Mark Stacey <markjstacey@gmail.com>",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "index.js.map"
+  ],
+  "scripts": {
+    "build": "tsc --project ."
+  },
   "license": "MIT",
-  "private": false
+  "private": false,
+  "devDependencies": {
+    "typescript": "^4.0.2"
+  }
 }

@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "module": "CommonJS",
+    "sourceMap": true,
+    "strict": true,
+    "target": "ES2017"
+  },
+  "include": [
+    "./**/*.ts"
+  ]
+}
