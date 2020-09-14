@@ -1,5 +1,5 @@
 import { format } from 'prettier';
-import SortJsonPlugin from '.';
+import * as SortJsonPlugin from '.';
 
 describe('Sort JSON', () => {
   it('should validate sorted JSON', () => {
