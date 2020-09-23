@@ -11,7 +11,13 @@ export const parsers = {
         preprocessedText = babelParsers.json.preprocess(text, options);
       }
 
-      const json = JSON.parse(preprocessedText);
+      let json;
+      try {
+        json = JSON.parse(preprocessedText);
+      } catch (_) {
+        // skip invalid JSON; this is best handled by the regular JSON parser
+        return text;
+      }
 
       const sortedJson: Record<string, any> = {};
       for (const key of Object.keys(json).sort()) {

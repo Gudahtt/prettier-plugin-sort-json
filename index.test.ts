@@ -62,6 +62,16 @@ describe('Sort JSON', () => {
     expect(output).toBe('');
   });
 
+  it('should throw Syntax Error in parser for invalid JSON', () => {
+    expect(() => {
+      format('{', {
+        filepath: 'foo.json',
+        parser: 'json',
+        plugins: [SortJsonPlugin],
+      });
+    }).toThrow(/^Unexpected token \(1:2\)/u);
+  });
+
   for (const validNonObjectJson of validNonObjectJsonExamples) {
     it(`should return '${validNonObjectJson}' unchanged`, () => {
       const validNonObjectJsonWithNewline = `${validNonObjectJson}\n`;
