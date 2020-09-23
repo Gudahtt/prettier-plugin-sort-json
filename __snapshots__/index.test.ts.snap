@@ -37,20 +37,28 @@ exports[`Sort JSON should sort a JSON object with unconventional keys 1`] = `
 
 exports[`Sort JSON should sort an unsorted JSON object 1`] = `
 "{
-  \\"0\\": \\"0\\",
-  \\"a\\": \\"a\\",
-  \\"b\\": \\"b\\",
-  \\"c\\": \\"c\\"
+  \\"0\\": null,
+  \\"a\\": null,
+  \\"b\\": null,
+  \\"exampleNestedObject\\": {
+    \\"z\\": null,
+    \\"a\\": null
+  },
+  \\"z\\": null
 }
 "
 `;
 
 exports[`Sort JSON should validate a sorted JSON object 1`] = `
 "{
-  \\"0\\": \\"0\\",
-  \\"a\\": \\"a\\",
-  \\"b\\": \\"b\\",
-  \\"c\\": \\"c\\"
+  \\"0\\": null,
+  \\"a\\": null,
+  \\"b\\": null,
+  \\"exampleNestedObject\\": {
+    \\"z\\": null,
+    \\"a\\": null
+  },
+  \\"z\\": null
 }
 "
 `;
