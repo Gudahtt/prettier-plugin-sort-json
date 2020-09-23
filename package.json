@@ -12,6 +12,7 @@
   ],
   "scripts": {
     "build": "tsc --project .",
+    "prepublishOnly": "yarn build",
     "test": "jest",
     "lint": "eslint . --ext .ts,.js"
   },
