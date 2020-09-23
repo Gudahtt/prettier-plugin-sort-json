@@ -1,5 +1,5 @@
 {
-  "name": "prettier-plugin-sorted-json",
+  "name": "prettier-plugin-sort-json",
   "version": "0.0.1",
   "description": "Prettier plugin to sort JSON files alphanumerically by key",
   "main": "index.js",
