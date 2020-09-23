@@ -1,6 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Sort JSON should sort unsorted JSON 1`] = `
+exports[`Sort JSON should sort a JSON object with unconventional keys 1`] = `
+"{
+  \\"\\": null,
+  \\"\\\\u0000\\": null,
+  \\"\\\\b\\": null,
+  \\"\\\\t\\": null,
+  \\"\\\\n\\": null,
+  \\"\\\\f\\": null,
+  \\"\\\\r\\": null,
+  \\" \\": null,
+  \\"\\\\\\"\\": null,
+  \\"'\\": null,
+  \\"-10\\": null,
+  \\"-10.1e10\\": null,
+  \\"/\\": null,
+  \\"0X10\\": null,
+  \\"0x10\\": null,
+  \\"10.101\\": null,
+  \\"10.1e10\\": null,
+  \\"1E10\\": null,
+  \\"1e10\\": null,
+  \\"[\\": null,
+  \\"[1,2,3]\\": null,
+  \\"[]\\": null,
+  \\"\\\\\\\\\\": null,
+  \\"false\\": null,
+  \\"null\\": null,
+  \\"true\\": null,
+  \\"{\\": null,
+  \\"{}\\": null,
+  \\"￿\\": null
+}
+"
+`;
+
+exports[`Sort JSON should sort an unsorted JSON object 1`] = `
 "{
   \\"0\\": \\"0\\",
   \\"a\\": \\"a\\",
@@ -10,12 +45,47 @@ exports[`Sort JSON should sort unsorted JSON 1`] = `
 "
 `;
 
-exports[`Sort JSON should validate sorted JSON 1`] = `
+exports[`Sort JSON should validate a sorted JSON object 1`] = `
 "{
   \\"0\\": \\"0\\",
   \\"a\\": \\"a\\",
   \\"b\\": \\"b\\",
   \\"c\\": \\"c\\"
+}
+"
+`;
+
+exports[`Sort JSON should validate a sorted JSON object with unconventional keys 1`] = `
+"{
+  \\"\\": null,
+  \\"\\\\u0000\\": null,
+  \\"\\\\b\\": null,
+  \\"\\\\t\\": null,
+  \\"\\\\n\\": null,
+  \\"\\\\f\\": null,
+  \\"\\\\r\\": null,
+  \\" \\": null,
+  \\"\\\\\\"\\": null,
+  \\"'\\": null,
+  \\"-10\\": null,
+  \\"-10.1e10\\": null,
+  \\"/\\": null,
+  \\"0X10\\": null,
+  \\"0x10\\": null,
+  \\"10.101\\": null,
+  \\"10.1e10\\": null,
+  \\"1E10\\": null,
+  \\"1e10\\": null,
+  \\"[\\": null,
+  \\"[1,2,3]\\": null,
+  \\"[]\\": null,
+  \\"\\\\\\\\\\": null,
+  \\"false\\": null,
+  \\"null\\": null,
+  \\"true\\": null,
+  \\"{\\": null,
+  \\"{}\\": null,
+  \\"￿\\": null
 }
 "
 `;
