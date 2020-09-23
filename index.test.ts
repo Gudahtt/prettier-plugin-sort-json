@@ -99,10 +99,14 @@ describe('Sort JSON', () => {
 
   it('should validate a sorted JSON object', () => {
     const fixture = {
-      0: '0',
-      a: 'a',
-      b: 'b',
-      c: 'c',
+      0: null,
+      a: null,
+      b: null,
+      exampleNestedObject: {
+        z: null,
+        a: null,
+      },
+      z: null,
     };
 
     const input = JSON.stringify(fixture, null, 2);
@@ -117,10 +121,14 @@ describe('Sort JSON', () => {
 
   it('should sort an unsorted JSON object', () => {
     const fixture = {
-      0: '0',
-      b: 'b',
-      a: 'a',
-      c: 'c',
+      z: null,
+      a: null,
+      b: null,
+      0: null,
+      exampleNestedObject: {
+        z: null,
+        a: null,
+      },
     };
 
     const input = JSON.stringify(fixture, null, 2);
