@@ -19,6 +19,11 @@ export const parsers = {
         return text;
       }
 
+      // Only objects are intended to be sorted by this plugin
+      if (json === null || typeof json !== 'object' || Array.isArray(json)) {
+        return text;
+      }
+
       const sortedJson: Record<string, any> = {};
       for (const key of Object.keys(json).sort()) {
         sortedJson[key] = json[key];

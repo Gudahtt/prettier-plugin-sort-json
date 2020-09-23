@@ -1,8 +1,20 @@
 import { format } from 'prettier';
 import * as SortJsonPlugin from '.';
 
-const validNonObjectJsonExamples = [
+const validJsonExamples = [
+  'null',
+  'true',
+  'false',
+  '10',
+  '-10',
+  '10.101',
+  '1e10',
+  '10.1e10',
+  '-10.1e10',
+  '""',
   '{}',
+  '[]',
+  '[1, 2, 3]',
 ];
 
 const unconventionalKeys = [
@@ -72,16 +84,16 @@ describe('Sort JSON', () => {
     }).toThrow(/^Unexpected token \(1:2\)/u);
   });
 
-  for (const validNonObjectJson of validNonObjectJsonExamples) {
-    it(`should return '${validNonObjectJson}' unchanged`, () => {
-      const validNonObjectJsonWithNewline = `${validNonObjectJson}\n`;
-      const output = format(validNonObjectJsonWithNewline, {
+  for (const validJson of validJsonExamples) {
+    it(`should return '${validJson}' unchanged`, () => {
+      const validJsonWithNewline = `${validJson}\n`;
+      const output = format(validJsonWithNewline, {
         filepath: 'foo.json',
         parser: 'json',
         plugins: [SortJsonPlugin],
       });
 
-      expect(output).toBe(validNonObjectJsonWithNewline);
+      expect(output).toBe(validJsonWithNewline);
     });
   }
 
