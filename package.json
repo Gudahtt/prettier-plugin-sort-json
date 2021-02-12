@@ -3,7 +3,10 @@
   "version": "0.0.1",
   "description": "Prettier plugin to sort JSON files alphanumerically by key",
   "main": "index.js",
-  "repository": "https://github.com/Gudahtt/prettier-plugin-sorted-json",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gudahtt/prettier-plugin-sort-json.git"
+  },
   "author": "Mark Stacey <markjstacey@gmail.com>",
   "files": [
     "index.js",
