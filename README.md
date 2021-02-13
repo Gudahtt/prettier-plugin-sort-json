@@ -24,8 +24,6 @@ yarn add --dev prettier-plugin-sort-json
 
 This plugin adds a JSON preprocessor that will sort JSON files containing a JSON object alphanumerically by key. JSON files containing Arrays or other non-Object values are skipped.
 
-Currently we only perform a shallow sort. Nested objects are not sorted.
-
 Object entries are sorted by key using [`Array.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort), according to each character's Unicode code point value.
 
 ## Examples
@@ -59,3 +57,13 @@ After:
     "z": null
 }
 ```
+
+## Configuration
+
+### JSON Recursive Sort
+
+Sort JSON objects recursively, including all nested objects.
+
+| Default | CLI Override            | API Override                |
+| ------- | ----------------------- | --------------------------- |
+| `false` | `--json-recursive-sort` | `jsonRecursiveSort: <bool>` |
