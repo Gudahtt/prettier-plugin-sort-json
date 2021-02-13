@@ -4,7 +4,7 @@ import { parsers as babelParsers } from 'prettier/parser-babel';
 export const parsers = {
   'json': {
     ...babelParsers.json,
-    preprocess (text: any, options: any) {
+    preprocess(text: any, options: any) {
       let preprocessedText = text;
       /* istanbul ignore next */
       if (babelParsers.json.preprocess) {

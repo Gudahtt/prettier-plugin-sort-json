@@ -15,4 +15,7 @@ module.exports = {
       sourceType: 'script',
     },
   }],
+  rules: {
+    'jest/no-restricted-matchers': 'off',
+  },
 };
