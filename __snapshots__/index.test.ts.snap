@@ -42,7 +42,96 @@ exports[`Sort JSON should sort an unsorted JSON object 1`] = `
   \\"b\\": null,
   \\"exampleNestedObject\\": {
     \\"z\\": null,
+    \\"exampleArray\\": [\\"z\\", \\"b\\", \\"a\\"],
+    \\"examplePrimitive\\": 1,
     \\"a\\": null
+  },
+  \\"z\\": null
+}
+"
+`;
+
+exports[`Sort JSON should sort an unsorted JSON object recursively 1`] = `
+"{
+  \\"0\\": null,
+  \\"a\\": null,
+  \\"b\\": null,
+  \\"exampleNestedObject\\": {
+    \\"a\\": null,
+    \\"exampleArray\\": [\\"z\\", \\"b\\", \\"a\\"],
+    \\"examplePrimitive\\": 1,
+    \\"z\\": null
+  },
+  \\"z\\": null
+}
+"
+`;
+
+exports[`Sort JSON should sort an unsorted JSON object within an array recursively 1`] = `
+"[
+  1,
+  4,
+  {
+    \\"0\\": null,
+    \\"a\\": null,
+    \\"b\\": null,
+    \\"exampleNestedObject\\": {
+      \\"a\\": null,
+      \\"exampleArray\\": [\\"z\\", \\"b\\", \\"a\\"],
+      \\"examplePrimitive\\": 1,
+      \\"z\\": null
+    },
+    \\"z\\": null
+  },
+  2
+]
+"
+`;
+
+exports[`Sort JSON should sort an unsorted deeply nested JSON object recursively 1`] = `
+"{
+  \\"0\\": null,
+  \\"a\\": null,
+  \\"b\\": null,
+  \\"exampleNestedObject\\": {
+    \\"a\\": null,
+    \\"anotherObject\\": {
+      \\"exampleArray\\": [\\"z\\", \\"b\\", \\"a\\"],
+      \\"examplePrimitive\\": 1,
+      \\"yetAnother\\": {
+        \\"andAnother\\": {
+          \\"a\\": null,
+          \\"b\\": null,
+          \\"z\\": null
+        }
+      }
+    },
+    \\"z\\": null
+  },
+  \\"z\\": null
+}
+"
+`;
+
+exports[`Sort JSON should validate a deeply nested sorted JSON object recursively 1`] = `
+"{
+  \\"0\\": null,
+  \\"a\\": null,
+  \\"b\\": null,
+  \\"exampleNestedObject\\": {
+    \\"a\\": null,
+    \\"anotherObject\\": {
+      \\"exampleArray\\": [\\"z\\", \\"b\\", \\"a\\"],
+      \\"examplePrimitive\\": 1,
+      \\"yetAnother\\": {
+        \\"andAnother\\": {
+          \\"a\\": null,
+          \\"b\\": null,
+          \\"z\\": null
+        }
+      }
+    },
+    \\"z\\": null
   },
   \\"z\\": null
 }
@@ -56,7 +145,25 @@ exports[`Sort JSON should validate a sorted JSON object 1`] = `
   \\"b\\": null,
   \\"exampleNestedObject\\": {
     \\"z\\": null,
+    \\"exampleArray\\": [\\"z\\", \\"b\\", \\"a\\"],
+    \\"examplePrimitive\\": 1,
     \\"a\\": null
+  },
+  \\"z\\": null
+}
+"
+`;
+
+exports[`Sort JSON should validate a sorted JSON object recursively 1`] = `
+"{
+  \\"0\\": null,
+  \\"a\\": null,
+  \\"b\\": null,
+  \\"exampleNestedObject\\": {
+    \\"a\\": null,
+    \\"exampleArray\\": [\\"z\\", \\"b\\", \\"a\\"],
+    \\"examplePrimitive\\": 1,
+    \\"z\\": null
   },
   \\"z\\": null
 }
@@ -95,5 +202,26 @@ exports[`Sort JSON should validate a sorted JSON object with unconventional keys
   \\"{}\\": null,
   \\"￿\\": null
 }
+"
+`;
+
+exports[`Sort JSON should validate a sorted JSON object within an array recursively 1`] = `
+"[
+  1,
+  4,
+  {
+    \\"0\\": null,
+    \\"a\\": null,
+    \\"b\\": null,
+    \\"exampleNestedObject\\": {
+      \\"a\\": null,
+      \\"exampleArray\\": [\\"z\\", \\"b\\", \\"a\\"],
+      \\"examplePrimitive\\": 1,
+      \\"z\\": null
+    },
+    \\"z\\": null
+  },
+  2
+]
 "
 `;

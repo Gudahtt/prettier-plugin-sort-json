@@ -104,6 +104,8 @@ describe('Sort JSON', () => {
       b: null,
       exampleNestedObject: {
         z: null,
+        exampleArray: ['z', 'b', 'a'],
+        examplePrimitive: 1,
         a: null,
       },
       z: null,
@@ -127,6 +129,8 @@ describe('Sort JSON', () => {
       0: null,
       exampleNestedObject: {
         z: null,
+        exampleArray: ['z', 'b', 'a'],
+        examplePrimitive: 1,
         a: null,
       },
     };
@@ -136,6 +140,196 @@ describe('Sort JSON', () => {
       filepath: 'foo.json',
       parser: 'json',
       plugins: [SortJsonPlugin],
+    });
+
+    expect(output).toMatchSnapshot();
+  });
+
+  it('should validate a sorted JSON object recursively', () => {
+    const fixture = {
+      0: null,
+      a: null,
+      b: null,
+      exampleNestedObject: {
+        a: null,
+        exampleArray: ['z', 'b', 'a'],
+        examplePrimitive: 1,
+        z: null,
+      },
+      z: null,
+    };
+
+    const input = JSON.stringify(fixture, null, 2);
+    const output = format(input, {
+      filepath: 'foo.json',
+      parser: 'json',
+      plugins: [SortJsonPlugin],
+      ...{
+        jsonRecursiveSort: true,
+      },
+    });
+
+    expect(output).toMatchSnapshot();
+  });
+
+  it('should sort an unsorted JSON object recursively', () => {
+    const fixture = {
+      z: null,
+      a: null,
+      b: null,
+      0: null,
+      exampleNestedObject: {
+        z: null,
+        a: null,
+        exampleArray: ['z', 'b', 'a'],
+        examplePrimitive: 1,
+      },
+    };
+
+    const input = JSON.stringify(fixture, null, 2);
+    const output = format(input, {
+      filepath: 'foo.json',
+      parser: 'json',
+      plugins: [SortJsonPlugin],
+      ...{
+        jsonRecursiveSort: true,
+      },
+    });
+
+    expect(output).toMatchSnapshot();
+  });
+
+  it('should validate a sorted JSON object within an array recursively', () => {
+    const fixture = [
+      1,
+      4,
+      {
+        0: null,
+        a: null,
+        b: null,
+        exampleNestedObject: {
+          a: null,
+          exampleArray: ['z', 'b', 'a'],
+          examplePrimitive: 1,
+          z: null,
+        },
+        z: null,
+      },
+      2,
+    ];
+
+    const input = JSON.stringify(fixture, null, 2);
+    const output = format(input, {
+      filepath: 'foo.json',
+      parser: 'json',
+      plugins: [SortJsonPlugin],
+      ...{
+        jsonRecursiveSort: true,
+      },
+    });
+
+    expect(output).toMatchSnapshot();
+  });
+
+  it('should sort an unsorted JSON object within an array recursively', () => {
+    const fixture = [
+      1,
+      4,
+      {
+        z: null,
+        a: null,
+        b: null,
+        0: null,
+        exampleNestedObject: {
+          z: null,
+          a: null,
+          exampleArray: ['z', 'b', 'a'],
+          examplePrimitive: 1,
+        },
+      },
+      2,
+    ];
+
+    const input = JSON.stringify(fixture, null, 2);
+    const output = format(input, {
+      filepath: 'foo.json',
+      parser: 'json',
+      plugins: [SortJsonPlugin],
+      ...{
+        jsonRecursiveSort: true,
+      },
+    });
+
+    expect(output).toMatchSnapshot();
+  });
+
+  it('should validate a deeply nested sorted JSON object recursively', () => {
+    const fixture = {
+      0: null,
+      a: null,
+      b: null,
+      exampleNestedObject: {
+        a: null,
+        anotherObject: {
+          exampleArray: ['z', 'b', 'a'],
+          examplePrimitive: 1,
+          yetAnother: {
+            andAnother: {
+              a: null,
+              b: null,
+              z: null,
+            },
+          },
+        },
+        z: null,
+      },
+      z: null,
+    };
+
+    const input = JSON.stringify(fixture, null, 2);
+    const output = format(input, {
+      filepath: 'foo.json',
+      parser: 'json',
+      plugins: [SortJsonPlugin],
+      ...{
+        jsonRecursiveSort: true,
+      },
+    });
+
+    expect(output).toMatchSnapshot();
+  });
+
+  it('should sort an unsorted deeply nested JSON object recursively', () => {
+    const fixture = {
+      z: null,
+      a: null,
+      b: null,
+      0: null,
+      exampleNestedObject: {
+        z: null,
+        a: null,
+        anotherObject: {
+          yetAnother: {
+            andAnother: {
+              z: null,
+              b: null,
+              a: null,
+            },
+          },
+          exampleArray: ['z', 'b', 'a'],
+          examplePrimitive: 1,
+        },
+      },
+    };
+
+    const input = JSON.stringify(fixture, null, 2);
+    const output = format(input, {
+      filepath: 'foo.json',
+      parser: 'json',
+      plugins: [SortJsonPlugin],
+      ...{
+        jsonRecursiveSort: true,
+      },
     });
 
     expect(output).toMatchSnapshot();
