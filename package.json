@@ -39,6 +39,6 @@
     "@types/prettier": "^2.2.0"
   },
   "peerDependencies": {
-    "prettier": "^2.2.1"
+    "prettier": "^2.1.0"
   }
 }
