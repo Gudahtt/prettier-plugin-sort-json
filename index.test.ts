@@ -375,4 +375,35 @@ describe('Sort JSON', () => {
 
     expect(output).toMatchSnapshot();
   });
+
+  it('should sort JSON objects within an array', () => {
+    const fixture = {
+      test: [
+        { foo: 'bar', baz: 3 },
+        { foo: 'bag', brz: 2 },
+      ],
+      z: null,
+      a: null,
+      b: null,
+      0: null,
+      exampleNestedObject: {
+        z: null,
+        a: null,
+        exampleArray: ['z', 'b', 'a'],
+        examplePrimitive: 1,
+      },
+    };
+
+    const input = JSON.stringify(fixture, null, 2);
+    const output = format(input, {
+      filepath: 'foo.json',
+      parser: 'json',
+      plugins: [SortJsonPlugin],
+      ...{
+        jsonRecursiveSort: true,
+      },
+    });
+
+    expect(output).toMatchSnapshot();
+  });
 });
