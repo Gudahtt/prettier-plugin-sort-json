@@ -17,5 +17,9 @@ module.exports = {
   }],
   rules: {
     'jest/no-restricted-matchers': 'off',
+    
+    'import/no-dynamic-require': 'off'
+    '@typescript-eslint/no-require-imports': 'off',
+    'nodejs/global-require': 'off'
   },
 };
