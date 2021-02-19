@@ -375,4 +375,94 @@ describe('Sort JSON', () => {
 
     expect(output).toMatchSnapshot();
   });
+
+  it('should sort a JSON object with a custom key sorting algorithm', () => {
+    /**
+     * This example will place numbers first,
+     * then the string 'k', then sort the others in reverse chronological order.
+     * Known caveat: Due to a language quirk, the JSON will always display
+     * numeric values in ascending order before
+     * @see: https://www.stefanjudis.com/today-i-learned/property-order-is-predictable-in-javascript-objects-since-es2015/
+     */
+
+    const fixture = {
+      z: null,
+      a: null,
+      b: null,
+      k: null,
+      0: null,
+      exampleNestedObject: {
+        z: null,
+        a: null,
+        anotherObject: {
+          yetAnother: {
+            andAnother: {
+              z: null,
+              b: null,
+              a: null,
+            },
+          },
+          exampleArray: ['z', 'b', 'a'],
+          examplePrimitive: 1,
+        },
+      },
+    };
+
+    const input = JSON.stringify(fixture, null, 2);
+    const output = format(input, {
+      filepath: 'foo.json',
+      parser: 'json',
+      plugins: [SortJsonPlugin],
+      ...{
+        jsonObjectSortAlgorithm: './test/objectSortA.ts',
+      },
+    });
+
+    expect(output).toMatchSnapshot();
+  });
+
+  it('should sort a JSON object with another custom key sorting algorithm', () => {
+    /**
+     * This example will place keys in the order:
+     * f o u b a r <rest in ascending order>
+     */
+
+    const fixture = {
+      f: null,
+      b: null,
+      u: null,
+      o: null,
+      r: null,
+      a: null,
+      k: null,
+      z: null,
+      exampleNestedObject: {
+        z: null,
+        a: null,
+        anotherObject: {
+          yetAnother: {
+            andAnother: {
+              z: null,
+              b: null,
+              a: null,
+            },
+          },
+          exampleArray: ['z', 'b', 'a'],
+          examplePrimitive: 1,
+        },
+      },
+    };
+
+    const input = JSON.stringify(fixture, null, 2);
+    const output = format(input, {
+      filepath: 'foo.json',
+      parser: 'json',
+      plugins: [SortJsonPlugin],
+      ...{
+        jsonObjectSortAlgorithm: './test/objectSortB.ts',
+      },
+    });
+
+    expect(output).toMatchSnapshot();
+  });
 });

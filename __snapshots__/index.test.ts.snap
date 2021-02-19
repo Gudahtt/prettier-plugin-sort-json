@@ -1,5 +1,60 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Sort JSON should sort a JSON object with a custom key sorting algorithm 1`] = `
+"{
+  \\"0\\": null,
+  \\"k\\": null,
+  \\"z\\": null,
+  \\"exampleNestedObject\\": {
+    \\"z\\": null,
+    \\"a\\": null,
+    \\"anotherObject\\": {
+      \\"yetAnother\\": {
+        \\"andAnother\\": {
+          \\"z\\": null,
+          \\"b\\": null,
+          \\"a\\": null
+        }
+      },
+      \\"exampleArray\\": [\\"z\\", \\"b\\", \\"a\\"],
+      \\"examplePrimitive\\": 1
+    }
+  },
+  \\"b\\": null,
+  \\"a\\": null
+}
+"
+`;
+
+exports[`Sort JSON should sort a JSON object with another custom key sorting algorithm 1`] = `
+"{
+  \\"f\\": null,
+  \\"o\\": null,
+  \\"u\\": null,
+  \\"b\\": null,
+  \\"a\\": null,
+  \\"r\\": null,
+  \\"exampleNestedObject\\": {
+    \\"z\\": null,
+    \\"a\\": null,
+    \\"anotherObject\\": {
+      \\"yetAnother\\": {
+        \\"andAnother\\": {
+          \\"z\\": null,
+          \\"b\\": null,
+          \\"a\\": null
+        }
+      },
+      \\"exampleArray\\": [\\"z\\", \\"b\\", \\"a\\"],
+      \\"examplePrimitive\\": 1
+    }
+  },
+  \\"k\\": null,
+  \\"z\\": null
+}
+"
+`;
+
 exports[`Sort JSON should sort a JSON object with unconventional keys 1`] = `
 "{
   \\"\\": null,
