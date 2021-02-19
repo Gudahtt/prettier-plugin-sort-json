@@ -16,8 +16,11 @@ function sortObject(object: any, options: SortJsonOptions): any {
       return sortObject(entry, options);
     });
   } else if (isObject(object) && !Array.isArray(object)) {
-    const objectSortFunction: (a: string, b: string) => number
-      = objectSortPath ? require(objectSortPath).default : undefined;
+    // ESLint does not like calling dynamic require().
+    /* eslint-disable import/no-dynamic-require, @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires, node/global-require */
+    const objectSortFunction: (a: string, b: string) => number =
+      objectSortPath ? require(objectSortPath).default : undefined;
+    /* eslint-enable import/no-dynamic-require, @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires, node/global-require */
 
     const sortedJson: Record<string, any> = {};
     for (const key of Object.keys(object).sort(objectSortFunction)) {

@@ -8,16 +8,16 @@
 /**
  * @param {string} a The first element to sort, converted to a string.
  * @param {string} b The second element to sort, converted to a string.
- * 
+ *
  * @returns {number} A number:
  * < 0 - First element must be placed before second
  *   0 - Both elements is equal, do not change order.
  * > 0 - Second element must be placed before first.
  */
-export default (a:string, b:string): number => {
+const sort = (a: string, b: string): number => {
   const presort = ['f', 'o', 'u', 'b', 'a', 'r'];
 
-  if (!presort.includes(a) && !presort.includes(b)){
+  if (!presort.includes(a) && !presort.includes(b)) {
     // Sort normally if not in presort.
     return a.localeCompare(b);
   } else if (presort.includes(a) && !presort.includes(b)) {
@@ -26,8 +26,9 @@ export default (a:string, b:string): number => {
   } else if (!presort.includes(a) && presort.includes(b)) {
     // Presort elements come first.
     return 1000;
-  } else {
-    // If a has a lower index, the result is negative, and a comes first.
-    return presort.indexOf(a) - presort.indexOf(b);
   }
-}
+  // If a has a lower index, the result is negative, and a comes first.
+  return presort.indexOf(a) - presort.indexOf(b);
+};
+
+export default sort;

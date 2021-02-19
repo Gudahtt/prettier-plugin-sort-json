@@ -9,16 +9,24 @@
 /**
  * @param {string} a The first element to sort, converted to a string.
  * @param {string} b The second element to sort, converted to a string.
- * 
+ *
  * @returns {number} A number:
  * < 0 - First element must be placed before second
  *   0 - Both elements is equal, do not change order.
  * > 0 - Second element must be placed before first.
  */
-export default (a:string, b:string): number => {
-  if (a === b) return 0;
-  if (a === 'k') return -1000;
-  if (b === 'k') return 1000;
+const sort = (a: string, b: string): number => {
+  if (a === b) {
+    return 0;
+  }
+  if (a === 'k') {
+    return -1000;
+  }
+  if (b === 'k') {
+    return 1000;
+  }
 
   return b.localeCompare(a);
-}
+};
+
+export default sort;

@@ -377,6 +377,7 @@ describe('Sort JSON', () => {
   });
 
   it('should sort a JSON object with a custom key sorting algorithm', () => {
+
     /**
      * This example will place numbers first,
      * then the string 'k', then sort the others in reverse chronological order.
@@ -422,6 +423,7 @@ describe('Sort JSON', () => {
   });
 
   it('should sort a JSON object with another custom key sorting algorithm', () => {
+
     /**
      * This example will place keys in the order:
      * f o u b a r <rest in ascending order>
