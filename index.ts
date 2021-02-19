@@ -1,18 +1,31 @@
-import { Parser } from 'prettier';
+import { Parser, ParserOptions, SupportOptions } from 'prettier';
 import { parsers as babelParsers } from 'prettier/parser-babel';
+
+interface SortJsonOptions extends ParserOptions<any> {
+  jsonRecursiveSort?: boolean;
+  jsonObjectSortAlgorithm?: string;
+}
 
 const isObject = (json: any) => json !== null && typeof json === 'object';
 
-function sortObject(object: any, recursive: boolean): any {
+function sortObject(object: any, options: SortJsonOptions): any {
+  const { jsonRecursiveSort: recursive, jsonObjectSortAlgorithm: objectSortPath } = options;
+
   if (Array.isArray(object) && recursive) {
     return object.map((entry: any) => {
-      return sortObject(entry, recursive);
+      return sortObject(entry, options);
     });
-  } else if (object !== null && typeof object === 'object' && !Array.isArray(object)) {
+  } else if (isObject(object) && !Array.isArray(object)) {
+    // ESLint does not like calling dynamic require().
+    /* eslint-disable import/no-dynamic-require, @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires, node/global-require */
+    const objectSortFunction: (a: string, b: string) => number =
+      objectSortPath ? require(objectSortPath).default : undefined;
+    /* eslint-enable import/no-dynamic-require, @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires, node/global-require */
+
     const sortedJson: Record<string, any> = {};
-    for (const key of Object.keys(object).sort()) {
+    for (const key of Object.keys(object).sort(objectSortFunction)) {
       if (recursive && isObject(object[key])) {
-        sortedJson[key] = sortObject(object[key], recursive);
+        sortedJson[key] = sortObject(object[key], options);
       } else {
         sortedJson[key] = object[key];
       }
@@ -25,7 +38,7 @@ function sortObject(object: any, recursive: boolean): any {
 export const parsers = {
   'json': {
     ...babelParsers.json,
-    preprocess(text, options: any) {
+    preprocess(text: string, options: SortJsonOptions) {
       let preprocessedText = text;
       /* istanbul ignore next */
       if (babelParsers.json.preprocess) {
@@ -40,30 +53,31 @@ export const parsers = {
         return text;
       }
 
-      const recursive = options.jsonRecursiveSort;
-
       // Only objects are intended to be sorted by this plugin
-      if (json === null || typeof json !== 'object' || (Array.isArray(json) && !recursive)) {
+      if (json === null || typeof json !== 'object' || (Array.isArray(json) && !options.jsonRecursiveSort)) {
         return text;
       }
 
-      const sortedJson = sortObject(json, recursive);
+      const sortedJson = sortObject(json, options);
 
       return JSON.stringify(sortedJson, null, 2);
     },
   },
 } as Record<string, Parser>;
 
-// I get a TypeScript error if I just set the type to 'boolean'
-// This fixes the error. I don't know why.
-const type: 'boolean' | 'path' | 'int' | 'choice' = 'boolean';
-
-export const options = {
+export const options: SupportOptions = {
   jsonRecursiveSort: {
     category: 'json-sort',
     default: false,
-    description: 'Sort JSON files recursively, including any nested properties',
+    description: 'Sort all JSON data recursively, including any nested properties',
     since: '0.0.2',
-    type,
+    type: 'boolean',
+  },
+  jsonObjectSortAlgorithm: {
+    category: 'json-sort',
+    default: '',
+    description: 'Specify a file exporting a function to customize how object keys are sorted.',
+    since: '0.0.3',
+    type: 'path',
   },
 };
