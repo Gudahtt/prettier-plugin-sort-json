@@ -1,4 +1,4 @@
-import { Parser } from 'prettier';
+import { Parser, ParserOptions, SupportOptions } from 'prettier';
 import { parsers as babelParsers } from 'prettier/parser-babel';
 
 const isObject = (json: any) => json !== null && typeof json === 'object';
@@ -25,7 +25,7 @@ function sortObject(object: any, recursive: boolean): any {
 export const parsers = {
   'json': {
     ...babelParsers.json,
-    preprocess(text, options: any) {
+    preprocess(text: string, options: SortJsonOptions) {
       let preprocessedText = text;
       /* istanbul ignore next */
       if (babelParsers.json.preprocess) {
@@ -54,16 +54,12 @@ export const parsers = {
   },
 } as Record<string, Parser>;
 
-// I get a TypeScript error if I just set the type to 'boolean'
-// This fixes the error. I don't know why.
-const type: 'boolean' | 'path' | 'int' | 'choice' = 'boolean';
-
-export const options = {
+export const options: SupportOptions = {
   jsonRecursiveSort: {
     category: 'json-sort',
     default: false,
-    description: 'Sort JSON files recursively, including any nested properties',
+    description: 'Sort all JSON data recursively, including any nested properties',
     since: '0.0.2',
-    type,
+    type: 'boolean',
   },
 };
