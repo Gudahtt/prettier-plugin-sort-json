@@ -1,3 +1,6 @@
+// The following line prevents this file from being included in test coverage reports.
+/* istanbul ignore file */
+
 /**
  * This example will place specific keys in a specified order.
  * Known caveat: Due to a language quirk, the JSON will always display

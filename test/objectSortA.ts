@@ -1,3 +1,6 @@
+// The following line prevents this file from being included in test coverage reports.
+/* istanbul ignore file */
+
 /**
  * This example will place numbers first,
  * then the string 'k', then sort the others in reverse chronological order.
