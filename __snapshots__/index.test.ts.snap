@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Sort JSON should sort JSON objects within an array 1`] = `
+exports[`Sort JSON should sort JSON objects recursively within a nested array 1`] = `
 "{
   \\"0\\": null,
   \\"a\\": null,
@@ -134,6 +134,32 @@ exports[`Sort JSON should sort an unsorted deeply nested JSON object recursively
     },
     \\"z\\": null
   },
+  \\"z\\": null
+}
+"
+`;
+
+exports[`Sort JSON should validate JSON objects recursively within a nested array 1`] = `
+"{
+  \\"0\\": null,
+  \\"a\\": null,
+  \\"b\\": null,
+  \\"exampleNestedObject\\": {
+    \\"a\\": null,
+    \\"exampleArray\\": [\\"z\\", \\"b\\", \\"a\\"],
+    \\"examplePrimitive\\": 1,
+    \\"z\\": null
+  },
+  \\"test\\": [
+    {
+      \\"baz\\": 3,
+      \\"foo\\": \\"bar\\"
+    },
+    {
+      \\"brz\\": 2,
+      \\"foo\\": \\"bag\\"
+    }
+  ],
   \\"z\\": null
 }
 "

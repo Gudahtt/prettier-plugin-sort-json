@@ -406,4 +406,35 @@ describe('Sort JSON', () => {
 
     expect(output).toMatchSnapshot();
   });
+
+  it('should validate JSON objects recursively within a nested array', () => {
+    const fixture = {
+      0: null,
+      a: null,
+      b: null,
+      exampleNestedObject: {
+        z: null,
+        a: null,
+        exampleArray: ['z', 'b', 'a'],
+        examplePrimitive: 1,
+      },
+      test: [
+        { baz: 3, foo: 'bar' },
+        { brz: 2, foo: 'bag' },
+      ],
+      z: null,
+    };
+
+    const input = JSON.stringify(fixture, null, 2);
+    const output = format(input, {
+      filepath: 'foo.json',
+      parser: 'json',
+      plugins: [SortJsonPlugin],
+      ...{
+        jsonRecursiveSort: true,
+      },
+    });
+
+    expect(output).toMatchSnapshot();
+  });
 });
