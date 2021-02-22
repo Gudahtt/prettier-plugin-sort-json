@@ -376,7 +376,7 @@ describe('Sort JSON', () => {
     expect(output).toMatchSnapshot();
   });
 
-  it('should sort JSON objects within an array', () => {
+  it('should sort JSON objects recursively within a nested array', () => {
     const fixture = {
       test: [
         { foo: 'bar', baz: 3 },
