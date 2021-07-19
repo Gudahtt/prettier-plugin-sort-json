@@ -1,21 +1,17 @@
 module.exports = {
   root: true,
-  extends: [
-    '@metamask/eslint-config',
-    '@metamask/eslint-config/config/jest',
-    '@metamask/eslint-config/config/nodejs',
-    '@metamask/eslint-config/config/typescript',
-  ],
-  overrides: [{
-    files: [
-      '.eslintrc.js',
-      'jest.config.js',
-    ],
-    parserOptions: {
-      sourceType: 'script',
+  extends: ['@metamask/eslint-config', '@metamask/eslint-config-nodejs'],
+  overrides: [
+    {
+      files: ['*.ts'],
+      extends: ['@metamask/eslint-config-typescript'],
     },
-  }],
-  rules: {
-    'jest/no-restricted-matchers': 'off',
-  },
+    {
+      files: ['*.test.ts'],
+      extends: ['@metamask/eslint-config-jest'],
+      rules: {
+        'jest/no-restricted-matchers': 'off',
+      },
+    },
+  ],
 };

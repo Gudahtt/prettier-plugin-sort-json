@@ -8,7 +8,11 @@ function sortObject(object: any, recursive: boolean): any {
     return object.map((entry: any) => {
       return sortObject(entry, recursive);
     });
-  } else if (object !== null && typeof object === 'object' && !Array.isArray(object)) {
+  } else if (
+    object !== null &&
+    typeof object === 'object' &&
+    !Array.isArray(object)
+  ) {
     const sortedJson: Record<string, any> = {};
     for (const key of Object.keys(object).sort()) {
       if (recursive && isObject(object[key])) {
@@ -23,7 +27,7 @@ function sortObject(object: any, recursive: boolean): any {
 }
 
 export const parsers = {
-  'json': {
+  json: {
     ...babelParsers.json,
     preprocess(text, options: any) {
       let preprocessedText = text;
@@ -43,7 +47,11 @@ export const parsers = {
       const recursive = options.jsonRecursiveSort;
 
       // Only objects are intended to be sorted by this plugin
-      if (json === null || typeof json !== 'object' || (Array.isArray(json) && !recursive)) {
+      if (
+        json === null ||
+        typeof json !== 'object' ||
+        (Array.isArray(json) && !recursive)
+      ) {
         return text;
       }
 
