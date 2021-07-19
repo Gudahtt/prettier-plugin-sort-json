@@ -20,7 +20,7 @@ const validJsonExamples = [
 const unconventionalKeys = [
   '',
   `"`,
-  '\'',
+  "'",
   '0x10',
   '0X10',
   'true',
@@ -38,9 +38,9 @@ const unconventionalKeys = [
   '[',
   '{',
   // eslint-disable-next-line no-useless-escape
-  '\"',
+  '"',
   // eslint-disable-next-line no-useless-escape
-  '\/',
+  '/',
   '\\',
   '\b',
   '\f',
@@ -336,14 +336,9 @@ describe('Sort JSON', () => {
   });
 
   it('should validate a sorted JSON object with unconventional keys', () => {
-    const fixture = unconventionalKeys
-      .sort()
-      .reduce(
-        (agg, key) => {
-          return { ...agg, [key]: null };
-        },
-        {}
-      );
+    const fixture = unconventionalKeys.sort().reduce((agg, key) => {
+      return { ...agg, [key]: null };
+    }, {});
 
     const input = JSON.stringify(fixture, null, 2);
     const output = format(input, {
@@ -359,12 +354,9 @@ describe('Sort JSON', () => {
     const fixture = unconventionalKeys
       .sort()
       .reverse()
-      .reduce(
-        (agg, key) => {
-          return { ...agg, [key]: null };
-        },
-        {}
-      );
+      .reduce((agg, key) => {
+        return { ...agg, [key]: null };
+      }, {});
 
     const input = JSON.stringify(fixture, null, 2);
     const output = format(input, {

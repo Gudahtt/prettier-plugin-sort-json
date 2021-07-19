@@ -12,8 +12,6 @@ module.exports = {
   moduleFileExtensions: ['ts', 'tsx', 'json', 'js', 'jsx', 'node'],
   preset: 'ts-jest',
   testEnvironment: 'node',
-  testRegex: [
-    '\\.test\\.ts$',
-  ],
+  testRegex: ['\\.test\\.ts$'],
   testTimeout: 5000,
 };
