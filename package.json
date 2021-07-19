@@ -14,9 +14,11 @@
     "index.js.map"
   ],
   "scripts": {
+    "setup": "yarn install && yarn allow-scripts",
     "build": "tsc --project .",
     "prepublishOnly": "yarn build",
     "test": "jest",
+    "test:watch": "jest --watch",
     "lint:eslint": "eslint . --cache --ext js,ts",
     "lint:misc": "prettier '**/*.json' '**/*.md' '!CHANGELOG.md' '**/*.yml' --ignore-path .gitignore",
     "lint": "yarn lint:eslint && yarn lint:misc --check",
@@ -25,6 +27,7 @@
   "license": "MIT",
   "private": false,
   "devDependencies": {
+    "@lavamoat/allow-scripts": "^1.0.6",
     "@metamask/eslint-config": "^7.0.1",
     "@metamask/eslint-config-jest": "^7.0.0",
     "@metamask/eslint-config-nodejs": "^7.0.1",
@@ -51,5 +54,10 @@
   },
   "engines": {
     "node": ">=12.0.0"
+  },
+  "lavamoat": {
+    "allowScripts": {
+      "@lavamoat/preinstall-always-fail": false
+    }
   }
 }
