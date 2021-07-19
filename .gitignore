@@ -5,6 +5,7 @@
 *.d.ts
 *.map
 *.tgz
+/dist/
 
 # Configuration files
 !.eslintrc.js
