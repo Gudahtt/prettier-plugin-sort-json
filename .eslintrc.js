@@ -14,4 +14,5 @@ module.exports = {
       },
     },
   ],
+  ignorePatterns: ['!.eslintrc.js', '!.prettierrc.js', 'coverage', 'dist'],
 };
