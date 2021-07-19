@@ -10,9 +10,11 @@ module.exports = {
       statements: 100,
     },
   },
-  moduleFileExtensions: ['ts', 'tsx', 'json', 'js', 'jsx', 'node'],
+  moduleFileExtensions: ['ts', 'js', 'json', 'jsx', 'tsx', 'node'],
   preset: 'ts-jest',
+  resetMocks: true,
+  restoreMocks: true,
   testEnvironment: 'node',
   testRegex: ['\\.test\\.ts$'],
-  testTimeout: 5000,
+  testTimeout: 2500,
 };
