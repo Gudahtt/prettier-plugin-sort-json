@@ -32,14 +32,14 @@ Before:
 
 ```json
 {
+  "z": null,
+  "a": null,
+  "b": null,
+  "0": null,
+  "exampleNestedObject": {
     "z": null,
-    "a": null,
-    "b": null,
-    "0": null,
-    "exampleNestedObject": {
-        "z": null,
-        "a": null
-    }
+    "a": null
+  }
 }
 ```
 
@@ -47,14 +47,14 @@ After:
 
 ```json
 {
-    "0": null,
-    "a": null,
-    "b": null,
-    "exampleNestedObject": {
-        "z": null,
-        "a": null
-    },
-    "z": null
+  "0": null,
+  "a": null,
+  "b": null,
+  "exampleNestedObject": {
+    "z": null,
+    "a": null
+  },
+  "z": null
 }
 ```
 

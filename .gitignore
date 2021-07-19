@@ -9,6 +9,7 @@
 # Configuration files
 !.eslintrc.js
 !jest.config.js
+!.prettierrc.js
 
 # Logs
 logs
