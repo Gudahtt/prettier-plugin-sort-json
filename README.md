@@ -74,7 +74,7 @@ Sort JSON objects recursively, including all nested objects.
 
 - Install [Node.js](https://nodejs.org) version 12
   - If you are using [nvm](https://github.com/creationix/nvm#installation) (recommended) running `nvm use` will automatically choose the right node version for you.
-- Install [Yarn v1](https://yarnpkg.com/en/docs/install)
+- Install [Yarn v3](https://yarnpkg.com/getting-started/install)
 - Run `yarn install` to install dependencies and run any requried post-install scripts
 
 ### Testing and Linting
