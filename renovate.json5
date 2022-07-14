@@ -7,6 +7,12 @@
   "ignoreScripts": true,
   "internalChecksFilter": "strict",
   "lockFileMaintenance": { "enabled": true },
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["^@metamask/eslint-config*"],
+      "groupName": "ESLint config"
+    }
+  ],
   "postUpdateOptions": ["yarnDedupeHighest"],
   "postUpgradeTasks": {
     "commands": ["yarn run allow-scripts auto"],
