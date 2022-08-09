@@ -1,29 +1,38 @@
 {
   // Configuration
-  "branchPrefix": "renovate/",
-  "dependencyDashboard": true,
-  "github-actions": { "enabled": false },
-  "gitAuthor": "Renovate Bot <bot@renovateapp.com>",
-  "ignoreScripts": true,
-  "internalChecksFilter": "strict",
-  "lockFileMaintenance": { "enabled": true },
-  "packageRules": [
+  branchPrefix: 'renovate/',
+  dependencyDashboard: true,
+  'github-actions': { enabled: false },
+  gitAuthor: 'Renovate Bot <bot@renovateapp.com>',
+  ignoreScripts: true,
+  internalChecksFilter: 'strict',
+  packageRules: [
     {
-      "matchPackagePatterns": ["^@metamask/eslint-config*"],
-      "groupName": "ESLint config"
-    }
+      excludePackageNames: ['typescript'],
+      groupName: 'Minor',
+      matchPackagePatterns: ['*'],
+      matchUpdateTypes: ['patch', 'minor'],
+    },
+    {
+      groupName: 'ESLint config',
+      matchPackagePatterns: ['^@metamask/eslint-config*'],
+    },
+    {
+      groupName: 'TypeScript',
+      matchPackageNames: ['typescript'],
+    },
   ],
-  "postUpdateOptions": ["yarnDedupeHighest"],
-  "postUpgradeTasks": {
-    "commands": ["yarn run allow-scripts auto"],
-    "fileFilters": ["package.json"],
-    "executionMode": "update"
+  postUpdateOptions: ['yarnDedupeHighest'],
+  postUpgradeTasks: {
+    commands: ['yarn run allow-scripts auto'],
+    fileFilters: ['package.json'],
+    executionMode: 'update',
   },
-  "prConcurrentLimit": 10,
-  "rangeStrategy": "update-lockfile",
-  "repositories": ["Gudahtt/prettier-plugin-sort-json"],
-  "skipInstalls": false,
-  "stabilityDays": 30,
+  prConcurrentLimit: 10,
+  rangeStrategy: 'update-lockfile',
+  repositories: ['Gudahtt/prettier-plugin-sort-json'],
+  skipInstalls: false,
+  stabilityDays: 30,
   // Self-Hosted configuration
   allowScripts: false,
   allowedPostUpgradeCommands: ['yarn run allow-scripts auto'],
