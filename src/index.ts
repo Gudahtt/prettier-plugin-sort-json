@@ -69,16 +69,12 @@ export const parsers = {
   },
 } as Record<string, Parser>;
 
-// I get a TypeScript error if I just set the type to 'boolean'
-// This fixes the error. I don't know why.
-const type: 'boolean' | 'path' | 'int' | 'choice' = 'boolean';
-
 export const options = {
   jsonRecursiveSort: {
     category: 'json-sort',
     default: false,
     description: 'Sort JSON files recursively, including any nested properties',
     since: '0.0.2',
-    type,
+    type: 'boolean' as const,
   },
 };
