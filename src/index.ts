@@ -3,6 +3,13 @@ import { parsers as babelParsers } from 'prettier/parser-babel';
 
 const isObject = (json: any) => json !== null && typeof json === 'object';
 
+/**
+ * Sort the properties of a JavaScript object.
+ *
+ * @param object - The object to sort.
+ * @param recursive - Whether to sort the object recursively or not.
+ * @returns The sorted object.
+ */
 function sortObject(object: any, recursive: boolean): any {
   if (Array.isArray(object) && recursive) {
     return object.map((entry: any) => {
