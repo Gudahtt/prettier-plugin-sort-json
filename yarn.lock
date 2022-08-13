@@ -720,51 +720,52 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/eslint-config-jest@npm:^7.0.0":
-  version: 7.0.0
-  resolution: "@metamask/eslint-config-jest@npm:7.0.0"
+"@metamask/eslint-config-jest@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "@metamask/eslint-config-jest@npm:9.0.0"
   peerDependencies:
-    "@metamask/eslint-config": ^7.0.0
+    "@metamask/eslint-config": ^9.0.0
     eslint: ^7.23.0
     eslint-plugin-jest: ^24.1.3
-  checksum: bf739d19e98bd535804100a79dbfcc58249f5e340d7bc51dc3c310e96250ccf1f93aba2dd0102e84d539ed188fd1bebe8c6667de34173efd919ab31767747f59
+  checksum: 74ddc7953691cc1e5fe76616fa7e0aaff3c671fae0187851bb90122662cd6a1346ae92ff1f3c28cc1beeeb31a8e86e6ca99062313e7674792a42ab56309efd20
   languageName: node
   linkType: hard
 
-"@metamask/eslint-config-nodejs@npm:^7.0.1":
-  version: 7.0.1
-  resolution: "@metamask/eslint-config-nodejs@npm:7.0.1"
+"@metamask/eslint-config-nodejs@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "@metamask/eslint-config-nodejs@npm:9.0.0"
   peerDependencies:
-    "@metamask/eslint-config": ^7.0.0
+    "@metamask/eslint-config": ^9.0.0
     eslint: ^7.23.0
     eslint-plugin-node: ^11.1.0
-  checksum: 28092ded83476e97cbeb76d012879b7f2e984b80dda1d212b7106040c3487e2a621203e8840636033c32c60d7e011156d23014a1b3c0063982a43a8cddb99b85
+  checksum: c4e502741f12f252fb01a391b7c733c76b447eadc7d26360b349aa2e768c52d04b30436e92d3db7969540faace68ab4d05f379a0f54d433778bf467f44469ba0
   languageName: node
   linkType: hard
 
-"@metamask/eslint-config-typescript@npm:^7.0.1":
-  version: 7.0.1
-  resolution: "@metamask/eslint-config-typescript@npm:7.0.1"
+"@metamask/eslint-config-typescript@npm:^9.0.0":
+  version: 9.0.1
+  resolution: "@metamask/eslint-config-typescript@npm:9.0.1"
   peerDependencies:
-    "@metamask/eslint-config": ^7.0.0
+    "@metamask/eslint-config": ^9.0.0
     "@typescript-eslint/eslint-plugin": ^4.20.0
     "@typescript-eslint/parser": ^4.20.0
     eslint: ^7.23.0
     typescript: ^4.0.7
-  checksum: 9d1beabb2e6b45a45a73de46bc5b33a644e174a5899aacb4083677eb921fafe9ca8110186be139a67d84621e590af035e0725b704b2a11fb0ab1a307160dab0d
+  checksum: df6c630e285b1a125caffce1988c23b3ba0f76507c337a849fb30fb5f9b9df4bb563419f9bb2ec7e39072601b7e95a4d5be52ddff1643bde65206f33d73440d3
   languageName: node
   linkType: hard
 
-"@metamask/eslint-config@npm:^7.0.1":
-  version: 7.0.1
-  resolution: "@metamask/eslint-config@npm:7.0.1"
+"@metamask/eslint-config@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "@metamask/eslint-config@npm:9.0.0"
   peerDependencies:
     eslint: ^7.23.0
     eslint-config-prettier: ^8.1.0
     eslint-plugin-import: ^2.22.1
+    eslint-plugin-jsdoc: ^36.1.0
     eslint-plugin-prettier: ^3.3.1
     prettier: ^2.2.1
-  checksum: 200e359efec64b9919ddb6cd28ae9dacd648468ab08f6e122c5f56a49376ec173664fd3252d4baec1616df20e936821ddd7000f77463d9d80d4b91123c435ef9
+  checksum: e44768e5f674e61743f1b147c589932e11f6d717b3f52b4b44ee3ab6b0b1078d379aea93473204c740fdff4b309393fc361c1e63c9cecc59ed5c8ab704eb6d20
   languageName: node
   linkType: hard
 
@@ -4906,10 +4907,10 @@ __metadata:
   resolution: "prettier-plugin-sort-json@workspace:."
   dependencies:
     "@lavamoat/allow-scripts": ^2.0.3
-    "@metamask/eslint-config": ^7.0.1
-    "@metamask/eslint-config-jest": ^7.0.0
-    "@metamask/eslint-config-nodejs": ^7.0.1
-    "@metamask/eslint-config-typescript": ^7.0.1
+    "@metamask/eslint-config": ^9.0.0
+    "@metamask/eslint-config-jest": ^9.0.0
+    "@metamask/eslint-config-nodejs": ^9.0.0
+    "@metamask/eslint-config-typescript": ^9.0.0
     "@types/jest": ^26.0.24
     "@types/prettier": ^2.3.2
     "@typescript-eslint/eslint-plugin": ^4.28.4
