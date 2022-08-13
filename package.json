@@ -16,13 +16,13 @@
   ],
   "scripts": {
     "build": "tsc --project .",
+    "lint": "yarn lint:eslint && yarn lint:misc --check",
+    "lint:eslint": "eslint . --cache --ext js,ts",
+    "lint:fix": "yarn lint:eslint --fix && yarn lint:misc --write",
+    "lint:misc": "prettier '**/*.json' '**/*.md' '!CHANGELOG.md' '**/*.yml' '!.yarnrc.yml' --ignore-path .gitignore",
     "prepack": "yarn build",
     "test": "jest",
-    "test:watch": "jest --watch",
-    "lint:eslint": "eslint . --cache --ext js,ts",
-    "lint:misc": "prettier '**/*.json' '**/*.md' '!CHANGELOG.md' '**/*.yml' '!.yarnrc.yml' --ignore-path .gitignore",
-    "lint": "yarn lint:eslint && yarn lint:misc --check",
-    "lint:fix": "yarn lint:eslint --fix && yarn lint:misc --write"
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@types/prettier": "^2.3.2"
@@ -52,6 +52,7 @@
   "peerDependencies": {
     "prettier": "^2.3.2"
   },
+  "packageManager": "yarn@3.2.1",
   "engines": {
     "node": ">=14.0.0"
   },
@@ -59,6 +60,5 @@
     "allowScripts": {
       "@lavamoat/preinstall-always-fail": false
     }
-  },
-  "packageManager": "yarn@3.2.1"
+  }
 }
