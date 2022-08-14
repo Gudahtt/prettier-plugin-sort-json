@@ -100,12 +100,16 @@ Each key represents a literal key value or a _category_ of keys, represented by 
 
 Each category is ordered in relation to other categories. Each value represents the sorting algorithm to use _within_ that category. If the value is `null`, the default sorting algorithm `lexical` is used. Here are the supported sorting algorithms:
 
-| Sorting Algorithm | Description                                                                                                 |
-| ----------------- | ----------------------------------------------------------------------------------------------------------- |
-| `lexical`         | Sort lexically (i.e. lexicographically). This is the default.                                               |
-| `numeric`         | For keys that are prefixed with a number, sort by that number in ascending order. Otherwise sort lexically. |
-| `reverseLexical`  | Reverse-order lexical sort.                                                                                 |
-| `reverseNumeric`  | Reverse-order numeric sort.                                                                                 |
+| Sorting Algorithm               | Description                                                                                                 |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `lexical`                       | Sort lexically (i.e. lexicographically). This is the default.                                               |
+| `numeric`                       | For keys that are prefixed with a number, sort by that number in ascending order. Otherwise sort lexically. |
+| `reverseLexical`                | Reverse-order lexical sort.                                                                                 |
+| `reverseNumeric`                | Reverse-order numeric sort.                                                                                 |
+| `caseInsensitiveLexical`        | Case-insensitive lexical sort.                                                                              |
+| `caseInsensitiveNumeric`        | Case-insensitive numeric sort.                                                                              |
+| `caseInsensitiveReverseLexical` | Case-insensitive reverse-order lexical sort.                                                                |
+| `caseInsensitiveReverseNumeric` | Case-insensitive reverse-order numeric sort.                                                                |
 
 Keys that do not match any defined category are treated as being in an implied last category, with `lexical` sorting.
 
