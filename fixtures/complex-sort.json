@@ -1,8 +1,13 @@
 {
   "first": null,
   "/^0\\d+/": "reverseNumeric",
+  "/^1\\d+/": "caseInsensitiveNumeric",
+  "/^2\\d+/": "caseInsensitiveReverseNumeric",
   "/^\\d+/": "numeric",
   "/^a/": "reverseLexical",
-  "/^b/": null,
+  "/^b/": "lexical",
+  "/^c/i": "caseInsensitiveLexical",
+  "/^d/i": "caseInsensitiveReverseLexical",
+  "/^e/": null,
   "last": null
 }

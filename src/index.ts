@@ -43,7 +43,10 @@ function numericSort(a: string, b: string) {
   if (aPrefixResult !== null && bPrefixResult !== null) {
     const aPrefix = parseInt(aPrefixResult[1], 10);
     const bPrefix = parseInt(bPrefixResult[1], 10);
-    return aPrefix - bPrefix;
+    const difference = aPrefix - bPrefix;
+    if (difference !== 0) {
+      return difference;
+    }
   }
   return String(a) > String(b) ? 1 : -1;
 }
@@ -62,9 +65,27 @@ function reverseSort(sortFunction: (a: string, b: string) => number) {
 }
 
 /**
+ * Make a sort function case-insensitive.. This is meant to wrap
+ * functions meant to be used as the sort function for
+ * `Array.prototype.sort`.
+ *
+ * @param sortFunction - The sort function to make case-insensitive.
+ * @returns A case-insensitive sort function.
+ */
+function caseInsensitiveSort(sortFunction: (a: string, b: string) => number) {
+  return (a: string, b: string) => {
+    return sortFunction(a.toLowerCase(), b.toLowerCase());
+  };
+}
+
+/**
  * Sorting algorithms for categories in a custom sort order definition.
  */
 enum CategorySort {
+  CaseInsensitiveLexical = 'caseInsensitiveLexical',
+  CaseInsensitiveNumeric = 'caseInsensitiveNumeric',
+  CaseInsensitiveReverseLexical = 'caseInsensitiveReverseLexical',
+  CaseInsensitiveReverseNumeric = 'caseInsensitiveReverseNumeric',
   Lexical = 'lexical',
   Numeric = 'numeric',
   ReverseLexical = 'reverseLexical',
@@ -75,6 +96,14 @@ enum CategorySort {
  * A mapping of category sort algorithms to sort functions.
  */
 const categorySortFunctions = {
+  [CategorySort.CaseInsensitiveLexical]: caseInsensitiveSort(lexicalSort),
+  [CategorySort.CaseInsensitiveNumeric]: caseInsensitiveSort(numericSort),
+  [CategorySort.CaseInsensitiveReverseLexical]: caseInsensitiveSort(
+    reverseSort(lexicalSort),
+  ),
+  [CategorySort.CaseInsensitiveReverseNumeric]: caseInsensitiveSort(
+    reverseSort(numericSort),
+  ),
   [CategorySort.Lexical]: lexicalSort,
   [CategorySort.Numeric]: numericSort,
   [CategorySort.ReverseLexical]: reverseSort(lexicalSort),
