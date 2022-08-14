@@ -8,11 +8,9 @@
   },
   "license": "MIT",
   "author": "Mark Stacey <markjstacey@gmail.com>",
-  "main": "index.js",
+  "main": "dist/index.js",
   "files": [
-    "index.js",
-    "index.d.ts",
-    "index.js.map"
+    "dist"
   ],
   "scripts": {
     "build": "tsc --project .",
