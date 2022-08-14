@@ -70,7 +70,7 @@ These configuration options are all optional. Each option can be set as a CLI fl
 
 ### JSON Recursive Sort
 
-Sort JSON objects recursively, including all nested objects.
+Sort JSON objects recursively, including all nested objects. This also sorts objects within JSON arrays.
 
 | Default | CLI                     | Configuration               |
 | ------- | ----------------------- | --------------------------- |
