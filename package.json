@@ -1,6 +1,6 @@
 {
   "name": "prettier-plugin-sort-json",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Prettier plugin to sort JSON files alphanumerically by key",
   "repository": {
     "type": "git",
@@ -19,7 +19,7 @@
     "lint": "yarn lint:eslint && yarn lint:misc --check",
     "lint:eslint": "eslint . --cache --ext js,ts",
     "lint:fix": "yarn lint:eslint --fix && yarn lint:misc --write",
-    "lint:misc": "prettier '**/*.json' '**/*.md' '!CHANGELOG.md' '**/*.yml' '!.yarnrc.yml' --ignore-path .gitignore",
+    "lint:misc": "prettier '**/*.json' '**/*.md' '!CHANGELOG.md' '**/*.yml' '!.yarnrc.yml' '!fixtures/invalid-json.json' --ignore-path .gitignore",
     "prepack": "yarn build",
     "test": "jest",
     "test:watch": "jest --watch"

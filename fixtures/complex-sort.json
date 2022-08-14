@@ -1,0 +1,8 @@
+{
+  "first": null,
+  "/^0\\d+/": "reverseNumeric",
+  "/^\\d+/": "numeric",
+  "/^a/": "reverseLexical",
+  "/^b/": null,
+  "last": null
+}
