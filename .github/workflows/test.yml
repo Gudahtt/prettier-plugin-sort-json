@@ -35,6 +35,12 @@ jobs:
         run: yarn lint
       - name: Run Tests
         run: yarn test
+      - name: Validate RC changelog
+        if: ${{ startsWith(github.head_ref, 'release/') }}
+        run: yarn auto-changelog validate --rc
+      - name: Validate changelog
+        if: ${{ !startsWith(github.head_ref, 'release/') }}
+        run: yarn auto-changelog validate
       - name: Require clean working directory
         shell: bash
         run: |
