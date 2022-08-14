@@ -22,9 +22,11 @@ yarn add --dev prettier-plugin-sort-json
 
 ## Description
 
-This plugin adds a JSON preprocessor that will sort JSON files containing a JSON object alphanumerically by key. JSON files containing Arrays or other non-Object values are skipped.
+This plugin adds a JSON preprocessor that will sort JSON files alphanumerically by key. By default, only top-level JSON objects are sorted. JSON files containing Arrays or other non-Object values are skipped.
 
-Object entries are sorted by key using [`Array.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort), according to each character's Unicode code point value.
+Object entries are sorted by key lexically using [`Array.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort), according to each character's Unicode code point value.
+
+Note that this will not sort `package.json`, `package-lock.json`, or `composer.json`. This plugin only affects the `json` parser used by Prettier. Prettier uses an alternate parser (`json-stringify`) for those three specific files ([See here for details](https://github.com/prettier/prettier/blob/9a8b579d368db99394ab9da114cc37ba772fc887/src/language-js/index.js#L80)).
 
 ## Examples
 
