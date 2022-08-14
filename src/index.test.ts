@@ -100,6 +100,7 @@ describe('Sort JSON', () => {
   it('should validate a sorted JSON object', () => {
     const fixture = {
       0: null,
+      $: null,
       a: null,
       b: null,
       exampleNestedObject: {
@@ -125,6 +126,7 @@ describe('Sort JSON', () => {
     const fixture = {
       z: null,
       a: null,
+      $: null,
       b: null,
       0: null,
       exampleNestedObject: {
