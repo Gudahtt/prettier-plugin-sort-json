@@ -1,3 +1,5 @@
+import path from 'path';
+import { readFileSync } from 'fs';
 import { format } from 'prettier';
 import * as SortJsonPlugin from '.';
 
@@ -82,6 +84,98 @@ describe('Sort JSON', () => {
         plugins: [SortJsonPlugin],
       });
     }).toThrow(/^Unexpected token \(1:2\)/u);
+  });
+
+  it('should throw if custom sort file does not exist', () => {
+    expect(() => {
+      format('{}', {
+        filepath: 'foo.json',
+        parser: 'json',
+        plugins: [SortJsonPlugin],
+        ...{
+          jsonSortOrder: path.resolve(
+            __dirname,
+            '..',
+            'fixtures',
+            'non-existent-sort.json',
+          ),
+        },
+      });
+    }).toThrow(/^Error: ENOENT/u);
+  });
+
+  it('should throw if custom sort file has invalid JSON', () => {
+    expect(() => {
+      format('{}', {
+        filepath: 'foo.json',
+        parser: 'json',
+        plugins: [SortJsonPlugin],
+        ...{
+          jsonSortOrder: path.resolve(
+            __dirname,
+            '..',
+            'fixtures',
+            'invalid-json.json',
+          ),
+        },
+      });
+    }).toThrow(/^SyntaxError/u);
+  });
+
+  it('should throw if custom sort file is an array', () => {
+    expect(() => {
+      format('{}', {
+        filepath: 'foo.json',
+        parser: 'json',
+        plugins: [SortJsonPlugin],
+        ...{
+          jsonSortOrder: path.resolve(
+            __dirname,
+            '..',
+            'fixtures',
+            'invalid-array.json',
+          ),
+        },
+      });
+    }).toThrow(/^Error: Invalid custom sort order file/u);
+  });
+
+  it('should throw if custom sort file has invalid category sort values', () => {
+    expect(() => {
+      format('{}', {
+        filepath: 'foo.json',
+        parser: 'json',
+        plugins: [SortJsonPlugin],
+        ...{
+          jsonSortOrder: path.resolve(
+            __dirname,
+            '..',
+            'fixtures',
+            'invalid-category-sort.json',
+          ),
+        },
+      });
+    }).toThrow(/^Error: Invalid custom sort file entry/u);
+  });
+
+  it('should not sort the sort order file', () => {
+    const sortOrderPath = path.resolve(
+      __dirname,
+      '..',
+      'fixtures',
+      'complex-sort.json',
+    );
+    const contents = readFileSync(sortOrderPath, 'utf8');
+    const output = format(contents, {
+      filepath: sortOrderPath,
+      parser: 'json',
+      plugins: [SortJsonPlugin],
+      ...{
+        jsonSortOrder: sortOrderPath,
+      },
+    });
+
+    expect(output).toBe(contents);
   });
 
   for (const validJson of validJsonExamples) {
@@ -424,5 +518,249 @@ describe('Sort JSON', () => {
     });
 
     expect(output).toMatchSnapshot();
+  });
+
+  describe('simple custom sort', () => {
+    it('should validate a sorted JSON object', () => {
+      const fixture = {
+        first: 'first',
+        0: null,
+        a: null,
+        b: null,
+        exampleNestedObject: {
+          z: null,
+          exampleArray: ['z', 'b', 'a'],
+          examplePrimitive: 1,
+          a: null,
+        },
+        z: null,
+      };
+
+      const input = JSON.stringify(fixture, null, 2);
+      const output = format(input, {
+        filepath: 'foo.json',
+        parser: 'json',
+        plugins: [SortJsonPlugin],
+        ...{
+          jsonSortOrder: path.resolve(
+            __dirname,
+            '..',
+            'fixtures',
+            'simple-sort.json',
+          ),
+        },
+      });
+
+      expect(output).toMatchSnapshot();
+    });
+
+    it('should sort an unsorted JSON object', () => {
+      const fixture = {
+        z: null,
+        a: null,
+        b: null,
+        0: null,
+        first: 'first',
+        exampleNestedObject: {
+          z: null,
+          exampleArray: ['z', 'b', 'a'],
+          examplePrimitive: 1,
+          a: null,
+        },
+      };
+
+      const input = JSON.stringify(fixture, null, 2);
+      const output = format(input, {
+        filepath: 'foo.json',
+        parser: 'json',
+        plugins: [SortJsonPlugin],
+        ...{
+          jsonSortOrder: path.resolve(
+            __dirname,
+            '..',
+            'fixtures',
+            'simple-sort.json',
+          ),
+        },
+      });
+
+      expect(output).toMatchSnapshot();
+    });
+  });
+
+  describe('numeric custom sort', () => {
+    it('should validate a sorted JSON object', () => {
+      const fixture = {
+        first: 'first',
+        0: null,
+        3: null,
+        20: null,
+        100: null,
+        a: null,
+        b: null,
+        exampleNestedObject: {
+          3: null,
+          20: null,
+          100: null,
+          z: null,
+          exampleArray: ['z', 'b', 'a'],
+          examplePrimitive: 1,
+          a: null,
+        },
+        z: null,
+      };
+
+      const input = JSON.stringify(fixture, null, 2);
+      const output = format(input, {
+        filepath: 'foo.json',
+        parser: 'json',
+        plugins: [SortJsonPlugin],
+        ...{
+          jsonSortOrder: path.resolve(
+            __dirname,
+            '..',
+            'fixtures',
+            'numeric-sort.json',
+          ),
+        },
+      });
+
+      expect(output).toMatchSnapshot();
+    });
+
+    it('should sort an unsorted JSON object', () => {
+      const fixture = {
+        z: null,
+        a: null,
+        b: null,
+        0: null,
+        100: null,
+        first: 'first',
+        20: null,
+        3: null,
+        exampleNestedObject: {
+          z: null,
+          exampleArray: ['z', 'b', 'a'],
+          100: null,
+          examplePrimitive: 1,
+          3: null,
+          a: null,
+          20: null,
+        },
+      };
+
+      const input = JSON.stringify(fixture, null, 2);
+      const output = format(input, {
+        filepath: 'foo.json',
+        parser: 'json',
+        plugins: [SortJsonPlugin],
+        ...{
+          jsonSortOrder: path.resolve(
+            __dirname,
+            '..',
+            'fixtures',
+            'numeric-sort.json',
+          ),
+        },
+      });
+
+      expect(output).toMatchSnapshot();
+    });
+  });
+
+  describe('complex custom sort', () => {
+    it('should validate a sorted JSON object', () => {
+      const fixture = {
+        first: 'first',
+        '050': null,
+        '021': null,
+        '001': null,
+        0: null,
+        3: null,
+        20: null,
+        100: null,
+        a2: null,
+        a1: null,
+        b1: null,
+        b2: null,
+        b3: null,
+        exampleNestedObject: {
+          '050': null,
+          '021': null,
+          '001': null,
+          3: null,
+          20: null,
+          100: null,
+          z: null,
+          exampleArray: ['z', 'b', 'a'],
+          examplePrimitive: 1,
+          a: null,
+        },
+        z: null,
+      };
+
+      const input = JSON.stringify(fixture, null, 2);
+      const output = format(input, {
+        filepath: 'foo.json',
+        parser: 'json',
+        plugins: [SortJsonPlugin],
+        ...{
+          jsonSortOrder: path.resolve(
+            __dirname,
+            '..',
+            'fixtures',
+            'complex-sort.json',
+          ),
+        },
+      });
+
+      expect(output).toMatchSnapshot();
+    });
+
+    it('should sort an unsorted JSON object', () => {
+      const fixture = {
+        z: null,
+        b2: null,
+        a1: null,
+        '001': null,
+        b1: null,
+        '021': null,
+        100: null,
+        first: 'first',
+        20: null,
+        '050': null,
+        3: null,
+        a2: null,
+        exampleNestedObject: {
+          z: null,
+          exampleArray: ['z', 'b', 'a'],
+          100: null,
+          '001': null,
+          examplePrimitive: 1,
+          3: null,
+          '021': null,
+          a: null,
+          '050': null,
+          20: null,
+        },
+      };
+
+      const input = JSON.stringify(fixture, null, 2);
+      const output = format(input, {
+        filepath: 'foo.json',
+        parser: 'json',
+        plugins: [SortJsonPlugin],
+        ...{
+          jsonSortOrder: path.resolve(
+            __dirname,
+            '..',
+            'fixtures',
+            'complex-sort.json',
+          ),
+        },
+      });
+
+      expect(output).toMatchSnapshot();
+    });
   });
 });

@@ -1,5 +1,113 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Sort JSON complex custom sort should sort an unsorted JSON object 1`] = `
+"{
+  \\"first\\": \\"first\\",
+  \\"050\\": null,
+  \\"021\\": null,
+  \\"001\\": null,
+  \\"3\\": null,
+  \\"20\\": null,
+  \\"100\\": null,
+  \\"a2\\": null,
+  \\"a1\\": null,
+  \\"b1\\": null,
+  \\"b2\\": null,
+  \\"exampleNestedObject\\": {
+    \\"3\\": null,
+    \\"20\\": null,
+    \\"100\\": null,
+    \\"z\\": null,
+    \\"exampleArray\\": [\\"z\\", \\"b\\", \\"a\\"],
+    \\"001\\": null,
+    \\"examplePrimitive\\": 1,
+    \\"021\\": null,
+    \\"a\\": null,
+    \\"050\\": null
+  },
+  \\"z\\": null
+}
+"
+`;
+
+exports[`Sort JSON complex custom sort should validate a sorted JSON object 1`] = `
+"{
+  \\"first\\": \\"first\\",
+  \\"050\\": null,
+  \\"021\\": null,
+  \\"001\\": null,
+  \\"0\\": null,
+  \\"3\\": null,
+  \\"20\\": null,
+  \\"100\\": null,
+  \\"a2\\": null,
+  \\"a1\\": null,
+  \\"b1\\": null,
+  \\"b2\\": null,
+  \\"b3\\": null,
+  \\"exampleNestedObject\\": {
+    \\"3\\": null,
+    \\"20\\": null,
+    \\"100\\": null,
+    \\"050\\": null,
+    \\"021\\": null,
+    \\"001\\": null,
+    \\"z\\": null,
+    \\"exampleArray\\": [\\"z\\", \\"b\\", \\"a\\"],
+    \\"examplePrimitive\\": 1,
+    \\"a\\": null
+  },
+  \\"z\\": null
+}
+"
+`;
+
+exports[`Sort JSON numeric custom sort should sort an unsorted JSON object 1`] = `
+"{
+  \\"0\\": null,
+  \\"3\\": null,
+  \\"20\\": null,
+  \\"100\\": null,
+  \\"a\\": null,
+  \\"b\\": null,
+  \\"exampleNestedObject\\": {
+    \\"3\\": null,
+    \\"20\\": null,
+    \\"100\\": null,
+    \\"z\\": null,
+    \\"exampleArray\\": [\\"z\\", \\"b\\", \\"a\\"],
+    \\"examplePrimitive\\": 1,
+    \\"a\\": null
+  },
+  \\"first\\": \\"first\\",
+  \\"z\\": null
+}
+"
+`;
+
+exports[`Sort JSON numeric custom sort should validate a sorted JSON object 1`] = `
+"{
+  \\"0\\": null,
+  \\"3\\": null,
+  \\"20\\": null,
+  \\"100\\": null,
+  \\"a\\": null,
+  \\"b\\": null,
+  \\"exampleNestedObject\\": {
+    \\"3\\": null,
+    \\"20\\": null,
+    \\"100\\": null,
+    \\"z\\": null,
+    \\"exampleArray\\": [\\"z\\", \\"b\\", \\"a\\"],
+    \\"examplePrimitive\\": 1,
+    \\"a\\": null
+  },
+  \\"first\\": \\"first\\",
+  \\"z\\": null
+}
+"
+`;
+
 exports[`Sort JSON should sort JSON objects recursively within a nested array 1`] = `
 "{
   \\"0\\": null,
@@ -279,5 +387,39 @@ exports[`Sort JSON should validate a sorted JSON object within an array recursiv
   },
   2
 ]
+"
+`;
+
+exports[`Sort JSON simple custom sort should sort an unsorted JSON object 1`] = `
+"{
+  \\"first\\": \\"first\\",
+  \\"0\\": null,
+  \\"a\\": null,
+  \\"b\\": null,
+  \\"exampleNestedObject\\": {
+    \\"z\\": null,
+    \\"exampleArray\\": [\\"z\\", \\"b\\", \\"a\\"],
+    \\"examplePrimitive\\": 1,
+    \\"a\\": null
+  },
+  \\"z\\": null
+}
+"
+`;
+
+exports[`Sort JSON simple custom sort should validate a sorted JSON object 1`] = `
+"{
+  \\"first\\": \\"first\\",
+  \\"0\\": null,
+  \\"a\\": null,
+  \\"b\\": null,
+  \\"exampleNestedObject\\": {
+    \\"z\\": null,
+    \\"exampleArray\\": [\\"z\\", \\"b\\", \\"a\\"],
+    \\"examplePrimitive\\": 1,
+    \\"a\\": null
+  },
+  \\"z\\": null
+}
 "
 `;
