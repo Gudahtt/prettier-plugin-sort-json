@@ -4,7 +4,7 @@ A plugin for [Prettier](https://prettier.io) that sorts JSON files by property n
 
 ## Requirements
 
-This module requires an [LTS](https://github.com/nodejs/Release) Node version (v10.0.0+), and `prettier` v2.1.0+.
+This module requires an [LTS](https://github.com/nodejs/Release) Node version (v14.0.0+), and `prettier` v2.3.2+.
 
 ## Install
 
@@ -72,7 +72,7 @@ Sort JSON objects recursively, including all nested objects.
 
 ### Setup
 
-- Install [Node.js](https://nodejs.org) version 12
+- Install [Node.js](https://nodejs.org) version 16
   - If you are using [nvm](https://github.com/creationix/nvm#installation) (recommended) running `nvm use` will automatically choose the right node version for you.
 - Install [Yarn v3](https://yarnpkg.com/getting-started/install)
 - Run `yarn install` to install dependencies and run any requried post-install scripts
