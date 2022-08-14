@@ -4700,6 +4700,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "prettier-plugin-sort-json@workspace:."
   dependencies:
+    "@babel/types": ^7.18.10
     "@lavamoat/allow-scripts": ^2.0.3
     "@metamask/auto-changelog": ^2.6.1
     "@metamask/eslint-config": ^9.0.0

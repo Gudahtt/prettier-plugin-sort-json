@@ -1,70 +1,97 @@
 import { Parser } from 'prettier';
 import { parsers as babelParsers } from 'prettier/parser-babel';
-
-const isObject = (json: any) => json !== null && typeof json === 'object';
+import type {
+  ArrayExpression,
+  Expression,
+  ObjectExpression,
+  ObjectProperty,
+  NullLiteral,
+  SpreadElement,
+  StringLiteral,
+} from '@babel/types';
 
 /**
- * Sort the properties of a JavaScript object.
+ * Lexical sort function for strings, meant to be used as the sort
+ * function for `Array.prototype.sort`.
  *
- * @param object - The object to sort.
+ * @param a - First element to compare.
+ * @param b - Second element to compare.
+ * @returns A number indicating which element should come first.
+ */
+function lexicalSort(a: string, b: string) {
+  return a > b ? 1 : -1;
+}
+
+/**
+ * Sort properties of JavaScript objects within an AST.
+ *
+ * @param ast - The AST to sort.
  * @param recursive - Whether to sort the object recursively or not.
  * @returns The sorted object.
  */
-function sortObject(object: any, recursive: boolean): any {
-  if (Array.isArray(object) && recursive) {
-    return object.map((entry: any) => {
-      return sortObject(entry, recursive);
-    });
-  } else if (
-    object !== null &&
-    typeof object === 'object' &&
-    !Array.isArray(object)
-  ) {
-    const sortedJson: Record<string, any> = {};
-    for (const key of Object.keys(object).sort()) {
-      if (recursive && isObject(object[key])) {
-        sortedJson[key] = sortObject(object[key], recursive);
-      } else {
-        sortedJson[key] = object[key];
-      }
+function sortAst(ast: Expression, recursive: boolean): Expression {
+  if (ast.type === 'ArrayExpression' && recursive) {
+    ast.elements = ast.elements.map(
+      (element: null | NullLiteral | Expression | SpreadElement) => {
+        if (element === null || element.type === 'NullLiteral') {
+          return element;
+        }
+        // SpreadElement is not possible in a JSON file
+        return sortAst(element as Expression, recursive);
+      },
+    );
+  } else if (ast.type === 'ObjectExpression') {
+    ast.properties = (ast.properties as ObjectProperty[]).sort(
+      (propertyA: ObjectProperty, propertyB: ObjectProperty) => {
+        return lexicalSort(
+          (propertyA.key as StringLiteral).value,
+          (propertyB.key as StringLiteral).value,
+        );
+      },
+    );
+
+    if (recursive) {
+      ast.properties = (ast.properties as ObjectProperty[]).map(
+        (property: ObjectProperty) => {
+          if (
+            ['ObjectExpression', 'ArrayExpression'].includes(
+              property.value.type,
+            )
+          ) {
+            property.value = sortAst(
+              property.value as ArrayExpression | ObjectExpression,
+              recursive,
+            );
+          }
+          return property;
+        },
+      );
     }
-    return sortedJson;
   }
-  return object;
+  return ast;
 }
 
 export const parsers = {
   json: {
     ...babelParsers.json,
-    preprocess(text, options: any) {
-      let preprocessedText = text;
-      /* istanbul ignore next */
-      if (babelParsers.json.preprocess) {
-        preprocessedText = babelParsers.json.preprocess(text, options);
-      }
+    parse(text, _parsers, options: any) {
+      const ast: Expression = babelParsers.json.parse(text, _parsers, options);
 
-      let json;
-      try {
-        json = JSON.parse(preprocessedText);
-      } catch (_) {
-        // skip invalid JSON; this is best handled by the regular JSON parser
-        return text;
-      }
-
-      const recursive = options.jsonRecursiveSort;
+      const { jsonRecursiveSort } = options;
 
       // Only objects are intended to be sorted by this plugin
+      // Arrays are considered only in recursive mode, so that we
+      // can get to nested objected.
       if (
-        json === null ||
-        typeof json !== 'object' ||
-        (Array.isArray(json) && !recursive)
+        !(
+          ast.type === 'ObjectExpression' ||
+          (ast.type === 'ArrayExpression' && jsonRecursiveSort)
+        )
       ) {
-        return text;
+        return ast;
       }
 
-      const sortedJson = sortObject(json, recursive);
-
-      return JSON.stringify(sortedJson, null, 2);
+      return sortAst(ast, jsonRecursiveSort);
     },
   },
 } as Record<string, Parser>;

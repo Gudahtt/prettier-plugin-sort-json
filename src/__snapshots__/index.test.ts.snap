@@ -12,6 +12,7 @@ exports[`Sort JSON should sort JSON objects recursively within a nested array 1`
     \\"z\\": null
   },
   \\"test\\": [
+    null,
     {
       \\"baz\\": 3,
       \\"foo\\": \\"bar\\"
@@ -63,8 +64,8 @@ exports[`Sort JSON should sort a JSON object with unconventional keys 1`] = `
 
 exports[`Sort JSON should sort an unsorted JSON object 1`] = `
 "{
-  \\"0\\": null,
   \\"$\\": null,
+  \\"0\\": null,
   \\"a\\": null,
   \\"b\\": null,
   \\"exampleNestedObject\\": {
@@ -152,6 +153,7 @@ exports[`Sort JSON should validate JSON objects recursively within a nested arra
     \\"z\\": null
   },
   \\"test\\": [
+    null,
     {
       \\"baz\\": 3,
       \\"foo\\": \\"bar\\"
@@ -193,8 +195,8 @@ exports[`Sort JSON should validate a deeply nested sorted JSON object recursivel
 
 exports[`Sort JSON should validate a sorted JSON object 1`] = `
 "{
-  \\"0\\": null,
   \\"$\\": null,
+  \\"0\\": null,
   \\"a\\": null,
   \\"b\\": null,
   \\"exampleNestedObject\\": {
