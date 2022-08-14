@@ -1,4 +1,3 @@
-
 # Changelog
 All notable changes to this project will be documented in this file.
 
@@ -17,12 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix manifest `repository` property ([#17](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/17))
 
 ### Removed
- - Remove unused `@babel/types` dependency ([#20](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/20))
+- Remove unused `@babel/types` dependency ([#20](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/20))
 
 ## [0.0.1] - 2020-09-22
 ### Added
 - Initial release
 
 [Unreleased]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v0.0.2...HEAD
-[0.0.2]: https://github.com/Gudahtt/prettier-plugin-sort-json/v0.0.1...v0.0.2
+[0.0.2]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/Gudahtt/prettier-plugin-sort-json/releases/tag/v0.0.1
