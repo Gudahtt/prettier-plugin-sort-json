@@ -28,6 +28,7 @@
     "@types/prettier": "^2.3.2"
   },
   "devDependencies": {
+    "@babel/types": "^7.18.10",
     "@lavamoat/allow-scripts": "^2.0.3",
     "@metamask/auto-changelog": "^2.6.1",
     "@metamask/eslint-config": "^9.0.0",

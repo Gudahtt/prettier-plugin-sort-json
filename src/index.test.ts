@@ -372,10 +372,7 @@ describe('Sort JSON', () => {
 
   it('should sort JSON objects recursively within a nested array', () => {
     const fixture = {
-      test: [
-        { foo: 'bar', baz: 3 },
-        { foo: 'bag', brz: 2 },
-      ],
+      test: [null, { foo: 'bar', baz: 3 }, { foo: 'bag', brz: 2 }],
       z: null,
       a: null,
       b: null,
@@ -412,10 +409,7 @@ describe('Sort JSON', () => {
         exampleArray: ['z', 'b', 'a'],
         examplePrimitive: 1,
       },
-      test: [
-        { baz: 3, foo: 'bar' },
-        { brz: 2, foo: 'bag' },
-      ],
+      test: [null, { baz: 3, foo: 'bar' }, { brz: 2, foo: 'bag' }],
       z: null,
     };
 
