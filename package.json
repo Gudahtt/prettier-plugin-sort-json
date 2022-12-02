@@ -48,7 +48,7 @@
     "prettier": "^2.3.2",
     "prettier-plugin-packagejson": "^2.2.11",
     "ts-jest": "^28.0.0",
-    "typescript": "~4.7.4"
+    "typescript": "~4.8.0"
   },
   "peerDependencies": {
     "prettier": "^2.3.2"
