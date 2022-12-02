@@ -15,4 +15,10 @@ module.exports = {
     },
   ],
   ignorePatterns: ['!.eslintrc.js', '!.prettierrc.js', 'coverage', 'dist'],
+
+  // This is required for rules that use type information.
+  // See here for more information: https://github.com/typescript-eslint/typescript-eslint/blob/master/docs/getting-started/linting/TYPED_LINTING.md
+  parserOptions: {
+    tsconfigRootDir: __dirname,
+  },
 };

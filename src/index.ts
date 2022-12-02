@@ -1,7 +1,3 @@
-import path from 'path';
-import { readFileSync } from 'fs';
-import { Parser } from 'prettier';
-import { parsers as babelParsers } from 'prettier/parser-babel';
 import type {
   ArrayExpression,
   Expression,
@@ -11,6 +7,10 @@ import type {
   SpreadElement,
   StringLiteral,
 } from '@babel/types';
+import { readFileSync } from 'fs';
+import path from 'path';
+import { Parser } from 'prettier';
+import { parsers as babelParsers } from 'prettier/parser-babel';
 
 const integerPrefixRegex = /^(\d+)/u;
 
@@ -212,7 +212,9 @@ export const parsers = {
         for (const categorySort of Object.values(parsedCustomSort)) {
           if (!allowedCategorySortValues.includes(categorySort as any)) {
             throw new Error(
-              `Invalid custom sort file entry: value must be one of '${allowedCategorySortValues}', got '${categorySort}'`,
+              `Invalid custom sort file entry: value must be one of '${String(
+                allowedCategorySortValues,
+              )}', got '${String(categorySort)}'`,
             );
           }
         }
