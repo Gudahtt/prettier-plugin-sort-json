@@ -105,7 +105,7 @@ describe('Sort JSON', () => {
           ),
         },
       });
-    }).toThrow(/^Error: ENOENT/u);
+    }).toThrow(/^ENOENT/u);
   });
 
   it('should throw if custom sort file has invalid JSON', () => {
@@ -123,7 +123,7 @@ describe('Sort JSON', () => {
           ),
         },
       });
-    }).toThrow(/^SyntaxError/u);
+    }).toThrow(/^(Unexpected end of JSON input|Expected property name)/u);
   });
 
   it('should throw if custom sort file is an array', () => {
@@ -141,7 +141,7 @@ describe('Sort JSON', () => {
           ),
         },
       });
-    }).toThrow(/^Error: Invalid custom sort order file/u);
+    }).toThrow(/^Invalid custom sort order file/u);
   });
 
   it('should throw if custom sort file has invalid category sort values', () => {
@@ -159,7 +159,7 @@ describe('Sort JSON', () => {
           ),
         },
       });
-    }).toThrow(/^Error: Invalid custom sort file entry/u);
+    }).toThrow(/^Invalid custom sort file entry/u);
   });
 
   it('should not sort the sort order file', () => {
