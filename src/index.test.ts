@@ -1,11 +1,23 @@
 // Disabled to allow strange property names in test fixtures
 /* eslint-disable @typescript-eslint/naming-convention */
 
-import { readFileSync } from 'fs';
-import path from 'path';
 import { format } from 'prettier';
 
 import * as SortJsonPlugin from '.';
+
+const complexSort = {
+  first: null,
+  '/^0\\d+/': 'reverseNumeric',
+  '/^1\\d+/': 'caseInsensitiveNumeric',
+  '/^2\\d+/': 'caseInsensitiveReverseNumeric',
+  '/^\\d+/': 'numeric',
+  '/^a/': 'reverseLexical',
+  '/^b/': 'lexical',
+  '/^c/i': 'caseInsensitiveLexical',
+  '/^d/i': 'caseInsensitiveReverseLexical',
+  '/^e/': null,
+  last: null,
+};
 
 const validJsonExamples = [
   'null',
@@ -90,96 +102,43 @@ describe('Sort JSON', () => {
     }).toThrow(/^Unexpected token \(1:2\)/u);
   });
 
-  it('should throw if custom sort file does not exist', () => {
+  it('should throw if custom sort is invalid JSON', () => {
     expect(() => {
       format('{}', {
         filepath: 'foo.json',
         parser: 'json',
         plugins: [SortJsonPlugin],
         ...{
-          jsonSortOrder: path.resolve(
-            __dirname,
-            '..',
-            'fixtures',
-            'non-existent-sort.json',
-          ),
+          jsonSortOrder: '{',
         },
       });
-    }).toThrow(/^ENOENT/u);
+    }).toThrow(/^Failed to parse sort order option as JSON/u);
   });
 
-  it('should throw if custom sort file has invalid JSON', () => {
+  it('should throw if custom sort is an array', () => {
     expect(() => {
       format('{}', {
         filepath: 'foo.json',
         parser: 'json',
         plugins: [SortJsonPlugin],
         ...{
-          jsonSortOrder: path.resolve(
-            __dirname,
-            '..',
-            'fixtures',
-            'invalid-json.json',
-          ),
+          jsonSortOrder: '[]',
         },
       });
-    }).toThrow(/^(Unexpected end of JSON input|Expected property name)/u);
+    }).toThrow(/^Invalid custom sort order/u);
   });
 
-  it('should throw if custom sort file is an array', () => {
+  it('should throw if custom sort has invalid category sort values', () => {
     expect(() => {
       format('{}', {
         filepath: 'foo.json',
         parser: 'json',
         plugins: [SortJsonPlugin],
         ...{
-          jsonSortOrder: path.resolve(
-            __dirname,
-            '..',
-            'fixtures',
-            'invalid-array.json',
-          ),
+          jsonSortOrder: JSON.stringify({ first: 'imaginarySort' }),
         },
       });
-    }).toThrow(/^Invalid custom sort order file/u);
-  });
-
-  it('should throw if custom sort file has invalid category sort values', () => {
-    expect(() => {
-      format('{}', {
-        filepath: 'foo.json',
-        parser: 'json',
-        plugins: [SortJsonPlugin],
-        ...{
-          jsonSortOrder: path.resolve(
-            __dirname,
-            '..',
-            'fixtures',
-            'invalid-category-sort.json',
-          ),
-        },
-      });
-    }).toThrow(/^Invalid custom sort file entry/u);
-  });
-
-  it('should not sort the sort order file', () => {
-    const sortOrderPath = path.resolve(
-      __dirname,
-      '..',
-      'fixtures',
-      'complex-sort.json',
-    );
-    const contents = readFileSync(sortOrderPath, 'utf8');
-    const output = format(contents, {
-      filepath: sortOrderPath,
-      parser: 'json',
-      plugins: [SortJsonPlugin],
-      ...{
-        jsonSortOrder: sortOrderPath,
-      },
-    });
-
-    expect(output).toBe(contents);
+    }).toThrow(/^Invalid custom sort entry/u);
   });
 
   for (const validJson of validJsonExamples) {
@@ -546,12 +505,7 @@ describe('Sort JSON', () => {
         parser: 'json',
         plugins: [SortJsonPlugin],
         ...{
-          jsonSortOrder: path.resolve(
-            __dirname,
-            '..',
-            'fixtures',
-            'simple-sort.json',
-          ),
+          jsonSortOrder: JSON.stringify({ first: null }),
         },
       });
 
@@ -579,12 +533,7 @@ describe('Sort JSON', () => {
         parser: 'json',
         plugins: [SortJsonPlugin],
         ...{
-          jsonSortOrder: path.resolve(
-            __dirname,
-            '..',
-            'fixtures',
-            'simple-sort.json',
-          ),
+          jsonSortOrder: JSON.stringify({ first: null }),
         },
       });
 
@@ -620,12 +569,7 @@ describe('Sort JSON', () => {
         parser: 'json',
         plugins: [SortJsonPlugin],
         ...{
-          jsonSortOrder: path.resolve(
-            __dirname,
-            '..',
-            'fixtures',
-            'numeric-sort.json',
-          ),
+          jsonSortOrder: JSON.stringify({ '/.+/u': 'numeric' }),
         },
       });
 
@@ -659,12 +603,7 @@ describe('Sort JSON', () => {
         parser: 'json',
         plugins: [SortJsonPlugin],
         ...{
-          jsonSortOrder: path.resolve(
-            __dirname,
-            '..',
-            'fixtures',
-            'numeric-sort.json',
-          ),
+          jsonSortOrder: JSON.stringify({ '/.+/u': 'numeric' }),
         },
       });
 
@@ -723,12 +662,7 @@ describe('Sort JSON', () => {
         parser: 'json',
         plugins: [SortJsonPlugin],
         ...{
-          jsonSortOrder: path.resolve(
-            __dirname,
-            '..',
-            'fixtures',
-            'complex-sort.json',
-          ),
+          jsonSortOrder: JSON.stringify(complexSort),
         },
       });
 
@@ -783,12 +717,7 @@ describe('Sort JSON', () => {
         parser: 'json',
         plugins: [SortJsonPlugin],
         ...{
-          jsonSortOrder: path.resolve(
-            __dirname,
-            '..',
-            'fixtures',
-            'complex-sort.json',
-          ),
+          jsonSortOrder: JSON.stringify(complexSort),
         },
       });
 
