@@ -1,6 +1,10 @@
-import path from 'path';
+// Disabled to allow strange property names in test fixtures
+/* eslint-disable @typescript-eslint/naming-convention */
+
 import { readFileSync } from 'fs';
+import path from 'path';
 import { format } from 'prettier';
+
 import * as SortJsonPlugin from '.';
 
 const validJsonExamples = [
