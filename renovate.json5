@@ -6,6 +6,7 @@
   gitAuthor: 'Renovate Bot <bot@renovateapp.com>',
   ignoreScripts: true,
   internalChecksFilter: 'strict',
+  "enabledManagers": ["npm"],
   packageRules: [
     {
       excludePackageNames: ['typescript'],
@@ -21,6 +22,10 @@
       groupName: 'TypeScript',
       matchPackageNames: ['typescript'],
     },
+    {
+      groupName: 'Jest',
+      matchPackageNames: ['@types/jest', 'jest', 'ts-jest']
+    }
   ],
   postUpdateOptions: ['yarnDedupeHighest'],
   postUpgradeTasks: {
