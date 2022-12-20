@@ -10,8 +10,6 @@ import type {
 import { Parser } from 'prettier';
 import { parsers as babelParsers } from 'prettier/parser-babel';
 
-const integerPrefixRegex = /^(\d+)/u;
-
 /**
  * Lexical sort function for strings, meant to be used as the sort
  * function for `Array.prototype.sort`.
@@ -23,6 +21,8 @@ const integerPrefixRegex = /^(\d+)/u;
 function lexicalSort(a: string, b: string) {
   return a > b ? 1 : -1;
 }
+
+const integerPrefixRegex = /^(\d+)/u;
 
 /**
  * Numeric sort function for strings, meant to be used as the sort
@@ -39,8 +39,14 @@ function numericSort(a: string, b: string) {
   const aPrefixResult = a.match(integerPrefixRegex);
   const bPrefixResult = b.match(integerPrefixRegex);
   if (aPrefixResult !== null && bPrefixResult !== null) {
-    const aPrefix = parseInt(aPrefixResult[1], 10);
-    const bPrefix = parseInt(bPrefixResult[1], 10);
+    // Guaranteed to be non-null because we checked for `null`, and because there is a capture
+    // group in the regex
+    /* eslint-disable @typescript-eslint/no-non-null-assertion */
+    const rawAPrefix = aPrefixResult[1]!;
+    const rawBPrefix = bPrefixResult[1]!;
+    /* eslint-enable @typescript-eslint/no-non-null-assertion */
+    const aPrefix = parseInt(rawAPrefix, 10);
+    const bPrefix = parseInt(rawBPrefix, 10);
     const difference = aPrefix - bPrefix;
     if (difference !== 0) {
       return difference;
@@ -225,8 +231,10 @@ export const parsers = {
           const regexRegex = /^\/(.+)\/([imsu]*)$/u;
           if (entry.match(regexRegex)) {
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            const [, regexSpec, flags] = entry.match(regexRegex)!;
-            const regex = new RegExp(regexSpec, flags);
+            const [, regexSpec, flags]: string[] = entry.match(regexRegex)!;
+            // "regexSpec" guaranteed to be defined because of capture group. False positive for unnecessary type assertion.
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+            const regex = new RegExp(regexSpec as string, flags);
             return value.match(regex);
           }
           return value === entry;
@@ -245,8 +253,12 @@ export const parsers = {
           } else if (aIndex === -1) {
             return 1;
           } else if (aIndex === bIndex) {
-            const sortEntry = sortEntries[aIndex];
-            const categorySort = customSort[sortEntry];
+            // Sort entry guaranteed to be non-null because index was found
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            const sortEntry = sortEntries[aIndex]!;
+            // Guaranteed to be defined because `sortEntry` is derived from `Object.keys`
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+            const categorySort = customSort[sortEntry] as null | CategorySort;
             const categorySortFunction =
               categorySort === null
                 ? lexicalSort
