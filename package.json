@@ -24,7 +24,7 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
-    "@types/prettier": "^2.3.2"
+    "@types/prettier": "^2.7.2"
   },
   "devDependencies": {
     "@babel/types": "^7.18.10",
