@@ -78,23 +78,19 @@ Sort JSON objects recursively, including all nested objects. This also sorts obj
 
 ### JSON Sort Order
 
-Use a custom sort order. This order is specified using a JSON file that maps exact strings or regular expressions to sorting algorithms.
+Use a custom sort order. This is specified as a JSON string that maps exact strings or regular expressions to sorting algorithms.
 
-| Default | CLI                        | Configuration           |
-| ------- | -------------------------- | ----------------------- |
-| `""`    | `--json-sort-order <path>` | `jsonSortOrder: <path>` |
+| Default | CLI                            | Configuration             |
+| ------- | ------------------------------ | ------------------------- |
+| `""`    | `--json-sort-order '<string>'` | `jsonSortOrder: <string>` |
 
-Here is an example JSON sort order file:
+Here is an example JSON sort order string:
 
-```json
-{
-  "placeThisFirst": null,
-  "/^[^\\d+]/": "lexical",
-  "/^\\d+/": "numeric"
-}
+```
+'{ "placeThisFirst": null, "/^[^\\d+]/": "lexical", "/^\\d+/": "numeric" }'
 ```
 
-This file sorts the key "placeThisFirst" ahead of all others. After that, the set of all keys that _don't_ start with a number are sorted lexically. Lastly, the set of keys that start with a number are sorted numerically.
+This sorts the key "placeThisFirst" ahead of all others. After that, the set of all keys that _don't_ start with a number are sorted lexically. Lastly, the set of keys that start with a number are sorted numerically.
 
 Each key represents a literal key value or a _category_ of keys, represented by a regular expression. Regular expressions are identified by leading and trailing forward slashes, along with some number of paths optionally following the trailing slash (supported flags are `i`, `m`, `s`, and `u`).
 

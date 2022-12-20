@@ -7,8 +7,6 @@ import type {
   SpreadElement,
   StringLiteral,
 } from '@babel/types';
-import { readFileSync } from 'fs';
-import path from 'path';
 import { Parser } from 'prettier';
 import { parsers as babelParsers } from 'prettier/parser-babel';
 
@@ -176,15 +174,7 @@ export const parsers = {
     parse(text, _parsers, options: any) {
       const ast: Expression = babelParsers.json.parse(text, _parsers, options);
 
-      const { filepath, jsonRecursiveSort, jsonSortOrder } = options;
-
-      if (
-        jsonSortOrder &&
-        path.resolve(filepath) === path.resolve(jsonSortOrder)
-      ) {
-        // Skip sorting the JSON sort order file
-        return ast;
-      }
+      const { jsonRecursiveSort, jsonSortOrder } = options;
 
       // Only objects are intended to be sorted by this plugin
       // Arrays are considered only in recursive mode, so that we
@@ -200,19 +190,27 @@ export const parsers = {
 
       let sortCompareFunction: (a: string, b: string) => number = lexicalSort;
       if (jsonSortOrder) {
-        const customSortOrderContents = readFileSync(jsonSortOrder, 'utf8');
-        const parsedCustomSort = JSON.parse(customSortOrderContents);
+        let parsedCustomSort;
+        try {
+          parsedCustomSort = JSON.parse(jsonSortOrder);
+        } catch (error) {
+          // @ts-expect-error Error cause property not yet supported by '@types/node' (see https://github.com/DefinitelyTyped/DefinitelyTyped/pull/61827)
+          throw new Error(`Failed to parse sort order option as JSON`, {
+            cause: error,
+          });
+        }
+
         if (
           Array.isArray(parsedCustomSort) ||
           typeof parsedCustomSort !== 'object'
         ) {
-          throw new Error(`Invalid custom sort order file; must be an object`);
+          throw new Error(`Invalid custom sort order; must be an object`);
         }
 
         for (const categorySort of Object.values(parsedCustomSort)) {
           if (!allowedCategorySortValues.includes(categorySort as any)) {
             throw new Error(
-              `Invalid custom sort file entry: value must be one of '${String(
+              `Invalid custom sort entry: value must be one of '${String(
                 allowedCategorySortValues,
               )}', got '${String(categorySort)}'`,
             );
@@ -273,8 +271,8 @@ export const options = {
   },
   jsonSortOrder: {
     category: 'json-sort',
-    description: 'A path to a JSON file specifying a custom sort order',
-    since: '0.0.3',
-    type: 'path' as const,
+    description: 'A JSON string specifying a custom sort order',
+    since: '0.0.4',
+    type: 'string' as const,
   },
 };
