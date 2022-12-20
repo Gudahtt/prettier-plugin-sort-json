@@ -6,6 +6,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0]
+### Uncategorized
+- Update ESLint config to v11.1.0 ([#130](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/130))
+- Change `jsonSortOrder` option to a JSON string ([#118](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/118))
+- Update dependency typescript to ~4.9.0 ([#129](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/129))
+- Bump qs from 6.5.2 to 6.5.3 ([#128](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/128))
+- Update Minor ([#125](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/125))
+- Update dependency @metamask/auto-changelog to v3 ([#126](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/126))
+- Add Dependabot config ([#127](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/127))
+- Update Jest to v29 (major) ([#122](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/122))
+- Update GitHub actions workflows ([#124](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/124))
+- Update to v11 ESlint config ([#123](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/123))
+- Update dependency typescript to ~4.8.0 ([#112](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/112))
+- Update Jest to v28.1.8 ([#121](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/121))
+- Update Minor ([#110](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/110))
+- Update Renovate config ([#120](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/120))
+- Update dependency @types/prettier to v2.6.4 ([#109](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/109))
+- Update ESLint config to v10 (major) ([#108](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/108))
+- Update Yarn to v3.2.2 ([#107](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/107))
+
 ## [0.0.3]
 ### Added
 - Add `jsonSortOrder` option ([#92](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/92))
@@ -34,7 +54,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial release
 
-[Unreleased]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v0.0.3...HEAD
+[Unreleased]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v0.0.3...v1.0.0
 [0.0.3]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v0.0.2...v0.0.3
 [0.0.2]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/Gudahtt/prettier-plugin-sort-json/releases/tag/v0.0.1
