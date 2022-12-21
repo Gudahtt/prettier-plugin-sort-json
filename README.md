@@ -109,6 +109,10 @@ Each category is ordered in relation to other categories. Each value represents 
 
 Keys that do not match any defined category are treated as being in an implied last category, with `lexical` sorting.
 
+> Note: Escaping can be tricky, especially if you are using regular expression sort keys. These regular expressions are configured as strings, so any backslashes require an additional escape (e.g. notice the double-backslash here: `"/^\\d+/"`).
+>
+> If this key is configured as part of a JSON Prettier configuration file (`prettierrc.json`), all double-quotes and backslashes need to be escaped _again_. For example, the example JSON sort order string would would be `"{ \"placeThisFirst\": null, \"/^[^\\\\d+]/\": \"lexical\", \"/^\\\\d+/\": \"numeric\" }`.
+
 ## Contributing
 
 ### Setup
