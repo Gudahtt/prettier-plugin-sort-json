@@ -7,7 +7,7 @@ import type {
   SpreadElement,
   StringLiteral,
 } from '@babel/types';
-import { Parser } from 'prettier';
+import type { Parser } from 'prettier';
 import { parsers as babelParsers } from 'prettier/parser-babel';
 
 /**
