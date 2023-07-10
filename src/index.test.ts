@@ -72,8 +72,8 @@ const unconventionalKeys = [
   '\u0020',
 ];
 
-test('should return an empty string unchanged', (t) => {
-  const output = format('', {
+test('should return an empty string unchanged', async (t) => {
+  const output = await format('', {
     filepath: 'foo.json',
     parser: 'json',
     plugins: [SortJsonPlugin],
@@ -82,8 +82,8 @@ test('should return an empty string unchanged', (t) => {
   t.is(output, '');
 });
 
-test('should return an empty string when given a newline', (t) => {
-  const output = format('\n', {
+test('should return an empty string when given a newline', async (t) => {
+  const output = await format('\n', {
     filepath: 'foo.json',
     parser: 'json',
     plugins: [SortJsonPlugin],
@@ -92,22 +92,21 @@ test('should return an empty string when given a newline', (t) => {
   t.is(output, '');
 });
 
-test('should throw Syntax Error in parser for invalid JSON', (t) => {
-  t.throws(
-    () => {
+test('should throw Syntax Error in parser for invalid JSON', async (t) => {
+  await t.throwsAsync(
+    async () =>
       format('{', {
         filepath: 'foo.json',
         parser: 'json',
         plugins: [SortJsonPlugin],
-      });
-    },
+      }),
     { message: /^Unexpected token \(1:2\)/u },
   );
 });
 
-test('should throw if custom sort is invalid JSON', (t) => {
-  t.throws(
-    () => {
+test('should throw if custom sort is invalid JSON', async (t) => {
+  await t.throwsAsync(
+    async () =>
       format('{}', {
         filepath: 'foo.json',
         parser: 'json',
@@ -115,15 +114,14 @@ test('should throw if custom sort is invalid JSON', (t) => {
         ...{
           jsonSortOrder: '{',
         },
-      });
-    },
+      }),
     { message: /^Failed to parse sort order option as JSON/u },
   );
 });
 
-test('should throw if custom sort is an array', (t) => {
-  t.throws(
-    () => {
+test('should throw if custom sort is an array', async (t) => {
+  await t.throwsAsync(
+    async () =>
       format('{}', {
         filepath: 'foo.json',
         parser: 'json',
@@ -131,15 +129,14 @@ test('should throw if custom sort is an array', (t) => {
         ...{
           jsonSortOrder: '[]',
         },
-      });
-    },
+      }),
     { message: /^Invalid custom sort order/u },
   );
 });
 
-test('should throw if custom sort has invalid category sort values', (t) => {
-  t.throws(
-    () => {
+test('should throw if custom sort has invalid category sort values', async (t) => {
+  await t.throwsAsync(
+    async () =>
       format('{}', {
         filepath: 'foo.json',
         parser: 'json',
@@ -147,26 +144,24 @@ test('should throw if custom sort has invalid category sort values', (t) => {
         ...{
           jsonSortOrder: JSON.stringify({ first: 'imaginarySort' }),
         },
-      });
-    },
+      }),
     { message: /^Invalid custom sort entry/u },
   );
 });
 
 for (const validJson of validJsonExamples) {
-  test(`should return '${validJson}' unchanged`, (t) => {
-    const validJsonWithNewline = `${validJson}\n`;
-    const output = format(validJsonWithNewline, {
+  test(`should return '${validJson}' unchanged`, async (t) => {
+    const output = await format(validJson, {
       filepath: 'foo.json',
       parser: 'json',
       plugins: [SortJsonPlugin],
     });
 
-    t.is(output, validJsonWithNewline);
+    t.is(output, validJson);
   });
 }
 
-test('should validate a sorted JSON object', (t) => {
+test('should validate a sorted JSON object', async (t) => {
   const fixture = {
     0: null,
     $: null,
@@ -182,7 +177,7 @@ test('should validate a sorted JSON object', (t) => {
   };
 
   const input = JSON.stringify(fixture, null, 2);
-  const output = format(input, {
+  const output = await format(input, {
     filepath: 'foo.json',
     parser: 'json',
     plugins: [SortJsonPlugin],
@@ -191,7 +186,7 @@ test('should validate a sorted JSON object', (t) => {
   t.snapshot(output);
 });
 
-test('should sort an unsorted JSON object', (t) => {
+test('should sort an unsorted JSON object', async (t) => {
   const fixture = {
     z: null,
     a: null,
@@ -207,7 +202,7 @@ test('should sort an unsorted JSON object', (t) => {
   };
 
   const input = JSON.stringify(fixture, null, 2);
-  const output = format(input, {
+  const output = await format(input, {
     filepath: 'foo.json',
     parser: 'json',
     plugins: [SortJsonPlugin],
@@ -216,7 +211,7 @@ test('should sort an unsorted JSON object', (t) => {
   t.snapshot(output);
 });
 
-test('should validate a sorted JSON object recursively', (t) => {
+test('should validate a sorted JSON object recursively', async (t) => {
   const fixture = {
     0: null,
     a: null,
@@ -231,7 +226,7 @@ test('should validate a sorted JSON object recursively', (t) => {
   };
 
   const input = JSON.stringify(fixture, null, 2);
-  const output = format(input, {
+  const output = await format(input, {
     filepath: 'foo.json',
     parser: 'json',
     plugins: [SortJsonPlugin],
@@ -243,7 +238,7 @@ test('should validate a sorted JSON object recursively', (t) => {
   t.snapshot(output);
 });
 
-test('should sort an unsorted JSON object recursively', (t) => {
+test('should sort an unsorted JSON object recursively', async (t) => {
   const fixture = {
     z: null,
     a: null,
@@ -258,7 +253,7 @@ test('should sort an unsorted JSON object recursively', (t) => {
   };
 
   const input = JSON.stringify(fixture, null, 2);
-  const output = format(input, {
+  const output = await format(input, {
     filepath: 'foo.json',
     parser: 'json',
     plugins: [SortJsonPlugin],
@@ -270,7 +265,7 @@ test('should sort an unsorted JSON object recursively', (t) => {
   t.snapshot(output);
 });
 
-test('should validate a sorted JSON object within an array recursively', (t) => {
+test('should validate a sorted JSON object within an array recursively', async (t) => {
   const fixture = [
     1,
     4,
@@ -290,7 +285,7 @@ test('should validate a sorted JSON object within an array recursively', (t) => 
   ];
 
   const input = JSON.stringify(fixture, null, 2);
-  const output = format(input, {
+  const output = await format(input, {
     filepath: 'foo.json',
     parser: 'json',
     plugins: [SortJsonPlugin],
@@ -302,7 +297,7 @@ test('should validate a sorted JSON object within an array recursively', (t) => 
   t.snapshot(output);
 });
 
-test('should sort an unsorted JSON object within an array recursively', (t) => {
+test('should sort an unsorted JSON object within an array recursively', async (t) => {
   const fixture = [
     1,
     4,
@@ -322,7 +317,7 @@ test('should sort an unsorted JSON object within an array recursively', (t) => {
   ];
 
   const input = JSON.stringify(fixture, null, 2);
-  const output = format(input, {
+  const output = await format(input, {
     filepath: 'foo.json',
     parser: 'json',
     plugins: [SortJsonPlugin],
@@ -334,7 +329,7 @@ test('should sort an unsorted JSON object within an array recursively', (t) => {
   t.snapshot(output);
 });
 
-test('should validate a deeply nested sorted JSON object recursively', (t) => {
+test('should validate a deeply nested sorted JSON object recursively', async (t) => {
   const fixture = {
     0: null,
     a: null,
@@ -358,7 +353,7 @@ test('should validate a deeply nested sorted JSON object recursively', (t) => {
   };
 
   const input = JSON.stringify(fixture, null, 2);
-  const output = format(input, {
+  const output = await format(input, {
     filepath: 'foo.json',
     parser: 'json',
     plugins: [SortJsonPlugin],
@@ -370,7 +365,7 @@ test('should validate a deeply nested sorted JSON object recursively', (t) => {
   t.snapshot(output);
 });
 
-test('should sort an unsorted deeply nested JSON object recursively', (t) => {
+test('should sort an unsorted deeply nested JSON object recursively', async (t) => {
   const fixture = {
     z: null,
     a: null,
@@ -394,7 +389,7 @@ test('should sort an unsorted deeply nested JSON object recursively', (t) => {
   };
 
   const input = JSON.stringify(fixture, null, 2);
-  const output = format(input, {
+  const output = await format(input, {
     filepath: 'foo.json',
     parser: 'json',
     plugins: [SortJsonPlugin],
@@ -406,13 +401,13 @@ test('should sort an unsorted deeply nested JSON object recursively', (t) => {
   t.snapshot(output);
 });
 
-test('should validate a sorted JSON object with unconventional keys', (t) => {
+test('should validate a sorted JSON object with unconventional keys', async (t) => {
   const fixture = unconventionalKeys.sort().reduce((agg, key) => {
     return { ...agg, [key]: null };
   }, {});
 
   const input = JSON.stringify(fixture, null, 2);
-  const output = format(input, {
+  const output = await format(input, {
     filepath: 'foo.json',
     parser: 'json',
     plugins: [SortJsonPlugin],
@@ -421,7 +416,7 @@ test('should validate a sorted JSON object with unconventional keys', (t) => {
   t.snapshot(output);
 });
 
-test('should sort a JSON object with unconventional keys', (t) => {
+test('should sort a JSON object with unconventional keys', async (t) => {
   const fixture = unconventionalKeys
     .sort()
     .reverse()
@@ -430,7 +425,7 @@ test('should sort a JSON object with unconventional keys', (t) => {
     }, {});
 
   const input = JSON.stringify(fixture, null, 2);
-  const output = format(input, {
+  const output = await format(input, {
     filepath: 'foo.json',
     parser: 'json',
     plugins: [SortJsonPlugin],
@@ -439,7 +434,7 @@ test('should sort a JSON object with unconventional keys', (t) => {
   t.snapshot(output);
 });
 
-test('should sort JSON objects recursively within a nested array', (t) => {
+test('should sort JSON objects recursively within a nested array', async (t) => {
   const fixture = {
     test: [null, { foo: 'bar', baz: 3 }, { foo: 'bag', brz: 2 }],
     z: null,
@@ -455,7 +450,7 @@ test('should sort JSON objects recursively within a nested array', (t) => {
   };
 
   const input = JSON.stringify(fixture, null, 2);
-  const output = format(input, {
+  const output = await format(input, {
     filepath: 'foo.json',
     parser: 'json',
     plugins: [SortJsonPlugin],
@@ -467,7 +462,7 @@ test('should sort JSON objects recursively within a nested array', (t) => {
   t.snapshot(output);
 });
 
-test('should validate JSON objects recursively within a nested array', (t) => {
+test('should validate JSON objects recursively within a nested array', async (t) => {
   const fixture = {
     0: null,
     a: null,
@@ -483,7 +478,7 @@ test('should validate JSON objects recursively within a nested array', (t) => {
   };
 
   const input = JSON.stringify(fixture, null, 2);
-  const output = format(input, {
+  const output = await format(input, {
     filepath: 'foo.json',
     parser: 'json',
     plugins: [SortJsonPlugin],
@@ -495,7 +490,7 @@ test('should validate JSON objects recursively within a nested array', (t) => {
   t.snapshot(output);
 });
 
-test('should validate a sorted JSON object with a simple custom sort', (t) => {
+test('should validate a sorted JSON object with a simple custom sort', async (t) => {
   const fixture = {
     first: 'first',
     0: null,
@@ -511,7 +506,7 @@ test('should validate a sorted JSON object with a simple custom sort', (t) => {
   };
 
   const input = JSON.stringify(fixture, null, 2);
-  const output = format(input, {
+  const output = await format(input, {
     filepath: 'foo.json',
     parser: 'json',
     plugins: [SortJsonPlugin],
@@ -523,7 +518,7 @@ test('should validate a sorted JSON object with a simple custom sort', (t) => {
   t.snapshot(output);
 });
 
-test('should sort an unsorted JSON object with a simple custom sort', (t) => {
+test('should sort an unsorted JSON object with a simple custom sort', async (t) => {
   const fixture = {
     z: null,
     a: null,
@@ -539,7 +534,7 @@ test('should sort an unsorted JSON object with a simple custom sort', (t) => {
   };
 
   const input = JSON.stringify(fixture, null, 2);
-  const output = format(input, {
+  const output = await format(input, {
     filepath: 'foo.json',
     parser: 'json',
     plugins: [SortJsonPlugin],
@@ -551,7 +546,7 @@ test('should sort an unsorted JSON object with a simple custom sort', (t) => {
   t.snapshot(output);
 });
 
-test('should validate a sorted JSON object with a numeric custom sort', (t) => {
+test('should validate a sorted JSON object with a numeric custom sort', async (t) => {
   const fixture = {
     first: 'first',
     0: null,
@@ -573,7 +568,7 @@ test('should validate a sorted JSON object with a numeric custom sort', (t) => {
   };
 
   const input = JSON.stringify(fixture, null, 2);
-  const output = format(input, {
+  const output = await format(input, {
     filepath: 'foo.json',
     parser: 'json',
     plugins: [SortJsonPlugin],
@@ -585,7 +580,7 @@ test('should validate a sorted JSON object with a numeric custom sort', (t) => {
   t.snapshot(output);
 });
 
-test('should sort an unsorted JSON object with a numeric custom sort', (t) => {
+test('should sort an unsorted JSON object with a numeric custom sort', async (t) => {
   const fixture = {
     z: null,
     a: null,
@@ -607,7 +602,7 @@ test('should sort an unsorted JSON object with a numeric custom sort', (t) => {
   };
 
   const input = JSON.stringify(fixture, null, 2);
-  const output = format(input, {
+  const output = await format(input, {
     filepath: 'foo.json',
     parser: 'json',
     plugins: [SortJsonPlugin],
@@ -619,7 +614,7 @@ test('should sort an unsorted JSON object with a numeric custom sort', (t) => {
   t.snapshot(output);
 });
 
-test('should validate a sorted JSON object with a complex custom sort', (t) => {
+test('should validate a sorted JSON object with a complex custom sort', async (t) => {
   const fixture = {
     first: 'first',
     '050': null,
@@ -664,7 +659,7 @@ test('should validate a sorted JSON object with a complex custom sort', (t) => {
   };
 
   const input = JSON.stringify(fixture, null, 2);
-  const output = format(input, {
+  const output = await format(input, {
     filepath: 'foo.json',
     parser: 'json',
     plugins: [SortJsonPlugin],
@@ -676,7 +671,7 @@ test('should validate a sorted JSON object with a complex custom sort', (t) => {
   t.snapshot(output);
 });
 
-test('should sort an unsorted JSON object with a complex custom sort', (t) => {
+test('should sort an unsorted JSON object with a complex custom sort', async (t) => {
   const fixture = {
     z: null,
     b2: null,
@@ -719,7 +714,7 @@ test('should sort an unsorted JSON object with a complex custom sort', (t) => {
   };
 
   const input = JSON.stringify(fixture, null, 2);
-  const output = format(input, {
+  const output = await format(input, {
     filepath: 'foo.json',
     parser: 'json',
     plugins: [SortJsonPlugin],
