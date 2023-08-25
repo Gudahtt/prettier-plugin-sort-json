@@ -8,7 +8,7 @@ import type {
   StringLiteral,
 } from '@babel/types';
 import type { Parser } from 'prettier';
-import { parsers as babelParsers } from 'prettier/parser-babel';
+import { parsers as babelParsers } from 'prettier/plugins/babel';
 
 /**
  * Lexical sort function for strings, meant to be used as the sort
@@ -177,8 +177,12 @@ function sortAst(
 export const parsers = {
   json: {
     ...babelParsers.json,
-    parse(text, _parsers, options: any) {
-      const ast: Expression = babelParsers.json.parse(text, _parsers, options);
+    async parse(text, options: any) {
+      const jsonRootAst = await babelParsers.json.parse(text, options);
+
+      // The Prettier JSON parser wraps the AST in a 'JsonRoot' node
+      // This ast variable is the real document root
+      const ast = jsonRootAst.node;
 
       const { jsonRecursiveSort, jsonSortOrder } = options;
 
