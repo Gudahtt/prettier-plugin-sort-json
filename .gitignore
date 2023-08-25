@@ -15,10 +15,11 @@
 *.map
 *.tgz
 /dist/
+/build/
 
 # Configuration files
 !.eslintrc.js
-!jest.config.js
+!ava.config.js
 !.prettierrc.js
 
 # Logs
