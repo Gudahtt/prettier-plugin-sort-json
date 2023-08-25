@@ -7,8 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ## [3.0.0]
-### Uncategorized
-- Migrate to Prettier v3 ([#156](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/156))
+### Changed
+- **BREAKING**: Migrate to Prettier v3 ([#156](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/156))
+  - This plugin no longer works with Prettier v2. Prettier v2 support will be maintained on v2 of this plugin however.
+  - Prettier v3 will no longer automatically load plugins. [Follow these instructions](https://prettier.io/docs/en/plugins#using-plugins) to load this plugin after updating.
 
 ## [2.0.0]
 ### Changed
