@@ -22,10 +22,6 @@
       groupName: 'TypeScript',
       matchPackageNames: ['typescript'],
     },
-    {
-      groupName: 'Jest',
-      matchPackageNames: ['@types/jest', 'jest', 'ts-jest']
-    }
   ],
   postUpdateOptions: ['yarnDedupeHighest'],
   postUpgradeTasks: {

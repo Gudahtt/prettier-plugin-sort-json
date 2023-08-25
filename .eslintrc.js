@@ -8,9 +8,16 @@ module.exports = {
     },
     {
       files: ['*.test.ts'],
-      extends: ['@metamask/eslint-config-jest'],
       rules: {
-        'jest/no-restricted-matchers': 'off',
+        // Duplicate rule from '@metamask/eslint-config', but add exception for `t`
+        'id-length': [
+          'error',
+          {
+            min: 2,
+            properties: 'never',
+            exceptionPatterns: ['_', 'a', 'b', 'i', 'j', 'k', 't'],
+          },
+        ],
       },
     },
   ],
