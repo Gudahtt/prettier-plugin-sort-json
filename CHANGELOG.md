@@ -6,6 +6,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0]
+### Uncategorized
+- Ignore lint errors in build output ([#165](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/165))
+- Update minimum supported Node.js version to v16 ([#164](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/164))
+- Migrate tests from Jest to AVA ([#163](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/163))
+- Update ESLint config to v12.1.0 ([#162](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/162))
+- Update Minor ([#157](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/157))
+- Bump semver from 6.3.0 to 6.3.1 ([#153](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/153))
+- Update ESLint config ([#154](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/154))
+- Update CI to test with Node.js v20 ([#152](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/152))
+- Update dependency typescript to v4.9.5 ([#141](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/141))
+- Update Jest to v29.5.2 ([#138](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/138))
+- Update Minor ([#137](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/137))
+- Bump json5 from 1.0.1 to 1.0.2 ([#139](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/139))
+- Add note to README about escaping ([#136](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/136))
+
 ## [1.0.0]
 ### Changed
 - **BREAKING**: Change `jsonSortOrder` option to a JSON string ([#118](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/118))
@@ -39,7 +55,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial release
 
-[Unreleased]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v1.0.0...v2.0.0
 [1.0.0]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v0.0.3...v1.0.0
 [0.0.3]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v0.0.2...v0.0.3
 [0.0.2]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v0.0.1...v0.0.2
