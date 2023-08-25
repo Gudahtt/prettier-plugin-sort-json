@@ -2,6 +2,11 @@
 
 A plugin for [Prettier](https://prettier.io) that sorts JSON files by property name.
 
+> [!IMPORTANT]
+> This plugin supports Prettier v3 as of version 3.0.0 of this plugin. The latest release will no longer work with Prettier v2.
+>
+> We are maintaining support for Prettier v2 on version 2 of this plugin. See [the main-v2 branch](https://github.com/Gudahtt/prettier-plugin-sort-json/tree/main-v2) for instructions on using v2 of this plugin.
+
 ## Requirements
 
 This module requires an [LTS](https://github.com/nodejs/Release) Node version (v16.0.0+), and `prettier` v3+.
@@ -20,7 +25,9 @@ Using `yarn`:
 yarn add --dev prettier-plugin-sort-json
 ```
 
-No configuration is necessary; Prettier will detect this plugin in your dependencies and use it automatically. There are some configuration options available ([described below](#configuration)), but they are all optional.
+Then [follow these instructions](https://prettier.io/docs/en/plugins#using-plugins) to load the plugin.
+
+There are some additional configuration options available ([described below](#configuration)), but they are all optional.
 
 ## Description
 
