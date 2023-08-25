@@ -52,7 +52,7 @@
   },
   "packageManager": "yarn@3.6.1",
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=16.0.0"
   },
   "lavamoat": {
     "allowScripts": {

@@ -4,7 +4,7 @@ A plugin for [Prettier](https://prettier.io) that sorts JSON files by property n
 
 ## Requirements
 
-This module requires an [LTS](https://github.com/nodejs/Release) Node version (v14.0.0+), and `prettier` v2.3.2+.
+This module requires an [LTS](https://github.com/nodejs/Release) Node version (v16.0.0+), and `prettier` v2.3.2+.
 
 ## Install
 
