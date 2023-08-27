@@ -151,13 +151,14 @@ test('should throw if custom sort has invalid category sort values', async (t) =
 
 for (const validJson of validJsonExamples) {
   test(`should return '${validJson}' unchanged`, async (t) => {
-    const output = await format(validJson, {
+    const validJsonWithNewline = `${validJson}\n`;
+    const output = await format(validJsonWithNewline, {
       filepath: 'foo.json',
       parser: 'json',
       plugins: [SortJsonPlugin],
     });
 
-    t.is(output, validJson);
+    t.is(output, validJsonWithNewline);
   });
 }
 
