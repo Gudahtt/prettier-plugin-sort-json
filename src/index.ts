@@ -195,7 +195,7 @@ export const parsers = {
           (ast.type === 'ArrayExpression' && jsonRecursiveSort)
         )
       ) {
-        return ast;
+        return jsonRootAst;
       }
 
       let sortCompareFunction: (a: string, b: string) => number = lexicalSort;
@@ -272,7 +272,12 @@ export const parsers = {
           return aIndex - bIndex;
         };
       }
-      return sortAst(ast, jsonRecursiveSort, sortCompareFunction);
+      const sortedAst = sortAst(ast, jsonRecursiveSort, sortCompareFunction);
+
+      return {
+        ...jsonRootAst,
+        node: sortedAst,
+      };
     },
   },
 } as Record<string, Parser>;
