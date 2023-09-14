@@ -729,13 +729,13 @@ test('should sort an unsorted JSON object with a complex custom sort', async (t)
 
 test('should validate a sorted JSON object with the none order', async (t) => {
   const fixture = {
-    "a": 1,
-    "b": 2,
-    "c": 3,
-    "B": 4,
-    "A": 5,
-    "C": 6,
-  }
+    a: 1,
+    b: 2,
+    c: 3,
+    B: 4,
+    A: 5,
+    C: 6,
+  };
 
   const input = JSON.stringify(fixture, null, 2);
   const output = await format(input, {
@@ -744,24 +744,24 @@ test('should validate a sorted JSON object with the none order', async (t) => {
     plugins: [SortJsonPlugin],
     ...{
       jsonSortOrder: JSON.stringify({
-        "/[a-z]+/": "lexical",
-        "/[A-Z]+/": "none",
+        '/[a-z]+/': 'lexical',
+        '/[A-Z]+/': 'none',
       }),
     },
   });
 
   t.snapshot(output);
-})
+});
 
 test('should sort an unsorted JSON object with the none order', async (t) => {
   const fixture = {
-    "C": 6,
-    "B": 4,
-    "b": 2,
-    "c": 3,
-    "A": 5,
-    "a": 1,
-  }
+    C: 6,
+    B: 4,
+    b: 2,
+    c: 3,
+    A: 5,
+    a: 1,
+  };
 
   const input = JSON.stringify(fixture, null, 2);
   const output = await format(input, {
@@ -770,11 +770,11 @@ test('should sort an unsorted JSON object with the none order', async (t) => {
     plugins: [SortJsonPlugin],
     ...{
       jsonSortOrder: JSON.stringify({
-        "/[a-z]+/": "lexical",
-        "/[A-Z]+/": "none",
+        '/[a-z]+/': 'lexical',
+        '/[A-Z]+/': 'none',
       }),
     },
   });
 
   t.snapshot(output);
-})
+});

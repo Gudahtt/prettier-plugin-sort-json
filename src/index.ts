@@ -86,14 +86,13 @@ function caseInsensitiveSort(sortFunction: (a: string, b: string) => number) {
  * Skip sort function, meant to be used as the sort
  * function for `Array.prototype.sort`.
  *
- * @param a - First element to compare.
- * @param b - Second element to compare.
+ * @param _a - First element to compare.
+ * @param _b - Second element to compare.
  * @returns A number indicating which element should come first.
  */
-function noneSort(a: string, b: string) {
-  return 0
+function noneSort(_a: string, _b: string) {
+  return 0;
 }
-
 
 /**
  * Sorting algorithms for categories in a custom sort order definition.
@@ -107,7 +106,7 @@ enum CategorySort {
   Numeric = 'numeric',
   ReverseLexical = 'reverseLexical',
   ReverseNumeric = 'reverseNumeric',
-  None = 'none'
+  None = 'none',
 }
 
 /**
