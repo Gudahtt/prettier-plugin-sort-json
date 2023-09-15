@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.1.0]
+### Uncategorized
+- feat: Implement `none` sort ([#177](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/177))
+- Update dependency @babel/types to v7.22.10 ([#174](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/174))
+- Update dependency eslint-config-prettier to v9 ([#173](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/173))
+- Update dependency prettier to v3.0.1 ([#172](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/172))
+- Update Minor ([#169](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/169))
+
 ## [3.0.1]
 ### Fixed
 - Fix accidental removal of trailing newline ([#170](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/170))
@@ -54,7 +62,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial release
 
-[Unreleased]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v3.0.1...HEAD
+[Unreleased]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v3.1.0...HEAD
+[3.1.0]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v3.0.1...v3.1.0
 [3.0.1]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v2.0.0...v3.0.0
 [2.0.0]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v1.0.0...v2.0.0
