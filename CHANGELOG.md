@@ -7,12 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ## [3.1.0]
-### Uncategorized
-- feat: Implement `none` sort ([#177](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/177))
-- Update dependency @babel/types to v7.22.10 ([#174](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/174))
-- Update dependency eslint-config-prettier to v9 ([#173](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/173))
-- Update dependency prettier to v3.0.1 ([#172](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/172))
-- Update Minor ([#169](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/169))
+### Added
+- Add `none` sorting algorithm ([#177](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/177))
+  - This lets you leave certain properties usorted when defining a custom sort order
+  - Contributed by @hyperupcall
 
 ## [3.0.1]
 ### Fixed
