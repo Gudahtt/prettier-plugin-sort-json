@@ -113,6 +113,7 @@ Each category is ordered in relation to other categories. Each value represents 
 | `caseInsensitiveNumeric`        | Case-insensitive numeric sort.                                                                              |
 | `caseInsensitiveReverseLexical` | Case-insensitive reverse-order lexical sort.                                                                |
 | `caseInsensitiveReverseNumeric` | Case-insensitive reverse-order numeric sort.                                                                |
+| `none`                          | Do not sort.                                                                                                |
 
 Keys that do not match any defined category are treated as being in an implied last category, with `lexical` sorting.
 

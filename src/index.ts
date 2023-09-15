@@ -69,7 +69,7 @@ function reverseSort(sortFunction: (a: string, b: string) => number) {
 }
 
 /**
- * Make a sort function case-insensitive.. This is meant to wrap
+ * Make a sort function case-insensitive. This is meant to wrap
  * functions meant to be used as the sort function for
  * `Array.prototype.sort`.
  *
@@ -80,6 +80,18 @@ function caseInsensitiveSort(sortFunction: (a: string, b: string) => number) {
   return (a: string, b: string) => {
     return sortFunction(a.toLowerCase(), b.toLowerCase());
   };
+}
+
+/**
+ * Skip sort function, meant to be used as the sort
+ * function for `Array.prototype.sort`.
+ *
+ * @param _a - First element to compare.
+ * @param _b - Second element to compare.
+ * @returns A number indicating which element should come first.
+ */
+function noneSort(_a: string, _b: string) {
+  return 0;
 }
 
 /**
@@ -94,6 +106,7 @@ enum CategorySort {
   Numeric = 'numeric',
   ReverseLexical = 'reverseLexical',
   ReverseNumeric = 'reverseNumeric',
+  None = 'none',
 }
 
 /**
@@ -112,6 +125,7 @@ const categorySortFunctions = {
   [CategorySort.Numeric]: numericSort,
   [CategorySort.ReverseLexical]: reverseSort(lexicalSort),
   [CategorySort.ReverseNumeric]: reverseSort(numericSort),
+  [CategorySort.None]: noneSort,
 };
 
 /**
