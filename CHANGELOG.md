@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.1.0]
+### Added
+- Add `none` sorting algorithm ([#177](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/177))
+  - This lets you leave certain properties usorted when defining a custom sort order
+  - Contributed by @hyperupcall
+
 ## [3.0.1]
 ### Fixed
 - Fix accidental removal of trailing newline ([#170](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/170))
@@ -54,7 +60,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial release
 
-[Unreleased]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v3.0.1...HEAD
+[Unreleased]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v3.1.0...HEAD
+[3.1.0]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v3.0.1...v3.1.0
 [3.0.1]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v2.0.0...v3.0.0
 [2.0.0]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v1.0.0...v2.0.0
