@@ -727,6 +727,31 @@ test('should sort an unsorted JSON object with a complex custom sort', async (t)
   t.snapshot(output);
 });
 
+test('should sort an unsorted JSON object with complex case sensitivies', async (t) => {
+  const fixture = {
+    c: 6,
+    b: 4,
+    a: 2,
+    C: 5,
+    B: 3,
+    A: 1,
+  };
+
+  const input = JSON.stringify(fixture, null, 2);
+  const output = await format(input, {
+    filepath: 'foo.json',
+    parser: 'json',
+    plugins: [SortJsonPlugin],
+    ...{
+      jsonSortOrder: JSON.stringify({
+        '/(.+)/': 'caseInsensitiveLexical',
+      }),
+    },
+  });
+
+  t.snapshot(output);
+});
+
 test('should validate a sorted JSON object with the none order', async (t) => {
   const fixture = {
     a: 1,

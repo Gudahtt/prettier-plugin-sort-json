@@ -19,7 +19,13 @@ import { parsers as babelParsers } from 'prettier/plugins/babel';
  * @returns A number indicating which element should come first.
  */
 function lexicalSort(a: string, b: string) {
-  return a > b ? 1 : -1;
+  if (a > b) {
+    return 1;
+  }
+  if (a < b) {
+    return -1;
+  }
+  return 0;
 }
 
 const integerPrefixRegex = /^(\d+)/u;
@@ -78,7 +84,7 @@ function reverseSort(sortFunction: (a: string, b: string) => number) {
  */
 function caseInsensitiveSort(sortFunction: (a: string, b: string) => number) {
   return (a: string, b: string) => {
-    return sortFunction(a.toLowerCase(), b.toLowerCase());
+    return sortFunction(a.toLowerCase(), b.toLowerCase()) || sortFunction(a, b);
   };
 }
 
