@@ -10,7 +10,7 @@
   minimumReleaseAge: '30 days',
   packageRules: [
     {
-      excludePackageNames: ['typescript'],
+      excludePackageNames: ['prettier','typescript'],
       groupName: 'Minor',
       matchPackagePatterns: ['*'],
       matchUpdateTypes: ['patch', 'minor'],
@@ -18,6 +18,10 @@
     {
       groupName: 'ESLint config',
       matchPackagePatterns: ['^@metamask/eslint-config*'],
+    },
+        {
+      groupName: 'Prettier',
+      matchPackageNames: ['prettier'],
     },
     {
       groupName: 'TypeScript',
