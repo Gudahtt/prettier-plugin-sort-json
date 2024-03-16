@@ -47,7 +47,7 @@
   "peerDependencies": {
     "prettier": "^3.0.0"
   },
-  "packageManager": "yarn@3.6.1",
+  "packageManager": "yarn@3.8.0",
   "engines": {
     "node": ">=16.0.0"
   },
