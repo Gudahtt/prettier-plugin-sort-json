@@ -7,6 +7,7 @@
   ignoreScripts: true,
   internalChecksFilter: 'strict',
   "enabledManagers": ["npm"],
+  minimumReleaseAge: '30 days',
   packageRules: [
     {
       excludePackageNames: ['typescript'],
@@ -33,7 +34,6 @@
   rangeStrategy: 'update-lockfile',
   repositories: ['Gudahtt/prettier-plugin-sort-json'],
   skipInstalls: false,
-  stabilityDays: 30,
   // Self-Hosted configuration
   allowScripts: false,
   allowedPostUpgradeCommands: ['yarn run allow-scripts auto'],
