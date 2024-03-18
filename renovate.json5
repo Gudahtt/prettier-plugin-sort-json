@@ -1,5 +1,4 @@
 {
-  // Configuration
   branchPrefix: 'renovate/',
   dependencyDashboard: true,
   'github-actions': { enabled: false },
@@ -36,14 +35,5 @@
   },
   prConcurrentLimit: 10,
   rangeStrategy: 'update-lockfile',
-  repositories: ['Gudahtt/prettier-plugin-sort-json'],
   skipInstalls: false,
-  // Self-Hosted configuration
-  allowScripts: false,
-  allowedPostUpgradeCommands: ['yarn run allow-scripts auto'],
-  customEnvVariables: {
-    SKIP_ALLOW_SCRIPTS: 'true',
-  },
-  platform: 'github',
-  onboarding: false,
 }
