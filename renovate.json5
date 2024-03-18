@@ -5,11 +5,11 @@
   gitAuthor: 'Renovate Bot <bot@renovateapp.com>',
   ignoreScripts: true,
   internalChecksFilter: 'strict',
-  "enabledManagers": ["npm"],
+  enabledManagers: ['npm'],
   minimumReleaseAge: '30 days',
   packageRules: [
     {
-      excludePackageNames: ['prettier','typescript'],
+      excludePackageNames: ['prettier', 'typescript'],
       groupName: 'Minor',
       matchPackagePatterns: ['*'],
       matchUpdateTypes: ['patch', 'minor'],
@@ -18,7 +18,7 @@
       groupName: 'ESLint config',
       matchPackagePatterns: ['^@metamask/eslint-config*'],
     },
-        {
+    {
       groupName: 'Prettier',
       matchPackageNames: ['prettier'],
     },

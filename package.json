@@ -18,7 +18,7 @@
     "lint": "yarn lint:eslint && yarn lint:misc --check",
     "lint:eslint": "eslint . --cache --ext js,ts",
     "lint:fix": "yarn lint:eslint --fix && yarn lint:misc --write",
-    "lint:misc": "prettier '**/*.json' '**/*.md' '!CHANGELOG.md' '**/*.yml' '!.yarnrc.yml' '!fixtures/invalid-json.json' --ignore-path .gitignore",
+    "lint:misc": "prettier '**/*.json' '**/*.json5' '**/*.md' '!CHANGELOG.md' '**/*.yml' '!.yarnrc.yml' '!fixtures/invalid-json.json' --ignore-path .gitignore",
     "prepack": "./scripts/prepack.sh",
     "test": "tsc --project tsconfig.test.json && ava"
   },
