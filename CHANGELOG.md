@@ -6,6 +6,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.0.0]
+### Uncategorized
+- chore(deps): update yarn to v4 ([#188](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/188))
+- Reduce Renovate frequency to once-per-hour ([#204](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/204))
+- chore(deps): update dependency ava to v6 ([#190](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/190))
+- Drop support for Node.js v16 ([#203](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/203))
+- Support case variants for insensitive lexical sort ([#189](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/189))
+- chore(deps): update dependency @lavamoat/allow-scripts to v3 ([#187](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/187))
+- chore(deps): update dependency typescript to v5 ([#183](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/183))
+- chore(deps): update minor ([#184](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/184))
+- Exclude Prettier from grouped Renovate update ([#200](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/200))
+- Migrate Renovate config to use newer syntax ([#199](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/199))
+- Update to latest version of Renovate ([#198](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/198))
+- Use LTS Node.js for development ([#197](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/197))
+- chore(deps): update dependency eslint-plugin-n to v16 ([#182](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/182))
+
 ## [3.1.0]
 ### Added
 - Add `none` sorting algorithm ([#177](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/177))
@@ -60,7 +76,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial release
 
-[Unreleased]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v3.1.0...HEAD
+[Unreleased]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v4.0.0...HEAD
+[4.0.0]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v3.1.0...v4.0.0
 [3.1.0]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v3.0.1...v3.1.0
 [3.0.1]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v2.0.0...v3.0.0
