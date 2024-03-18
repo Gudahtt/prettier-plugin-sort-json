@@ -125,7 +125,7 @@ Keys that do not match any defined category are treated as being in an implied l
 
 ### Setup
 
-- Install [Node.js](https://nodejs.org) version 16
+- Install the current LTS version of [Node.js](https://nodejs.org)
   - If you are using [nvm](https://github.com/creationix/nvm#installation) (recommended) running `nvm use` will automatically choose the right node version for you.
 - Install [Yarn v3](https://yarnpkg.com/getting-started/install)
 - Run `yarn install` to install dependencies and run any requried post-install scripts
