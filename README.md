@@ -99,9 +99,9 @@ Here is an example JSON sort order string:
 
 This sorts the key "placeThisFirst" ahead of all others. After that, the set of all keys that _don't_ start with a number are sorted lexically. Lastly, the set of keys that start with a number are sorted numerically.
 
-Each key represents a literal key value or a _category_ of keys, represented by a regular expression. Regular expressions are identified by leading and trailing forward slashes, along with some number of paths optionally following the trailing slash (supported flags are `i`, `m`, `s`, and `u`).
+Each `jsonSortOrder` key represents a literal key value or a _category_ of keys, represented by a regular expression. Regular expressions are identified by leading and trailing forward slashes, along with some number of paths optionally following the trailing slash (supported flags are `i`, `m`, `s`, and `u`).
 
-Each category is ordered in relation to other categories. Each value represents the sorting algorithm to use _within_ that category. If the value is `null`, the default sorting algorithm `lexical` is used. Here are the supported sorting algorithms:
+Each `jsonSortOrder` value represents the sorting algorithm to use _within_ that category. If the value is `null`, the default sorting algorithm `lexical` is used. Here are the supported sorting algorithms:
 
 | Sorting Algorithm               | Description                                                                                                 |
 | ------------------------------- | ----------------------------------------------------------------------------------------------------------- |
@@ -115,7 +115,7 @@ Each category is ordered in relation to other categories. Each value represents 
 | `caseInsensitiveReverseNumeric` | Case-insensitive reverse-order numeric sort.                                                                |
 | `none`                          | Do not sort.                                                                                                |
 
-Keys that do not match any defined category are treated as being in an implied last category, with `lexical` sorting.
+The order of the `jsonSortOrder` configuration determines how the keys in each category are sorted in relation to each other. Keys that do not match any defined category are treated as being in an implied last category, with `lexical` sorting.
 
 > Note: Escaping can be tricky, especially if you are using regular expression sort keys. These regular expressions are configured as strings, so any backslashes require an additional escape (e.g. notice the double-backslash here: `"/^\\d+/"`).
 >
