@@ -6,6 +6,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.0.0]
+### Changed
+- **BREAKING**: Drop support for Node.js v16 ([#203](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/203))
+- **BREAKING**: Update case insensitive sort to use deterministic key order ([#189](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/189))
+  - Previously the "case insensitive" sorting options would leave keys in their original order when they differed only in case. They have been updated to sort identical keys in case order instead, making these sort options deterministic.
+  - This change has been made because deterministic sort orders tend to be easier to work with, are more aligned with how Prettier works, and typically lead to less churn. However, if your project needs to preserve original key order, you can emulate the old behavior by defining a custom sort order that has a category for each case-insensitive character. For example, you could set this as your `prettierrc.js` file:
+  ```JavaScript prettierrc.js
+    {
+        jsonSortOrder: JSON.stringify({
+            '/^[Aa]/': 'none',
+            '/^[Bb]/': 'none',
+            '/^[Cc]/': 'none',
+            ...
+            '/^[Zz]/': 'none',
+        })
+    }
+  ```
+  This should work for small character sets. If you require case-insensitive sorting with a larger character set, please submit a feature request. We can bring back the old sorting order as an option if there is demand for it.
+
 ## [3.1.0]
 ### Added
 - Add `none` sorting algorithm ([#177](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/177))
@@ -60,7 +79,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial release
 
-[Unreleased]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v3.1.0...HEAD
+[Unreleased]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v4.0.0...HEAD
+[4.0.0]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v3.1.0...v4.0.0
 [3.1.0]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v3.0.1...v3.1.0
 [3.0.1]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v2.0.0...v3.0.0
