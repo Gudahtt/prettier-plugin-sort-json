@@ -1,11 +1,10 @@
 {
   branchPrefix: 'renovate/',
   dependencyDashboard: true,
-  'github-actions': { enabled: false },
+  enabledManagers: ['npm'],
   gitAuthor: 'Renovate Bot <bot@renovateapp.com>',
   ignoreScripts: true,
   internalChecksFilter: 'strict',
-  enabledManagers: ['npm'],
   minimumReleaseAge: '30 days',
   packageRules: [
     {
@@ -30,8 +29,8 @@
   postUpdateOptions: ['yarnDedupeHighest'],
   postUpgradeTasks: {
     commands: ['yarn run allow-scripts auto'],
-    fileFilters: ['package.json'],
     executionMode: 'update',
+    fileFilters: ['package.json'],
   },
   prConcurrentLimit: 10,
   rangeStrategy: 'update-lockfile',
