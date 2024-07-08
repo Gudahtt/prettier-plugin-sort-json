@@ -1,9 +1,6 @@
 {
   allowScripts: false,
   allowedPostUpgradeCommands: ['yarn run allow-scripts auto'],
-  customEnvVariables: {
-    SKIP_ALLOW_SCRIPTS: 'true',
-  },
   onboarding: false,
   platform: 'github',
   repositories: ['Gudahtt/prettier-plugin-sort-json'],
