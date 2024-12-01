@@ -37,6 +37,7 @@
     "ava": "^6.0.0",
     "eslint": "^9.0.0",
     "eslint-config-prettier": "^9.0.0",
+    "eslint-import-resolver-typescript": "^3.6.3",
     "eslint-plugin-import-x": "^4.3.0",
     "eslint-plugin-jsdoc": "^50.0.0",
     "eslint-plugin-n": "^17.0.0",
@@ -44,7 +45,8 @@
     "eslint-plugin-promise": "^7.0.0",
     "prettier": "^3.0.0",
     "prettier-plugin-packagejson": "^2.2.11",
-    "typescript": "~5.1.6"
+    "typescript": "~5.1.6",
+    "typescript-eslint": "^8.16.0"
   },
   "peerDependencies": {
     "prettier": "^3.0.0"
