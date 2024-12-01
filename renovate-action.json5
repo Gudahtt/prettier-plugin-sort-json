@@ -4,4 +4,5 @@
   onboarding: false,
   platform: 'github',
   repositories: ['Gudahtt/prettier-plugin-sort-json'],
+  username: "renovate-bot",
 }
