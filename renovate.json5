@@ -25,11 +25,15 @@
         '/typescript-eslint/',
       ],
     },
+    // Prettier handled separately because plugin API is not stable
     {
       groupName: 'Prettier',
       matchPackageNames: ['prettier'],
       matchUpdateTypes: ['patch', 'minor'],
     },
+    // TypeScript handled separately because it doesn't use SemVer
+    // The minor version is a peer dependency of the TypeScript ESLint
+    // configuration, so the minor bumps are left to that group.
     {
       groupName: 'TypeScript',
       matchPackageNames: ['typescript'],
