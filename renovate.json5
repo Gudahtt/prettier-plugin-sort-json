@@ -19,9 +19,11 @@
         '^@metamask/eslint-config*',
         'eslint',
         'eslint-config-*',
+        'eslint-import-resolver-typescript',
         'eslint-plugin-*',
         'prettier',
         'typescript',
+        'typescript-eslint',
       ],
     },
     // Prettier handled separately because plugin API is not stable
