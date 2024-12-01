@@ -41,7 +41,7 @@
     "eslint-plugin-jsdoc": "^39.3.6",
     "eslint-plugin-n": "^16.0.0",
     "eslint-plugin-prettier": "^5.0.0",
-    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-promise": "^7.0.0",
     "prettier": "^3.0.0",
     "prettier-plugin-packagejson": "^2.2.11",
     "typescript": "~5.1.6"
