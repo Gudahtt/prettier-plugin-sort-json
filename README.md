@@ -88,6 +88,16 @@ There are some additional configuration options available ([described below](#co
 
 These configuration options are all optional. Each option can be set as a CLI flag, or as an entry in your Prettier configuraton (e.g. in your `.prettierrc` file).
 
+Here is an example `.prettierrc` file with all default options set:
+
+```json
+{
+  "plugins": ["prettier-plugin-sort-json"],
+  "jsonRecursiveSort": false,
+  "jsonSortOrder": "{\"*\": \"lexical\"}"
+}
+```
+
 ### JSON Recursive Sort
 
 Sort JSON objects recursively, including all nested objects. This also sorts objects within JSON arrays.
