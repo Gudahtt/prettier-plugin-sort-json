@@ -121,6 +121,39 @@ The order of the `jsonSortOrder` configuration determines how the keys in each c
 >
 > If this key is configured as part of a JSON Prettier configuration file (`prettierrc.json`), all double-quotes and backslashes need to be escaped _again_. For example, the example JSON sort order string would would be `"{ \"placeThisFirst\": null, \"/^[^\\\\d+]/\": \"lexical\", \"/^\\\\d+/\": \"numeric\" }`.
 
+## Ignoring files
+
+This plugin can be used on specific files using [Prettier configuration overrides](https://prettier.io/docs/en/configuration#configuration-overrides). By configuring this plugin in an override, you can control which files it is applied to. Overrides can also allow using different configuration for different files (e.g. different sort order)
+
+For example, lets say you had the following requirements:
+
+- No sorting of JSON by default
+- Shallow (non-recursive) sort JSON in the `json/` directory
+- Do not sort the file `json/unsorted.json`
+- Recursively sort `recursively-sorted.json`
+
+You could do that with this `.prettierrc.json` file:
+
+```json
+{
+  "overrides": [
+    {
+      "excludedFiles": ["./json/unsorted.json"],
+      "files": ["./json/**"],
+      "options": {
+        "plugins": ["prettier-plugin-sort-json"]
+      }
+    },
+    {
+      "files": ["./json/recursive-sorted.json"],
+      "options": {
+        "jsonRecursiveSort": true
+      }
+    }
+  ]
+}
+```
+
 ## Contributing
 
 ### Setup
