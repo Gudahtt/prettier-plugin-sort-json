@@ -56,9 +56,7 @@ const unconventionalKeys = [
   '[1,2,3]',
   '[',
   '{',
-  // eslint-disable-next-line no-useless-escape
   '"',
-  // eslint-disable-next-line no-useless-escape
   '/',
   '\\',
   '\b',
