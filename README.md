@@ -2,14 +2,61 @@
 
 A plugin for [Prettier](https://prettier.io) that sorts JSON files by property name.
 
-> [!IMPORTANT]
-> This plugin supports Prettier v3 as of version 3.0.0 of this plugin. The latest release will no longer work with Prettier v2.
->
-> We are maintaining support for Prettier v2 on version 2 of this plugin. See [the main-v2 branch](https://github.com/Gudahtt/prettier-plugin-sort-json/tree/main-v2) for instructions on using v2 of this plugin.
+## Description
+
+This plugin adds a JSON preprocessor that will sort JSON files alphanumerically by key.
+
+By default, top-level object entries are sorted by key lexically using [`Array.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort), according to each character's Unicode code point value. It can be [configured](#configuration) to sort recursively, and with a custom sort order.
+
+### Example
+
+Before:
+
+```json
+{
+  "z": null,
+  "a": null,
+  "0": null,
+  "exampleNestedObject": {
+    "z": null,
+    "a": null
+  }
+}
+```
+
+After:
+
+```json
+{
+  "0": null,
+  "a": null,
+  "exampleNestedObject": {
+    "z": null,
+    "a": null
+  },
+  "z": null
+}
+```
+
+### Exceptions
+
+- Non-objects
+
+  This is meant to sort objects. JSON files containing Arrays or other non-Object values are skipped.
+
+- JSON files with dedicated Prettier parsers
+
+  This will not sort `package.json`, `package-lock.json`, or `composer.json`. This plugin only affects the `json` parser used by Prettier. Prettier uses an alternate parser (`json-stringify`) for those three specific files ([See here for details](https://github.com/prettier/prettier/blob/9a8b579d368db99394ab9da114cc37ba772fc887/src/language-js/index.js#L80)).
+
+- JSON embedded in other files
+
+  This will not sort JSON objects within other types of files, such as JavaScript or TypeScript files. This is just for sorting JSON files.
 
 ## Requirements
 
 This module requires an [LTS](https://github.com/nodejs/Release) Node version (v16.0.0+), and `prettier` v3+.
+
+We are maintaining support for Prettier v2 on version 2 of this plugin. See [the main-v2 branch](https://github.com/Gudahtt/prettier-plugin-sort-json/tree/main-v2) for instructions on using v2 of this plugin.
 
 ## Install
 
@@ -29,45 +76,11 @@ Then [follow these instructions](https://prettier.io/docs/en/plugins#using-plugi
 
 There are some additional configuration options available ([described below](#configuration)), but they are all optional.
 
-## Description
-
-This plugin adds a JSON preprocessor that will sort JSON files alphanumerically by key. By default, only top-level JSON objects are sorted. JSON files containing Arrays or other non-Object values are skipped.
-
-Object entries are sorted by key lexically using [`Array.sort`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort), according to each character's Unicode code point value.
-
-Note that this will not sort `package.json`, `package-lock.json`, or `composer.json`. This plugin only affects the `json` parser used by Prettier. Prettier uses an alternate parser (`json-stringify`) for those three specific files ([See here for details](https://github.com/prettier/prettier/blob/9a8b579d368db99394ab9da114cc37ba772fc887/src/language-js/index.js#L80)).
-
-This also will not sort JSON objects within other types of files, such as JavaScript or TypeScript files. This is just for sorting JSON files.
-
-## Examples
-
-Before:
+### Example Prettier configuration
 
 ```json
 {
-  "z": null,
-  "a": null,
-  "b": null,
-  "0": null,
-  "exampleNestedObject": {
-    "z": null,
-    "a": null
-  }
-}
-```
-
-After:
-
-```json
-{
-  "0": null,
-  "a": null,
-  "b": null,
-  "exampleNestedObject": {
-    "z": null,
-    "a": null
-  },
-  "z": null
+  "plugins": ["prettier-plugin-sort-json"]
 }
 ```
 
