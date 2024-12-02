@@ -18,7 +18,7 @@ import { parsers as babelParsers } from 'prettier/plugins/babel';
  * @param b - Second element to compare.
  * @returns A number indicating which element should come first.
  */
-function lexicalSort(a: string, b: string) {
+function lexicalSort(a: string, b: string): number {
   if (a > b) {
     return 1;
   }
@@ -41,7 +41,7 @@ const integerPrefixRegex = /^(\d+)/u;
  * @param b - Second element to compare.
  * @returns A number indicating which element should come first.
  */
-function numericSort(a: string, b: string) {
+function numericSort(a: string, b: string): number {
   const aPrefixResult = a.match(integerPrefixRegex);
   const bPrefixResult = b.match(integerPrefixRegex);
   if (aPrefixResult !== null && bPrefixResult !== null) {
@@ -68,7 +68,9 @@ function numericSort(a: string, b: string) {
  * @param sortFunction - The sort function to reverse.
  * @returns A reversed sort function.
  */
-function reverseSort(sortFunction: (a: string, b: string) => number) {
+function reverseSort(
+  sortFunction: (a: string, b: string) => number,
+): (a: string, b: string) => number {
   return (a: string, b: string) => {
     return -1 * sortFunction(a, b);
   };
@@ -82,7 +84,9 @@ function reverseSort(sortFunction: (a: string, b: string) => number) {
  * @param sortFunction - The sort function to make case-insensitive.
  * @returns A case-insensitive sort function.
  */
-function caseInsensitiveSort(sortFunction: (a: string, b: string) => number) {
+function caseInsensitiveSort(
+  sortFunction: (a: string, b: string) => number,
+): (a: string, b: string) => number {
   return (a: string, b: string) => {
     return sortFunction(a.toLowerCase(), b.toLowerCase()) || sortFunction(a, b);
   };
@@ -96,7 +100,7 @@ function caseInsensitiveSort(sortFunction: (a: string, b: string) => number) {
  * @param _b - Second element to compare.
  * @returns A number indicating which element should come first.
  */
-function noneSort(_a: string, _b: string) {
+function noneSort(_a: string, _b: string): number {
   return 0;
 }
 
@@ -251,22 +255,21 @@ export const parsers = {
           null | CategorySort
         >;
 
-        const evaluateSortEntry = (value: string, entry: string) => {
+        const evaluateSortEntry = (value: string, entry: string): boolean => {
           const regexRegex = /^\/(.+)\/([imsu]*)$/u;
           if (entry.match(regexRegex)) {
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             const [, regexSpec, flags]: string[] = entry.match(regexRegex)!;
             // "regexSpec" guaranteed to be defined because of capture group. False positive for unnecessary type assertion.
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
             const regex = new RegExp(regexSpec as string, flags);
-            return value.match(regex);
+            return Boolean(value.match(regex));
           }
           return value === entry;
         };
 
         const sortEntries = Object.keys(customSort);
 
-        sortCompareFunction = (a: string, b: string) => {
+        sortCompareFunction = (a: string, b: string): number => {
           const aIndex = sortEntries.findIndex(evaluateSortEntry.bind(null, a));
           const bIndex = sortEntries.findIndex(evaluateSortEntry.bind(null, b));
 
@@ -281,7 +284,6 @@ export const parsers = {
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             const sortEntry = sortEntries[aIndex]!;
             // Guaranteed to be defined because `sortEntry` is derived from `Object.keys`
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
             const categorySort = customSort[sortEntry] as null | CategorySort;
             const categorySortFunction =
               categorySort === null
