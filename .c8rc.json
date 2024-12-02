@@ -1,0 +1,6 @@
+{
+  "100": true,
+  "all": true,
+  "reporter": ["html", "text"],
+  "src": "./src"
+}
