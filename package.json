@@ -18,7 +18,7 @@
     "lint": "yarn lint:eslint && yarn lint:misc --check",
     "lint:eslint": "eslint . --cache",
     "lint:fix": "yarn lint:eslint --fix && yarn lint:misc --write",
-    "lint:misc": "prettier '**/*.json' '**/*.json5' '**/*.md' '!CHANGELOG.md' '**/*.yml' '!.yarnrc.yml' '!fixtures/invalid-json.json' --ignore-path .gitignore",
+    "lint:misc": "prettier '**/*.json' '**/*.json5' '**/*.md' '**/*.yml' '!.yarnrc.yml' '!fixtures/invalid-json.json' --ignore-path .gitignore",
     "prepack": "./scripts/prepack.sh",
     "test": "tsc --project tsconfig.test.json && ava"
   },
@@ -27,7 +27,7 @@
     "@babel/types": "^7.18.10",
     "@lavamoat/allow-scripts": "^3.0.0",
     "@lavamoat/preinstall-always-fail": "^2.0.0",
-    "@metamask/auto-changelog": "^3.0.0",
+    "@metamask/auto-changelog": "^4.0.0",
     "@metamask/eslint-config": "^14.0.0",
     "@metamask/eslint-config-nodejs": "^14.0.0",
     "@metamask/eslint-config-typescript": "^14.0.0",
