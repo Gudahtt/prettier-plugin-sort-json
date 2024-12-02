@@ -1,19 +1,19 @@
-### Setup
+# Setup
 
 - Install the current LTS version of [Node.js](https://nodejs.org)
   - If you are using [nvm](https://github.com/creationix/nvm#installation) (recommended) running `nvm use` will automatically choose the right node version for you.
-- Install [Yarn v3](https://yarnpkg.com/getting-started/install)
+- Install [Yarn v4](https://yarnpkg.com/getting-started/install)
 - Run `yarn install` to install dependencies and run any requried post-install scripts
 
-### Testing and Linting
+# Testing and Linting
 
 Run `yarn test` to run the tests.
 
 Run `yarn lint` to run the linter, or run `yarn lint:fix` to run the linter and fix any automatically fixable issues.
 
-### Release & Publishing
+# Release & Publishing
 
-The project follows the same release process as the other libraries in the MetaMask organization. The GitHub Actions [`action-create-release-pr`](https://github.com/MetaMask/action-create-release-pr) and [`action-publish-release`](https://github.com/MetaMask/action-publish-release) are used to automate the release process; see those repositories for more information about how they work.
+The project follows the same release process as libraries in the MetaMask organization. The GitHub Actions [`action-create-release-pr`](https://github.com/MetaMask/action-create-release-pr) and [`action-publish-release`](https://github.com/MetaMask/action-publish-release) are used to automate the release process; see those repositories for more information about how they work.
 
 1. Choose a release version.
 
@@ -25,15 +25,18 @@ The project follows the same release process as the other libraries in the MetaM
 
 3. Trigger the [`workflow_dispatch`](https://docs.github.com/en/actions/reference/events-that-trigger-workflows#workflow_dispatch) event [manually](https://docs.github.com/en/actions/managing-workflow-runs/manually-running-a-workflow) for the `Create Release Pull Request` action to create the release PR.
 
-   - For a backport release, the base branch should be the major version branch that you ensured existed in step 2. For a normal release, the base branch should be the main branch for that repository (which should be the default value).
    - This should trigger the [`action-create-release-pr`](https://github.com/MetaMask/action-create-release-pr) workflow to create the release PR.
+   - This workflow dispatch trigger does not support backport releases. For backports, create the release branch manually by following these steps:
+     - Branch from the major version branch created in step 2, with the branch name `release/[version]`
+     - Increment the version in `package.json`
+     - Run `yarn auto-changelog update --rc` to generate the initial draft of the changelog
 
 4. Update the changelog to move each change entry into the appropriate change category ([See here](https://keepachangelog.com/en/1.0.0/#types) for the full list of change categories, and the correct ordering), and edit them to be more easily understood by users of the package.
 
    - Generally any changes that don't affect consumers of the package (e.g. lockfile changes or development environment changes) are omitted. Exceptions may be made for changes that might be of interest despite not having an effect upon the published package (e.g. major test improvements, security improvements, improved documentation, etc.).
    - Try to explain each change in terms that users of the package would understand (e.g. avoid referencing internal variables/concepts).
    - Consolidate related changes into one change entry if it makes it easier to explain.
-   - Run `yarn auto-changelog validate --rc` to check that the changelog is correctly formatted.
+   - Run `yarn auto-changelog validate --rc --prettier` to check that the changelog is correctly formatted.
 
 5. Review and QA the release.
 
