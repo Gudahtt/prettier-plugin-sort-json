@@ -114,8 +114,8 @@ test('should throw if jsonRecursiveSort is not a boolean', async (t) => {
         },
       }),
     {
-      // `.+` used to match color codes
-      message: /^Invalid .+jsonRecursiveSort.+ value./u,
+      // `(?:.+)?` used to match color codes
+      message: /^Invalid (?:.+)?jsonRecursiveSort(?:.+)? value./u,
     },
   );
 });
@@ -132,8 +132,8 @@ test('should throw if custom sort is not a string', async (t) => {
         },
       }),
     {
-      // `.+` used to match color codes
-      message: /^Invalid .+jsonSortOrder.+ value./u,
+      // `(?:.+)?` used to match color codes
+      message: /^Invalid (?:.+)?jsonSortOrder(?:.+)? value./u,
     },
   );
 });
