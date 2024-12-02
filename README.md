@@ -42,7 +42,7 @@ After:
 
 - Non-objects
 
-  This is meant to sort objects. JSON files containing Arrays or other non-Object values are skipped.
+  This is meant to sort objects. JSON files with a top-level value that is not an object are skipped.
 
 - JSON files with dedicated Prettier parsers
 
