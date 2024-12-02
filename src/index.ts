@@ -6,8 +6,9 @@ import type {
   NullLiteral,
   SpreadElement,
   StringLiteral,
+  ObjectMethod,
 } from '@babel/types';
-import type { Parser, ParserOptions } from 'prettier';
+import type { ParserOptions } from 'prettier';
 import { parsers as babelParsers } from 'prettier/plugins/babel';
 
 /**
@@ -144,6 +145,53 @@ const categorySortFunctions = {
 const allowedCategorySortValues = [null, ...Object.keys(categorySortFunctions)];
 
 /**
+ * Asserts that the given AST properties only contain 'ObjectProperty' entries.
+ * The other two types are not found in JSON files.
+ *
+ * @param properties - The properties to check.
+ * @throws Throws an error if unexpected property types are found.
+ */
+function assertObjectPropertyTypes(
+  properties: (ObjectMethod | ObjectProperty | SpreadElement)[],
+): asserts properties is ObjectProperty[] {
+  const invalidProperty = properties.find(
+    (property) => property.type !== 'ObjectProperty',
+  );
+  if (invalidProperty !== undefined) {
+    throw new Error(`Property type not supported: ${invalidProperty.type}`);
+  }
+}
+
+/**
+ * Asserts that the given AST object property is a string literal. This should
+ * be the only type of key found in JSON files.
+ *
+ * @param objectPropertyKey - The key to check.
+ * @throws Throws an error if the key has an unexpected type.
+ */
+function assertObjectPropertyKeyType(
+  objectPropertyKey: ObjectProperty['key'],
+): asserts objectPropertyKey is StringLiteral {
+  if (objectPropertyKey.type !== 'StringLiteral') {
+    throw new Error(
+      `Object property key type not supported: ${objectPropertyKey.type}`,
+    );
+  }
+}
+
+/**
+ * Determins whether the given object property value is an array or object.
+ *
+ * @param value - The ObjectProperty value to check.
+ * @returns True if the value is an array or object, false otherwise.
+ */
+function valueIsArrayOrObjectExpression(
+  value: ObjectProperty['value'],
+): value is ObjectExpression | ArrayExpression {
+  return ['ObjectExpression', 'ArrayExpression'].includes(value.type);
+}
+
+/**
  * Sort properties of JavaScript objects within an AST.
  *
  * @param ast - The AST to sort.
@@ -161,38 +209,36 @@ function sortAst(
       (element: null | NullLiteral | Expression | SpreadElement) => {
         if (element === null || element.type === 'NullLiteral') {
           return element;
+        } else if (element.type === 'SpreadElement') {
+          throw new Error('Unreachable; SpreadElement is not allowed in JSON');
         }
-        // SpreadElement is not possible in a JSON file
-        return sortAst(element as Expression, recursive, sortCompareFunction);
+        return sortAst(element, recursive, sortCompareFunction);
       },
     );
   } else if (ast.type === 'ObjectExpression') {
-    ast.properties = (ast.properties as ObjectProperty[]).sort(
+    const { properties } = ast;
+    assertObjectPropertyTypes(properties);
+    const sortedProperties = properties.sort(
       (propertyA: ObjectProperty, propertyB: ObjectProperty) => {
-        return sortCompareFunction(
-          (propertyA.key as StringLiteral).value,
-          (propertyB.key as StringLiteral).value,
-        );
+        assertObjectPropertyKeyType(propertyA.key);
+        assertObjectPropertyKeyType(propertyB.key);
+        return sortCompareFunction(propertyA.key.value, propertyB.key.value);
       },
     );
 
     if (recursive) {
-      ast.properties = (ast.properties as ObjectProperty[]).map(
+      const recursivelySortedProperties = sortedProperties.map(
         (property: ObjectProperty) => {
-          if (
-            ['ObjectExpression', 'ArrayExpression'].includes(
-              property.value.type,
-            )
-          ) {
-            property.value = sortAst(
-              property.value as ArrayExpression | ObjectExpression,
-              recursive,
-              sortCompareFunction,
-            );
+          const { value } = property;
+          if (valueIsArrayOrObjectExpression(value)) {
+            property.value = sortAst(value, recursive, sortCompareFunction);
           }
           return property;
         },
       );
+      ast.properties = recursivelySortedProperties;
+    } else {
+      ast.properties = sortedProperties;
     }
   }
   return ast;
@@ -244,10 +290,13 @@ function parseOptions(prettierOptions: ParserOptions): SortJsonOptions {
     }
 
     for (const categorySort of Object.values(jsonSortOrder)) {
-      if (!allowedCategorySortValues.includes(categorySort as any)) {
+      if (
+        (categorySort !== null && typeof categorySort !== 'string') ||
+        !allowedCategorySortValues.includes(categorySort)
+      ) {
         throw new Error(
           `Invalid custom sort entry: value must be one of '${String(
-            allowedCategorySortValues,
+            allowedCategorySortValues.map(String),
           )}', got '${String(categorySort)}'`,
         );
       }
@@ -268,11 +317,14 @@ function createSortCompareFunction(
 ): (a: string, b: string) => number {
   const evaluateSortEntry = (value: string, entry: string): boolean => {
     const regexRegex = /^\/(.+)\/([imsu]*)$/u;
-    if (entry.match(regexRegex)) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const [, regexSpec, flags]: string[] = entry.match(regexRegex)!;
-      // "regexSpec" guaranteed to be defined because of capture group. False positive for unnecessary type assertion.
-      const regex = new RegExp(regexSpec as string, flags);
+    const regexResult = entry.match(regexRegex);
+    if (regexResult) {
+      const [, regexSpec, flags]: string[] = regexResult;
+      if (!regexSpec) {
+        // The RegExp specifies that this capture group be non-empty, so this is unreachable
+        throw new Error('Unreachable, empty RegExp specification found');
+      }
+      const regex = new RegExp(regexSpec, flags);
       return Boolean(value.match(regex));
     }
     return value === entry;
@@ -291,11 +343,16 @@ function createSortCompareFunction(
     } else if (aIndex === -1) {
       return 1;
     } else if (aIndex === bIndex) {
-      // Sort entry guaranteed to be non-null because index was found
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const sortEntry = sortEntries[aIndex]!;
-      // Guaranteed to be defined because `sortEntry` is derived from `Object.keys`
-      const categorySort = jsonSortOrder[sortEntry] as null | CategorySort;
+      const sortEntry = sortEntries[aIndex];
+      if (sortEntry === undefined) {
+        // Sort entry guaranteed to be non-null because index was found
+        throw new Error('Unreachable, undefined sort entry');
+      }
+      const categorySort = jsonSortOrder[sortEntry];
+      if (categorySort === undefined) {
+        // Guaranteed to be defined because `sortEntry` is derived from `Object.keys`
+        throw new Error('Unreachable, undefined category sort entry');
+      }
       const categorySortFunction =
         categorySort === null
           ? lexicalSort
@@ -359,7 +416,7 @@ export const parsers = {
     ...babelParsers.json,
     parse: createParser('json'),
   },
-} as Record<string, Parser>;
+};
 
 export const options = {
   jsonRecursiveSort: {
