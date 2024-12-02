@@ -102,6 +102,42 @@ test('should throw Syntax Error in parser for invalid JSON', async (t) => {
   );
 });
 
+test('should throw if jsonRecursiveSort is not a boolean', async (t) => {
+  await t.throwsAsync(
+    async () =>
+      format('{}', {
+        filepath: 'foo.json',
+        parser: 'json',
+        plugins: [SortJsonPlugin],
+        ...{
+          jsonRecursiveSort: 'yes',
+        },
+      }),
+    {
+      // `(?:.+)?` used to match color codes
+      message: /^Invalid (?:.+)?jsonRecursiveSort(?:.+)? value./u,
+    },
+  );
+});
+
+test('should throw if custom sort is not a string', async (t) => {
+  await t.throwsAsync(
+    async () =>
+      format('{}', {
+        filepath: 'foo.json',
+        parser: 'json',
+        plugins: [SortJsonPlugin],
+        ...{
+          jsonSortOrder: 10,
+        },
+      }),
+    {
+      // `(?:.+)?` used to match color codes
+      message: /^Invalid (?:.+)?jsonSortOrder(?:.+)? value./u,
+    },
+  );
+});
+
 test('should throw if custom sort is invalid JSON', async (t) => {
   await t.throwsAsync(
     async () =>

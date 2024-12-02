@@ -157,9 +157,11 @@ function assertObjectPropertyTypes(
   const invalidProperty = properties.find(
     (property) => property.type !== 'ObjectProperty',
   );
+  /* c8 ignore start */
   if (invalidProperty !== undefined) {
     throw new Error(`Property type not supported: ${invalidProperty.type}`);
   }
+  /* c8 ignore stop */
 }
 
 /**
@@ -172,11 +174,13 @@ function assertObjectPropertyTypes(
 function assertObjectPropertyKeyType(
   objectPropertyKey: ObjectProperty['key'],
 ): asserts objectPropertyKey is StringLiteral {
+  /* c8 ignore start */
   if (objectPropertyKey.type !== 'StringLiteral') {
     throw new Error(
       `Object property key type not supported: ${objectPropertyKey.type}`,
     );
   }
+  /* c8 ignore stop */
 }
 
 /**
@@ -209,9 +213,10 @@ function sortAst(
       (element: null | NullLiteral | Expression | SpreadElement) => {
         if (element === null || element.type === 'NullLiteral') {
           return element;
-        } else if (element.type === 'SpreadElement') {
+        } /* c8 ignore start */ else if (element.type === 'SpreadElement') {
           throw new Error('Unreachable; SpreadElement is not allowed in JSON');
         }
+        /* c8 ignore stop */
         return sortAst(element, recursive, sortCompareFunction);
       },
     );
@@ -259,20 +264,26 @@ type SortJsonOptions = {
  * @returns JSON sort options.
  */
 function parseOptions(prettierOptions: ParserOptions): SortJsonOptions {
-  const jsonRecursiveSort = prettierOptions.jsonRecursiveSort ?? false;
+  const { jsonRecursiveSort } = prettierOptions;
 
+  // Unreachable, validated before here by Prettier
+  /* c8 ignore start */
   if (typeof jsonRecursiveSort !== 'boolean') {
     throw new Error(
       `Invalid 'jsonRecursiveSort' option; expected boolean, got '${typeof prettierOptions.jsonRecursiveSort}'`,
     );
   }
+  /* c8 ignore stop */
 
   const rawJsonSortOrder = prettierOptions.jsonSortOrder ?? null;
+  // Unreachable, validated before here by Prettier
+  /* c8 ignore start */
   if (rawJsonSortOrder !== null && typeof rawJsonSortOrder !== 'string') {
     throw new Error(
       `Invalid 'jsonSortOrder' option; expected string, got '${typeof prettierOptions.rawJsonSortOrder}'`,
     );
   }
+  /* c8 ignore stop */
 
   let jsonSortOrder = null;
   if (rawJsonSortOrder !== null) {
@@ -320,10 +331,12 @@ function createSortCompareFunction(
     const regexResult = entry.match(regexRegex);
     if (regexResult) {
       const [, regexSpec, flags]: string[] = regexResult;
+      /* c8 ignore start */
       if (!regexSpec) {
         // The RegExp specifies that this capture group be non-empty, so this is unreachable
         throw new Error('Unreachable, empty RegExp specification found');
       }
+      /* c8 ignore stop */
       const regex = new RegExp(regexSpec, flags);
       return Boolean(value.match(regex));
     }
@@ -344,15 +357,19 @@ function createSortCompareFunction(
       return 1;
     } else if (aIndex === bIndex) {
       const sortEntry = sortEntries[aIndex];
+      /* c8 ignore start */
       if (sortEntry === undefined) {
         // Sort entry guaranteed to be non-null because index was found
         throw new Error('Unreachable, undefined sort entry');
       }
+      /* c8 ignore stop */
       const categorySort = jsonSortOrder[sortEntry];
+      /* c8 ignore start */
       if (categorySort === undefined) {
         // Guaranteed to be defined because `sortEntry` is derived from `Object.keys`
         throw new Error('Unreachable, undefined category sort entry');
       }
+      /* c8 ignore stop */
       const categorySortFunction =
         categorySort === null
           ? lexicalSort
