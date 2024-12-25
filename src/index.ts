@@ -450,3 +450,10 @@ export const options = {
     type: 'string' as const,
   },
 };
+
+/**
+ * Exporting this type so that users can strongly type their configs.
+ * `Partial` converts all properties to optional.
+ */
+type SortJsonOptionsOptional = Partial<SortJsonOptions>;
+export type { SortJsonOptionsOptional as SortJsonOptions };
