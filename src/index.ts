@@ -108,35 +108,33 @@ function noneSort(_a: string, _b: string): number {
 /**
  * Sorting algorithms for categories in a custom sort order definition.
  */
-enum CategorySort {
-  CaseInsensitiveLexical = 'caseInsensitiveLexical',
-  CaseInsensitiveNumeric = 'caseInsensitiveNumeric',
-  CaseInsensitiveReverseLexical = 'caseInsensitiveReverseLexical',
-  CaseInsensitiveReverseNumeric = 'caseInsensitiveReverseNumeric',
-  Lexical = 'lexical',
-  Numeric = 'numeric',
-  ReverseLexical = 'reverseLexical',
-  ReverseNumeric = 'reverseNumeric',
-  None = 'none',
-}
+type CategorySort =
+  | 'caseInsensitiveLexical'
+  | 'caseInsensitiveNumeric'
+  | 'caseInsensitiveReverseLexical'
+  | 'caseInsensitiveReverseNumeric'
+  | 'lexical'
+  | 'numeric'
+  | 'reverseLexical'
+  | 'reverseNumeric'
+  | 'none';
 
 /**
  * A mapping of category sort algorithms to sort functions.
  */
-const categorySortFunctions = {
-  [CategorySort.CaseInsensitiveLexical]: caseInsensitiveSort(lexicalSort),
-  [CategorySort.CaseInsensitiveNumeric]: caseInsensitiveSort(numericSort),
-  [CategorySort.CaseInsensitiveReverseLexical]: caseInsensitiveSort(
-    reverseSort(lexicalSort),
-  ),
-  [CategorySort.CaseInsensitiveReverseNumeric]: caseInsensitiveSort(
-    reverseSort(numericSort),
-  ),
-  [CategorySort.Lexical]: lexicalSort,
-  [CategorySort.Numeric]: numericSort,
-  [CategorySort.ReverseLexical]: reverseSort(lexicalSort),
-  [CategorySort.ReverseNumeric]: reverseSort(numericSort),
-  [CategorySort.None]: noneSort,
+const categorySortFunctions: Record<
+  CategorySort,
+  (a: string, b: string) => number
+> = {
+  caseInsensitiveLexical: caseInsensitiveSort(lexicalSort),
+  caseInsensitiveNumeric: caseInsensitiveSort(numericSort),
+  caseInsensitiveReverseLexical: caseInsensitiveSort(reverseSort(lexicalSort)),
+  caseInsensitiveReverseNumeric: caseInsensitiveSort(reverseSort(numericSort)),
+  lexical: lexicalSort,
+  numeric: numericSort,
+  reverseLexical: reverseSort(lexicalSort),
+  reverseNumeric: reverseSort(numericSort),
+  none: noneSort,
 };
 
 /**
