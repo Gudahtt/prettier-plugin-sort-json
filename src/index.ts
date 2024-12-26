@@ -252,7 +252,7 @@ function sortAst(
 /**
  * JSON sorting options. See README for details.
  */
-type SortJsonOptions = {
+export type SortJsonOptions = {
   jsonRecursiveSort: boolean;
   jsonSortOrder: Record<string, CategorySort | null>;
 };
