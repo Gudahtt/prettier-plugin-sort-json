@@ -1,6 +1,6 @@
 {
   "name": "prettier-plugin-sort-json",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "Prettier plugin to sort JSON files alphanumerically by key",
   "repository": {
     "type": "git",
