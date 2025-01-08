@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.1.0]
+
+### Added
+
+- Export `SortJsonOptions` and `CategorySort` types ([#256](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/256))
+
+### Changed
+
+- Update TypeScript from `~5.1.0` to `~5.5.0` ([#238](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/238))
+
 ## [4.0.0]
 
 ### Changed
@@ -101,7 +111,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release
 
-[Unreleased]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v4.0.0...HEAD
+[Unreleased]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v4.1.0...HEAD
+[4.1.0]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v4.0.0...v4.1.0
 [4.0.0]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v3.1.0...v4.0.0
 [3.1.0]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v3.0.1...v3.1.0
 [3.0.1]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v3.0.0...v3.0.1
