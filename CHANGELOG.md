@@ -7,47 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ## [4.1.0]
-### Uncategorized
-- feat: Export `SortJsonOptions` and convert `CategorySort` to TS Union ([#256](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/256))
-- chore(deps): update minor ([#254](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/254))
-- chore(deps): update dependency prettier to v3.4.2 ([#257](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/257))
-- fix: Fix option parsing and types ([#258](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/258))
-- chore: Refactor tests to specify format ([#253](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/253))
-- chore: Update test descriptions to remove "should" ([#252](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/252))
-- chore: Add test coverage ([#251](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/251))
-- refactor: Eliminate TypeScript casts ([#250](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/250))
-- refactor: Refactor how parser is constructed ([#249](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/249))
-- docs: Improve contributor docs ([#248](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/248))
-- docs: Add default configuration ([#247](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/247))
-- docs: Clarify non-object exception ([#246](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/246))
-- docs: Reorganize README ([#245](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/245))
-- docs: Move contributor docs to dedicated file ([#244](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/244))
-- docs: Add section on ignoring files ([#243](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/243))
-- chore(deps): update dependency @metamask/auto-changelog to v4 ([#235](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/235))
-- chore(deps): update dependency typescript to ~5.6.0 ([#238](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/238))
-- chore(deps): update eslint related (major) ([#239](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/239))
-- chore(config): migrate renovate config ([#240](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/240))
-- chore: Add missing entries from Renovate ESLint group ([#241](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/241))
-- chore: Improve Renovate grouping ([#237](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/237))
-- chore(deps): update minor ([#222](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/222))
-- chore(deps): update dependency prettier to v3.3.3 ([#223](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/223))
-- Revert "chore: Set Renovate username (#231)" ([#231](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/231))
-- chore: Set Renovate username ([#231](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/231))
-- chore(deps): update yarn to v4.3.1 ([#221](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/221))
-- chore: Cleanup renovate repository configuration ([#220](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/220))
-- chore: Simplify Renovate configuration ([#219](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/219))
-- chore: Update Renovate action ([#218](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/218))
-- Refresh lockfile ([#217](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/217))
-- Reduce renovate frequency to once per day ([#216](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/216))
-- chore(deps): update minor ([#211](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/211))
-- chore(deps): update dependency @ava/typescript to v5 ([#214](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/214))
-- chore(deps): update yarn to v4.1.1 ([#210](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/210))
-- chore(deps): update dependency @metamask/eslint-config to v12.2.0 ([#186](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/186))
-- chore(deps): update dependency prettier to v3.2.5 ([#201](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/201))
-- Lint JSON5 files ([#209](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/209))
-- Split Renovate project config from action config ([#208](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/208))
-- Update all GitHub actions from v3 to v4 ([#207](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/207))
-- Clarify sort order instructions ([#206](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/206))
+### Added
+- Export `SortJsonOptions` and `CategorySort` types ([#256](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/256))
+
+### Changed
+- Update TypeScript from `~5.1.0` to `~5.5.0` ([#238](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/238))
 
 ## [4.0.0]
 ### Changed
