@@ -108,7 +108,7 @@ function noneSort(_a: string, _b: string): number {
 /**
  * Sorting algorithms for categories in a custom sort order definition.
  */
-type CategorySort =
+export type CategorySort =
   | 'caseInsensitiveLexical'
   | 'caseInsensitiveNumeric'
   | 'caseInsensitiveReverseLexical'
@@ -250,7 +250,7 @@ function sortAst(
 /**
  * JSON sorting options. See README for details.
  */
-type SortJsonOptions = {
+export type SortJsonOptions = {
   jsonRecursiveSort?: boolean;
   jsonSortOrder?: Record<string, CategorySort | null>;
 };
@@ -480,10 +480,3 @@ export const options = {
     type: 'string' as const,
   },
 };
-
-/**
- * Exporting this type so that users can strongly type their configs.
- * `Partial` converts all properties to optional.
- */
-type SortJsonOptionsOptional = Partial<SortJsonOptions>;
-export type { SortJsonOptionsOptional as SortJsonOptions };
