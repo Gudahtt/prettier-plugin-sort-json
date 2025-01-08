@@ -30,12 +30,12 @@ __metadata:
   linkType: hard
 
 "@babel/types@npm:^7.18.10":
-  version: 7.26.0
-  resolution: "@babel/types@npm:7.26.0"
+  version: 7.26.3
+  resolution: "@babel/types@npm:7.26.3"
   dependencies:
     "@babel/helper-string-parser": "npm:^7.25.9"
     "@babel/helper-validator-identifier": "npm:^7.25.9"
-  checksum: 10c0/b694f41ad1597127e16024d766c33a641508aad037abd08d0d1f73af753e1119fa03b4a107d04b5f92cc19c095a594660547ae9bead1db2299212d644b0a5cb8
+  checksum: 10c0/966c5242c5e55c8704bf7a7418e7be2703a0afa4d19a8480999d5a4ef13d095dd60686615fe5983cb7593b4b06ba3a7de8d6ca501c1d78bdd233a10d90be787b
   languageName: node
   linkType: hard
 
@@ -216,31 +216,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lavamoat/aa@npm:^4.3.0":
-  version: 4.3.0
-  resolution: "@lavamoat/aa@npm:4.3.0"
+"@lavamoat/aa@npm:^4.3.1":
+  version: 4.3.1
+  resolution: "@lavamoat/aa@npm:4.3.1"
   dependencies:
     resolve: "npm:1.22.8"
   bin:
     lavamoat-ls: src/cli.js
-  checksum: 10c0/772893d4a944bd24aa5c404a55db3755be5e2cbee1a95550f380d950b78add89a6e58c04b14a8db4049b6832ebb2dd9f1e8703fa7d3532043212f30b368236f6
+  checksum: 10c0/691c249f455926ec04b34348335500831462bfd973cda5f860496fc61533d4d95be18c6d1164908900b3823e5b497b95dc2ea5ff012a840478a0e2c2152cd6ae
   languageName: node
   linkType: hard
 
 "@lavamoat/allow-scripts@npm:^3.0.0":
-  version: 3.3.0
-  resolution: "@lavamoat/allow-scripts@npm:3.3.0"
+  version: 3.3.1
+  resolution: "@lavamoat/allow-scripts@npm:3.3.1"
   dependencies:
-    "@lavamoat/aa": "npm:^4.3.0"
+    "@lavamoat/aa": "npm:^4.3.1"
     "@npmcli/run-script": "npm:8.1.0"
     bin-links: "npm:4.0.4"
     npm-normalize-package-bin: "npm:3.0.1"
+    type-fest: "npm:4.30.0"
     yargs: "npm:17.7.2"
   peerDependencies:
     "@lavamoat/preinstall-always-fail": "*"
   bin:
     allow-scripts: src/cli.js
-  checksum: 10c0/6da18f0f2026d90d8c9ddb3deef277e68b4b29b91f13c08b7e9efd69c6797b298b622738f3a432f6eec33203d76ce999666f3fd9156dc6fd9f59f3f77b173bef
+  checksum: 10c0/c272030841a90bb61356e7a226a47a3e5ec431a42314787c86f07d055d7f7218a7cb50619508cc57ecba1ad81b93b72213a56d0b6ea825ecfa586c493fda09f3
   languageName: node
   linkType: hard
 
@@ -1890,17 +1891,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"foreground-child@npm:^3.1.0":
-  version: 3.2.1
-  resolution: "foreground-child@npm:3.2.1"
-  dependencies:
-    cross-spawn: "npm:^7.0.0"
-    signal-exit: "npm:^4.0.1"
-  checksum: 10c0/9a53a33dbd87090e9576bef65fb4a71de60f6863a8062a7b11bc1cbe3cc86d428677d7c0b9ef61cdac11007ac580006f78bd5638618d564cfd5e6fd713d6878f
-  languageName: node
-  linkType: hard
-
-"foreground-child@npm:^3.1.1":
+"foreground-child@npm:^3.1.0, foreground-child@npm:^3.1.1":
   version: 3.3.0
   resolution: "foreground-child@npm:3.3.0"
   dependencies:
@@ -2028,23 +2019,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^10.2.2, glob@npm:^10.3.10":
-  version: 10.4.3
-  resolution: "glob@npm:10.4.3"
-  dependencies:
-    foreground-child: "npm:^3.1.0"
-    jackspeak: "npm:^3.1.2"
-    minimatch: "npm:^9.0.4"
-    minipass: "npm:^7.1.2"
-    package-json-from-dist: "npm:^1.0.0"
-    path-scurry: "npm:^1.11.1"
-  bin:
-    glob: dist/esm/bin.mjs
-  checksum: 10c0/bea148e5dae96c17e2764f4764c72376a6ab7072b27a21e861ae4af6f97f3e810d79d67f64de52f63ce1d7fdb73b7306f61c65b48d0f61ca7c8647ce8acaf9a7
-  languageName: node
-  linkType: hard
-
-"glob@npm:^10.4.1":
+"glob@npm:^10.2.2, glob@npm:^10.3.10, glob@npm:^10.4.1":
   version: 10.4.5
   resolution: "glob@npm:10.4.5"
   dependencies:
@@ -3244,11 +3219,11 @@ __metadata:
   linkType: soft
 
 "prettier@npm:^3.0.0":
-  version: 3.4.1
-  resolution: "prettier@npm:3.4.1"
+  version: 3.4.2
+  resolution: "prettier@npm:3.4.2"
   bin:
     prettier: bin/prettier.cjs
-  checksum: 10c0/2d6cc3101ad9de72b49c59339480b0983e6ff6742143da0c43f476bf3b5ef88ede42ebd9956d7a0a8fa59f7a5990e8ef03c9ad4c37f7e4c9e5db43ee0853156c
+  checksum: 10c0/99e076a26ed0aba4ebc043880d0f08bbb8c59a4c6641cdee6cdadf2205bdd87aa1d7823f50c3aea41e015e99878d37c58d7b5f0e663bba0ef047f94e36b96446
   languageName: node
   linkType: hard
 
@@ -3872,6 +3847,13 @@ __metadata:
   dependencies:
     prelude-ls: "npm:^1.2.1"
   checksum: 10c0/7b3fd0ed43891e2080bf0c5c504b418fbb3e5c7b9708d3d015037ba2e6323a28152ec163bcb65212741fa5d2022e3075ac3c76440dbd344c9035f818e8ecee58
+  languageName: node
+  linkType: hard
+
+"type-fest@npm:4.30.0":
+  version: 4.30.0
+  resolution: "type-fest@npm:4.30.0"
+  checksum: 10c0/9441fbbc971f92a53d7dfdb0db3f9c71a5a33ac3e021ca605cba8ad0b5c0a1e191cc778b4980c534b098ccb4e3322809100baf763be125510c993c9b8361f60e
   languageName: node
   linkType: hard
 

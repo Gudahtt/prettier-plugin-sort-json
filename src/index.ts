@@ -251,9 +251,17 @@ function sortAst(
  * JSON sorting options. See README for details.
  */
 type SortJsonOptions = {
-  jsonRecursiveSort: boolean;
-  jsonSortOrder: Record<string, CategorySort | null>;
+  jsonRecursiveSort?: boolean;
+  jsonSortOrder?: Record<string, CategorySort | null>;
 };
+
+/**
+ * JSON sorting options after they have been processed by Prettier.
+ *
+ * Defaults set in the 'options' export have been applied by this point.
+ */
+type ProcessedSortJsonOptions = Omit<SortJsonOptions, 'jsonRecursiveSort'> &
+  Required<Pick<SortJsonOptions, 'jsonRecursiveSort'>>;
 
 /**
  * Parse JSON sort options from Prettier options.
@@ -261,32 +269,35 @@ type SortJsonOptions = {
  * @param prettierOptions - Prettier options.
  * @returns JSON sort options.
  */
-function parseOptions(prettierOptions: ParserOptions): SortJsonOptions {
-  const { jsonRecursiveSort } = prettierOptions;
-
+function parseOptions(
+  prettierOptions: ParserOptions,
+): ProcessedSortJsonOptions {
   // Unreachable, validated before here by Prettier
   /* c8 ignore start */
-  if (typeof jsonRecursiveSort !== 'boolean') {
+  if (typeof prettierOptions.jsonRecursiveSort !== 'boolean') {
     throw new Error(
       `Invalid 'jsonRecursiveSort' option; expected boolean, got '${typeof prettierOptions.jsonRecursiveSort}'`,
     );
   }
   /* c8 ignore stop */
+  const parsedJsonSortOptions: ProcessedSortJsonOptions = {
+    jsonRecursiveSort: prettierOptions.jsonRecursiveSort,
+  };
 
-  const rawJsonSortOrder = prettierOptions.jsonSortOrder ?? null;
-  // Unreachable, validated before here by Prettier
-  /* c8 ignore start */
-  if (rawJsonSortOrder !== null && typeof rawJsonSortOrder !== 'string') {
-    throw new Error(
-      `Invalid 'jsonSortOrder' option; expected string, got '${typeof prettierOptions.rawJsonSortOrder}'`,
-    );
-  }
-  /* c8 ignore stop */
+  if ('jsonSortOrder' in prettierOptions) {
+    const rawJsonSortOrder = prettierOptions.jsonSortOrder;
+    // Unreachable, validated before here by Prettier
+    /* c8 ignore start */
+    if (typeof rawJsonSortOrder !== 'string') {
+      throw new Error(
+        `Invalid 'jsonSortOrder' option; expected string, got '${typeof prettierOptions.rawJsonSortOrder}'`,
+      );
+    }
+    /* c8 ignore stop */
 
-  let jsonSortOrder = null;
-  if (rawJsonSortOrder !== null) {
+    let parsedJsonSortOrder;
     try {
-      jsonSortOrder = JSON.parse(rawJsonSortOrder);
+      parsedJsonSortOrder = JSON.parse(rawJsonSortOrder);
     } catch (error) {
       // @ts-expect-error Error cause property not yet supported by '@types/node' (see https://github.com/DefinitelyTyped/DefinitelyTyped/pull/61827)
       throw new Error(`Failed to parse sort order option as JSON`, {
@@ -294,11 +305,14 @@ function parseOptions(prettierOptions: ParserOptions): SortJsonOptions {
       });
     }
 
-    if (Array.isArray(jsonSortOrder) || typeof jsonSortOrder !== 'object') {
+    if (
+      Array.isArray(parsedJsonSortOrder) ||
+      typeof parsedJsonSortOrder !== 'object'
+    ) {
       throw new Error(`Invalid custom sort order; must be an object`);
     }
 
-    for (const categorySort of Object.values(jsonSortOrder)) {
+    for (const categorySort of Object.values(parsedJsonSortOrder)) {
       if (
         (categorySort !== null && typeof categorySort !== 'string') ||
         !allowedCategorySortValues.includes(categorySort)
@@ -310,9 +324,28 @@ function parseOptions(prettierOptions: ParserOptions): SortJsonOptions {
         );
       }
     }
+
+    parsedJsonSortOptions.jsonSortOrder = parsedJsonSortOrder;
   }
 
-  return { jsonRecursiveSort, jsonSortOrder };
+  return parsedJsonSortOptions;
+}
+
+/**
+ * Apply default sort options.
+ *
+ * @param options - JSON sort options as configured.
+ * @returns JSON sort options with defaults applied.
+ */
+function applyDefaultOptions(
+  options: ProcessedSortJsonOptions,
+): Required<ProcessedSortJsonOptions> {
+  const { jsonRecursiveSort, jsonSortOrder } = options;
+
+  return {
+    jsonRecursiveSort, // Default already applied by Prettier
+    jsonSortOrder: jsonSortOrder ?? {},
+  };
 }
 
 /**
@@ -393,7 +426,9 @@ function createParser(
   parser: JsonParser,
 ): (text: string, options: ParserOptions) => Promise<any> {
   return async (text: string, prettierOptions: ParserOptions): Promise<any> => {
-    const { jsonRecursiveSort, jsonSortOrder } = parseOptions(prettierOptions);
+    const { jsonRecursiveSort, jsonSortOrder } = applyDefaultOptions(
+      parseOptions(prettierOptions),
+    );
 
     const jsonRootAst = await babelParsers[parser].parse(text, prettierOptions);
 
@@ -413,10 +448,7 @@ function createParser(
       return jsonRootAst;
     }
 
-    let sortCompareFunction: (a: string, b: string) => number = lexicalSort;
-    if (jsonSortOrder) {
-      sortCompareFunction = createSortCompareFunction(jsonSortOrder);
-    }
+    const sortCompareFunction = createSortCompareFunction(jsonSortOrder);
     const sortedAst = sortAst(ast, jsonRecursiveSort, sortCompareFunction);
 
     return {
