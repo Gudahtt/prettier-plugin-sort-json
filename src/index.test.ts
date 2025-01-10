@@ -96,6 +96,20 @@ for (const parser of supportedParsers) {
     t.is(output, '');
   });
 
+  test(`${parser}: ignores undefined options`, async (t) => {
+    const output = await format('{}\n', {
+      filepath: `foo.${fileExtensions[parser]}`,
+      parser,
+      plugins: [SortJsonPlugin],
+      ...{
+        jsonRecursiveSort: undefined,
+        jsonSortOrder: undefined,
+      },
+    });
+
+    t.is(output, '{}\n');
+  });
+
   test(`${parser}: throws Syntax Error in parser for invalid JSON`, async (t) => {
     await t.throwsAsync(
       async () =>
