@@ -284,10 +284,7 @@ function parseOptions(
     jsonRecursiveSort: prettierOptions.jsonRecursiveSort,
   };
 
-  if (
-    'jsonSortOrder' in prettierOptions &&
-    prettierOptions.jsonSortOrder !== undefined
-  ) {
+  if (prettierOptions.jsonSortOrder !== undefined) {
     const rawJsonSortOrder = prettierOptions.jsonSortOrder;
     // Unreachable, validated before here by Prettier
     /* c8 ignore start */
