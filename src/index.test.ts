@@ -126,6 +126,19 @@ for (const parser of supportedParsers) {
     );
   });
 
+  test(`${parser}: ignores undefined jsonSortOrder`, async (t) => {
+    const output = await format('\n', {
+      filepath: `foo.${fileExtensions[parser]}`,
+      parser,
+      plugins: [SortJsonPlugin],
+      ...{
+        jsonSortOrder: undefined,
+      },
+    });
+
+    t.is(output, '');
+  });
+
   test(`${parser}: throws if custom sort is not a string`, async (t) => {
     await t.throwsAsync(
       async () =>
