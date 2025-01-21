@@ -66,6 +66,12 @@ Using `npm`:
 npm install --save-dev prettier-plugin-sort-json
 ```
 
+Using `pnpm`:
+
+```console
+pnpm add --save-dev prettier-plugin-sort-json
+```
+
 Using `yarn`:
 
 ```console
