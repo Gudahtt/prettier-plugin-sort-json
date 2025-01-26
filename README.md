@@ -167,7 +167,7 @@ You could do that with this `.prettierrc.json` file:
 {
   "overrides": [
     {
-      "excludedFiles": ["./json/unsorted.json"],
+      "excludeFiles": ["./json/unsorted.json"],
       "files": ["./json/**"],
       "options": {
         "plugins": ["prettier-plugin-sort-json"]
