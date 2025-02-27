@@ -272,8 +272,8 @@ __metadata:
   linkType: hard
 
 "@metamask/auto-changelog@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "@metamask/auto-changelog@npm:4.0.0"
+  version: 4.1.0
+  resolution: "@metamask/auto-changelog@npm:4.1.0"
   dependencies:
     diff: "npm:^5.0.0"
     execa: "npm:^5.1.1"
@@ -283,7 +283,7 @@ __metadata:
     prettier: ">=3.0.0"
   bin:
     auto-changelog: dist/cli.js
-  checksum: 10c0/66a4edd6cfccbb5bc5cedaaab90c12113129642b15aa606803e6f858ff3e978bc465f4bc7e8a1d97383f4f3f05c9faf9521d8298cd45d6ac1bd74049b00307c9
+  checksum: 10c0/6a7c75835d13a1e2ae00ec05774c66dec712fe44c026f13af8a9aeba6f32999e105ad334cc28310088a30055ddda1cad718267854f625bdf0b7b34a8d524781a
   languageName: node
   linkType: hard
 
