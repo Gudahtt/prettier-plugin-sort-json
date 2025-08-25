@@ -133,8 +133,8 @@ The order of the rules determines the order of the groups; for example, keys in 
 
 Here is an example of a custom sort order string:
 
-```
-'{ "placeThisFirst": null, "/^\\d+/": "numeric", "/.*/": "caseInsensitiveLexical" }'
+```yaml
+'{ "placeThisFirst": null, "/^\\\\d+/": "numeric", "/.*/": "caseInsensitiveLexical" }'
 ```
 
 This string has three rules. Here is what they each mean:
@@ -145,9 +145,11 @@ This string has three rules. Here is what they each mean:
 
    No sorting algorithm is specified in this rule (the value is `null`) so the default `lexical` sort _would_ be used to sort keys in this group. Except in this case the sorting algorithm is irrelevant because only one key can be in this group.
 
-2. `"/^\\d+/": "numeric"`
+2. `"/^\\\\d+/": "numeric"`
 
    The group in this case is a regular expression that matches keys that start with a number. This is the second rule, so keys starting with a number will come second after `placeThisFirst`.
+
+   The regular expression is double-escaped because it's a string within a stringified JSON object; the real regular expression this represents is `/^\d+/` (see [Escaping](#escaping) for more details).
 
    The sorting algorithm is `numeric`, so these keys will be sorted numerically (in ascending order).
 
@@ -223,13 +225,29 @@ Each `jsonSortOrder` _value_ represents the sorting algorithm to use _within_ th
 
 #### Escaping
 
-Escaping can be tricky, especially if you are using regular expression sort keys. These regular expressions are configured as strings, so any backslashes require an additional escape (e.g. notice the double-backslash here: `"/^\\d+/"`). This is a limitation of Prettier plugins; object configuration is not supported, so we must use a string instead.
+A stringified JSON object is a strange configuration format. This format was chosen to work around a limitation of Prettier plugins; object configuration values for plugins are not supported, but strings are, so we put an object in a string. This has downsides though, especially if the string includes special characters.
 
-If this key is configured as part of a JSON Prettier configuration file (`prettierrc.json`), all double-quotes and backslashes need to be escaped _again_. For example, the example JSON sort order string would would be:
+Special characters (such as backslashes) in string literals need to be escaped by a backslash. This is commonplace in string representations of regular expressions, which often include the backslash special character. For example, try running `/^\d+/.toString()` in a console, and you'll see it prints out `"/^\\d+/"`.
 
-```
+When this string is included as the key of a stringified JSON object, all double-quotes and backslashes need to be escaped _again_. That's why a single backslash needed to be represented by _four_ backslashes in the earlier example. If this string is used in a JSON file (e.g. in `package.json` or `.prettierrc.json`) it gets even worse because the string itself needs to use double-quotes, requiring even more escaping of all double-quotes used inside the string:
+
+```yaml
 "{ \"placeThisFirst\": null, \"/\\\\d+/\": \"numeric\", \"/.+/\": \"caseInsensitiveLexical\" }"
 ```
+
+If you're using a JavaScript Prettier configuration file, all of this escaping can be avoided by using `JSON.stringify` to create the `jsonSortOrder` string from an object with RegExp literal keys. For example, you could create the earlier example JSON sort order string like this:
+
+```javascript
+{
+    jsonSortOrder: JSON.stringify({
+      placeThisFirst: null,
+      [/^\d+/]: 'numeric',
+      [/.*/]: 'caseInsensitiveLexical',
+    }),
+}
+```
+
+This makes the configuration much easier to read and write. This approach is strongly recommended, if the configuration format you're using allows it.
 
 ## Ignoring files
 
