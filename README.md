@@ -114,23 +114,100 @@ Sort JSON objects recursively, including all nested objects. This also sorts obj
 
 ### JSON Sort Order
 
-Use a custom sort order. This is specified as a JSON string that maps exact strings or regular expressions to sorting algorithms.
+Use a custom sort order. This is specified as a JSON string containing a set of sorting rules.
 
 | Default | CLI                            | Configuration             |
 | ------- | ------------------------------ | ------------------------- |
 | `""`    | `--json-sort-order '<string>'` | `jsonSortOrder: <string>` |
 
-Here is an example JSON sort order string:
+This JSON string is an _ordered_ set of sorting rules. Each entry is one sorting rule, where they key of the sorting rule defines a _group_ of keys in the object being sorted, and the value of the sorting rule defines the sorting algorithm to use _within_ that group of keys. That is, a rule is structured like this: `[definition of sorting group]: [sorting algorithm within that group]`
+
+Each sorting group is defined either by an exact string, or by a regular expression. For example, the group `A` would include just the key `A`, and the group `/.*/` would include all keys.
+
+> [!NOTE]
+> Regular expression sorting groups **must** start with `/` and end with `/`, optionally followed by any supported regular expression flag (supported flags are `i`, `m`, `s`, and `u`, see [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions#advanced_searching_with_flags) for details on how they work).
+
+The order of the rules determines the order of the groups; for example, keys in the first group are first, those in the second group come next, etc. Keys that would qualify for multiple sorting groups are always placed in the first. Keys that are not in any sorting group are treated as being in an implied last group, with the default `lexical` sorting algorithm.
+
+#### Example
+
+Here is an example of a custom sort order string:
 
 ```
-'{ "placeThisFirst": null, "/^[^\\d+]/": "lexical", "/^\\d+/": "numeric" }'
+'{ "placeThisFirst": null, "/^\\d+/": "numeric", "/.*/": "caseInsensitiveLexical" }'
 ```
 
-This sorts the key "placeThisFirst" ahead of all others. After that, the set of all keys that _don't_ start with a number are sorted lexically. Lastly, the set of keys that start with a number are sorted numerically.
+This string has three rules. Here is what they each mean:
 
-Each `jsonSortOrder` key represents a literal key value or a _category_ of keys, represented by a regular expression. Regular expressions are identified by leading and trailing forward slashes, along with some number of paths optionally following the trailing slash (supported flags are `i`, `m`, `s`, and `u`).
+1. `"placeThisFirst": null`
 
-Each `jsonSortOrder` value represents the sorting algorithm to use _within_ that category. If the value is `null`, the default sorting algorithm `lexical` is used. Here are the supported sorting algorithms:
+   The group is `placeThisFirst`, which is not a regular expression (no leading or trailing forward slash), so it's interpreted as an exact string. This is the first rule, so the key `placeThisFirst` will be first in the sort order.
+
+   No sorting algorithm is specified in this rule (the value is `null`) so the default `lexical` sort _would_ be used to sort keys in this group. Except in this case the sorting algorithm is irrelevant because only one key can be in this group.
+
+2. `"/^\\d+/": "numeric"`
+
+   The group in this case is a regular expression that matches keys that start with a number. This is the second rule, so keys starting with a number will come second after `placeThisFirst`.
+
+   The sorting algorithm is `numeric`, so these keys will be sorted numerically (in ascending order).
+
+3. `"/.*/": "caseInsensitiveLexical"`
+
+   The group `/.*/` matches all other keys. These keys will be sorted third, after `placeThisFirst` and after keys starting with a number.
+
+   The sorting algorithm here is `caseInsensitiveLexical`, so keys in this group will be sorted lexically ignoring case.
+
+Here are some example JSON objects that would match these rules, with inline comments to explain:
+
+<details>
+<summary>Example Sorted JSON file #1:</summary>
+
+```jsonc
+{
+  // `placeThisFirst` is the first sorting rule, so this always comes first.
+  "placeThisFirst": null,
+
+  // These match the second sorting rule.
+  // These keys start with a number, so they're sorted numerically (ascending).
+  "1": null,
+  // The `numeric` sort order only looks at the numeric prefix.
+  // The rest of the key is ignored.
+  "2_____irrelevant_text": null,
+  "10": null,
+
+  // Everything is matched by the third sorting rule.
+  "a": null,
+  // This is in the middle because we're using `caseInsensitiveLexical`,
+  // rather than the default `lexical` sort order.
+  "B": null,
+  "c": null,
+}
+```
+
+</details>
+
+<br>
+
+<details>
+<summary> Example Sorted JSON File #2: </summary>
+
+This example only has keys that match the second sorting rule.
+
+```jsonc
+{
+  // The keys are sorted in ascending order.
+  // Values are ignored by all sorting rules. Only keys are sorted.
+  "1": 10,
+  "2": 9,
+  "3": 8,
+}
+```
+
+</details>
+
+#### Sorting Algorithms
+
+Each `jsonSortOrder` _value_ represents the sorting algorithm to use _within_ that category. If the value is `null`, the default sorting algorithm `lexical` is used. Here are the supported sorting algorithms:
 
 | Sorting Algorithm               | Description                                                                                                 |
 | ------------------------------- | ----------------------------------------------------------------------------------------------------------- |
@@ -144,11 +221,15 @@ Each `jsonSortOrder` value represents the sorting algorithm to use _within_ that
 | `caseInsensitiveReverseNumeric` | Case-insensitive reverse-order numeric sort.                                                                |
 | `none`                          | Do not sort.                                                                                                |
 
-The order of the `jsonSortOrder` configuration determines how the keys in each category are sorted in relation to each other. Keys that do not match any defined category are treated as being in an implied last category, with `lexical` sorting.
+#### Escaping
 
-> Note: Escaping can be tricky, especially if you are using regular expression sort keys. These regular expressions are configured as strings, so any backslashes require an additional escape (e.g. notice the double-backslash here: `"/^\\d+/"`).
->
-> If this key is configured as part of a JSON Prettier configuration file (`prettierrc.json`), all double-quotes and backslashes need to be escaped _again_. For example, the example JSON sort order string would would be `"{ \"placeThisFirst\": null, \"/^[^\\\\d+]/\": \"lexical\", \"/^\\\\d+/\": \"numeric\" }`.
+Escaping can be tricky, especially if you are using regular expression sort keys. These regular expressions are configured as strings, so any backslashes require an additional escape (e.g. notice the double-backslash here: `"/^\\d+/"`). This is a limitation of Prettier plugins; object configuration is not supported, so we must use a string instead.
+
+If this key is configured as part of a JSON Prettier configuration file (`prettierrc.json`), all double-quotes and backslashes need to be escaped _again_. For example, the example JSON sort order string would would be:
+
+```
+"{ \"placeThisFirst\": null, \"/\\\\d+/\": \"numeric\", \"/.+/\": \"caseInsensitiveLexical\" }"
+```
 
 ## Ignoring files
 
