@@ -100,7 +100,7 @@ Here is an example `.prettierrc` file with all default options set:
 {
   "plugins": ["prettier-plugin-sort-json"],
   "jsonRecursiveSort": false,
-  "jsonSortOrder": "{\"*\": \"lexical\"}"
+  "jsonSortOrder": "{\"/.*/\": \"lexical\"}"
 }
 ```
 
