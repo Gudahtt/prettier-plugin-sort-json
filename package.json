@@ -47,7 +47,7 @@
     "eslint-plugin-promise": "^7.0.0",
     "prettier": "^3.0.0",
     "prettier-plugin-packagejson": "^2.2.11",
-    "typescript": "~5.5.0",
+    "typescript": "~5.9.0",
     "typescript-eslint": "^8.16.0"
   },
   "peerDependencies": {
@@ -59,7 +59,8 @@
   },
   "lavamoat": {
     "allowScripts": {
-      "@lavamoat/preinstall-always-fail": false
+      "@lavamoat/preinstall-always-fail": false,
+      "eslint-plugin-import-x>unrs-resolver": false
     }
   }
 }
