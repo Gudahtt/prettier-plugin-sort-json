@@ -24,7 +24,7 @@
     "test:coverage": "tsc --project tsconfig.test.json && c8 --config ./.c8rc.json ava"
   },
   "devDependencies": {
-    "@ava/typescript": "^5.0.0",
+    "@ava/typescript": "^6.0.0",
     "@babel/types": "^7.18.10",
     "@lavamoat/allow-scripts": "^3.0.0",
     "@lavamoat/preinstall-always-fail": "^2.0.0",
@@ -38,10 +38,10 @@
     "ava": "^6.0.0",
     "c8": "^10.1.2",
     "eslint": "^9.0.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-import-resolver-typescript": "^3.6.3",
+    "eslint-config-prettier": "^10.0.0",
+    "eslint-import-resolver-typescript": "^4.0.0",
     "eslint-plugin-import-x": "^4.3.0",
-    "eslint-plugin-jsdoc": "^50.0.0",
+    "eslint-plugin-jsdoc": "^61.0.0",
     "eslint-plugin-n": "^17.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-promise": "^7.0.0",
@@ -59,7 +59,8 @@
   },
   "lavamoat": {
     "allowScripts": {
-      "@lavamoat/preinstall-always-fail": false
+      "@lavamoat/preinstall-always-fail": false,
+      "eslint-import-resolver-typescript>unrs-resolver": false
     }
   }
 }
