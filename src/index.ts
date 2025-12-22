@@ -29,7 +29,7 @@ function lexicalSort(a: string, b: string): number {
   return 0;
 }
 
-const integerPrefixRegex = /^(\d+)/u;
+const integerPrefixRegex = /^(-?\d+)/u;
 
 /**
  * Numeric sort function for strings, meant to be used as the sort
