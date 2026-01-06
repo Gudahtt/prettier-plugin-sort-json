@@ -491,11 +491,11 @@ declare module 'prettier' {
      *
      * @default false
      */
-    jsonRecursiveSort?: boolean;
+    jsonRecursiveSort?: boolean | undefined;
 
     /**
      * Use a custom sort order. This is specified as a JSON string containing a set of sorting rules.
      */
-    jsonSortOrder?: string;
+    jsonSortOrder?: string | undefined;
   }
 }
