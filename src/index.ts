@@ -485,6 +485,7 @@ export const options = {
  * Augument Prettier’s `Options` interface with JSON sorting options.
  */
 declare module 'prettier' {
+  /* eslint-disable-next-line @typescript-eslint/consistent-type-definitions */
   interface Options {
     /**
      * Sort JSON objects recursively, including all nested objects. This also sorts objects within JSON arrays.
