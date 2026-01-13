@@ -125,6 +125,7 @@ for (const parser of supportedParsers) {
   test(`${parser}: throws if jsonRecursiveSort is not a boolean`, async (t) => {
     await t.throwsAsync(
       async () =>
+        // @ts-expect-error Testing invalid option type
         format('{}', {
           filepath: `foo.${fileExtensions[parser]}`,
           parser,
@@ -143,6 +144,7 @@ for (const parser of supportedParsers) {
   test(`${parser}: throws if custom sort is not a string`, async (t) => {
     await t.throwsAsync(
       async () =>
+        // @ts-expect-error Testing invalid option type
         format('{}', {
           filepath: `foo.${fileExtensions[parser]}`,
           parser,
