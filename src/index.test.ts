@@ -606,6 +606,8 @@ for (const parser of supportedParsers) {
   test(`${parser}: validates a sorted JSON object with a numeric custom sort`, async (t) => {
     const fixture = {
       first: 'first',
+      '-100': null,
+      '-42': null,
       0: null,
       3: null,
       20: null,
@@ -641,11 +643,13 @@ for (const parser of supportedParsers) {
     const fixture = {
       z: null,
       a: null,
+      '-42': null,
       b: null,
       0: null,
       100: null,
       first: 'first',
       20: null,
+      '-100': null,
       3: null,
       exampleNestedObject: {
         z: null,
