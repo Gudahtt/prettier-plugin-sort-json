@@ -1,6 +1,3 @@
-// Disabled to allow strange property names in test fixtures
-/* eslint-disable @typescript-eslint/naming-convention */
-
 import test from 'ava';
 import { format } from 'prettier';
 
