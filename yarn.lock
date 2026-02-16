@@ -274,22 +274,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lavamoat/aa@npm:^4.3.4":
-  version: 4.3.4
-  resolution: "@lavamoat/aa@npm:4.3.4"
+"@lavamoat/aa@npm:^4.3.6":
+  version: 4.3.6
+  resolution: "@lavamoat/aa@npm:4.3.6"
   dependencies:
     resolve: "npm:1.22.10"
   bin:
     lavamoat-ls: src/cli.js
-  checksum: 10c0/1b86a89213f773ef6ba4cace67c88f8685b969357cd8eedd3678c8d2bb27fd4c976d96a1f423abe02855b54c40ef2e28a727d01228a994188c91ba12ff886e1b
+  checksum: 10c0/b0f8e078a355c9b1c3831eef9bea0e06e6c941efc0814d16cd2f6ae231eddf9665fa0cea80beed9e00f2d898937b0756b3ccbceb7fa6d31a7ad0460b3b6a7487
   languageName: node
   linkType: hard
 
 "@lavamoat/allow-scripts@npm:^3.0.0":
-  version: 3.4.1
-  resolution: "@lavamoat/allow-scripts@npm:3.4.1"
+  version: 3.4.3
+  resolution: "@lavamoat/allow-scripts@npm:3.4.3"
   dependencies:
-    "@lavamoat/aa": "npm:^4.3.4"
+    "@lavamoat/aa": "npm:^4.3.6"
     "@npmcli/run-script": "npm:10.0.3"
     bin-links: "npm:4.0.4"
     npm-normalize-package-bin: "npm:3.0.1"
@@ -297,7 +297,7 @@ __metadata:
     yargs: "npm:17.7.2"
   bin:
     allow-scripts: src/cli.js
-  checksum: 10c0/fbd96037cb5839fa5fa74d0bf8d6f4b23315e8cba8414395a0bb38f2e4fe2725a7662919c2244d2cd51e56bf7bad251dfb99439029b00a540a0c88ab9276fe1d
+  checksum: 10c0/5f10ec3c7f147ae665603c0b09dce1f7b74e4150d11bbd72973f2f2a8b0e2d6a9429fe8bac2ab9c5de7fec582c11d309145401f68634c2ffd12e2e405ea001a7
   languageName: node
   linkType: hard
 
@@ -326,8 +326,8 @@ __metadata:
   linkType: hard
 
 "@metamask/auto-changelog@npm:^5.0.0":
-  version: 5.3.0
-  resolution: "@metamask/auto-changelog@npm:5.3.0"
+  version: 5.3.2
+  resolution: "@metamask/auto-changelog@npm:5.3.2"
   dependencies:
     "@octokit/rest": "npm:^20.0.0"
     diff: "npm:^5.0.0"
@@ -338,7 +338,7 @@ __metadata:
     prettier: ">=3.0.0"
   bin:
     auto-changelog: dist/cli.mjs
-  checksum: 10c0/e75f91e8019b0b65a21cccd0992b37b214ddab2d1de9ada7746e99de004d327c793e5caf86b273e393bb9eaf78ffb018320e886294271b21c767d6f569043361
+  checksum: 10c0/c0479d0c23b8d4f47a5e1d44258ef6bc1181abd07bb8a77a17ed31b581ba462c363f8fe29658c2dccde94e1ebcd8a40238e17ee1e2a38ec98d6ce3ef54efb5e1
   languageName: node
   linkType: hard
 
