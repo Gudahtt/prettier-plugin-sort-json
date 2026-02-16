@@ -24,7 +24,7 @@
     "test:coverage": "tsc --project tsconfig.test.json && c8 --config ./.c8rc.json ava"
   },
   "devDependencies": {
-    "@ava/typescript": "^5.0.0",
+    "@ava/typescript": "^6.0.0",
     "@babel/types": "^7.18.10",
     "@lavamoat/allow-scripts": "^3.0.0",
     "@lavamoat/preinstall-always-fail": "^2.0.0",
