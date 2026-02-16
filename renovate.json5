@@ -21,7 +21,6 @@
         '/eslint-import-resolver-typescript/',
         '/eslint-plugin-*/',
         '/prettier/',
-        '/typescript/',
         '/typescript-eslint/',
       ],
     },
