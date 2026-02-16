@@ -248,10 +248,16 @@ function sortAst(
 }
 
 /**
- * JSON sorting options. See README for details.
+ * JSON sorting options.
  */
 export type SortJsonOptions = {
+  /**
+   * Whether to sort JSON objects recursively
+   */
   jsonRecursiveSort?: boolean;
+  /**
+   * A custom JSON sort order. See README for details on the format.
+   */
   jsonSortOrder?: Record<string, CategorySort | null>;
 };
 
@@ -357,6 +363,13 @@ function applyDefaultOptions(
 function createSortCompareFunction(
   jsonSortOrder: Record<string, CategorySort | null>,
 ): (a: string, b: string) => number {
+  /**
+   * Identify whether the given value is within the given sorty entry group.
+   *
+   * @param value - The value to check.
+   * @param entry - The sort entry group.
+   * @returns True if the value is within the sort entry, false otherwise.
+   */
   const evaluateSortEntry = (value: string, entry: string): boolean => {
     const regexRegex = /^\/(.+)\/([imsu]*)$/u;
     const regexResult = entry.match(regexRegex);
@@ -376,6 +389,13 @@ function createSortCompareFunction(
 
   const sortEntries = Object.keys(jsonSortOrder);
 
+  /**
+   * A sort compare function using a custom JSON sort order.
+   *
+   * @param a - The first value to compare.
+   * @param b - The second value to compare.
+   * @returns A number indicating which value comes first.
+   */
   return (a: string, b: string): number => {
     const aIndex = sortEntries.findIndex(evaluateSortEntry.bind(null, a));
     const bIndex = sortEntries.findIndex(evaluateSortEntry.bind(null, b));
@@ -485,7 +505,7 @@ export const options = {
  * Augument Prettier’s `Options` interface with JSON sorting options.
  */
 declare module 'prettier' {
-  /* eslint-disable-next-line @typescript-eslint/consistent-type-definitions */
+  /* eslint-disable-next-line @typescript-eslint/consistent-type-definitions,jsdoc/require-jsdoc */
   interface Options {
     /**
      * Sort JSON objects recursively, including all nested objects. This also sorts objects within JSON arrays.
