@@ -301,10 +301,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lavamoat/preinstall-always-fail@npm:^2.0.0":
-  version: 2.1.1
-  resolution: "@lavamoat/preinstall-always-fail@npm:2.1.1"
-  checksum: 10c0/0871036915cc9014ebf04be59c8cf86e0f79f09381c5b46111b405230de37804824bd0be515330dfa249a9e128274ced26be6efa17ea36d884afd57d04075456
+"@lavamoat/preinstall-always-fail@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@lavamoat/preinstall-always-fail@npm:3.0.0"
+  checksum: 10c0/9f6b25e852aa81827d1aaa0e66694f73e2e2a8c7397af64461bd51d9826ce9d60812db26f918d7519777076b83ca09f6c024a2b527e30da82032cf1fd3f74290
   languageName: node
   linkType: hard
 
@@ -3400,7 +3400,7 @@ __metadata:
     "@ava/typescript": "npm:^6.0.0"
     "@babel/types": "npm:^7.18.10"
     "@lavamoat/allow-scripts": "npm:^3.0.0"
-    "@lavamoat/preinstall-always-fail": "npm:^2.0.0"
+    "@lavamoat/preinstall-always-fail": "npm:^3.0.0"
     "@metamask/auto-changelog": "npm:^5.0.0"
     "@metamask/eslint-config": "npm:^15.0.0"
     "@metamask/eslint-config-nodejs": "npm:^15.0.0"
