@@ -6,6 +6,10 @@
     "type": "git",
     "url": "https://github.com/Gudahtt/prettier-plugin-sort-json.git"
   },
+  "homepage": "https://github.com/Gudahtt/prettier-plugin-sort-json#readme",
+  "bugs": {
+    "url": "https://github.com/Gudahtt/prettier-plugin-sort-json/issues"
+  },
   "license": "MIT",
   "author": "Mark Stacey <markjstacey@gmail.com>",
   "main": "dist/index.js",
