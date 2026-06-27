@@ -2,7 +2,7 @@
   branchPrefix: 'renovate/',
   dependencyDashboard: true,
   enabledManagers: ['github-actions', 'npm'],
-  gitAuthor: 'Renovate Bot <bot@renovateapp.com>',
+  gitAuthor: 'GudahttBot <gudahttbot@users.noreply.github.com>',
   ignoreScripts: true,
   internalChecksFilter: 'strict',
   minimumReleaseAge: '30 days',
