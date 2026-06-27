@@ -10,7 +10,7 @@
     {
       groupName: 'Minor',
       matchUpdateTypes: ['patch', 'minor'],
-      matchPackageNames: ['!prettier', '!typescript', '*'],
+      matchPackageNames: ['!prettier', '!typescript'],
     },
     {
       groupName: 'ESLint related',
