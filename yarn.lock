@@ -3406,17 +3406,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier-plugin-packagejson@npm:^2.2.11":
-  version: 2.5.22
-  resolution: "prettier-plugin-packagejson@npm:2.5.22"
+"prettier-plugin-packagejson@npm:^3.0.0":
+  version: 3.0.2
+  resolution: "prettier-plugin-packagejson@npm:3.0.2"
   dependencies:
-    sort-package-json: "npm:3.6.0"
+    sort-package-json: "npm:^3.6.0"
   peerDependencies:
-    prettier: ">= 1.16.0"
+    prettier: ^3
   peerDependenciesMeta:
     prettier:
       optional: true
-  checksum: 10c0/a4c8d671c5c453c3c33414ac3c28ae61c11fce4494b5a82a442343cb26e13b86e70fd9335b2c6c19c3065bb299ad48765b220ec17d3e85942a2b6ea370597f67
+  checksum: 10c0/c277b3252ce299c11053ad1b01968b0895b3baf2483323fcedbdae66ce9999b76d4b9e70396c58c39c61429d4672ba3f63a5e6e9a3104ff3b0000ec5214a4963
   languageName: node
   linkType: hard
 
@@ -3446,7 +3446,7 @@ __metadata:
     eslint-plugin-prettier: "npm:^5.0.0"
     eslint-plugin-promise: "npm:^7.0.0"
     prettier: "npm:^3.0.0"
-    prettier-plugin-packagejson: "npm:^2.2.11"
+    prettier-plugin-packagejson: "npm:^3.0.0"
     typescript: "npm:~5.8.0"
     typescript-eslint: "npm:^8.16.0"
   peerDependencies:
@@ -3705,9 +3705,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sort-package-json@npm:3.6.0":
-  version: 3.6.0
-  resolution: "sort-package-json@npm:3.6.0"
+"sort-package-json@npm:^3.6.0":
+  version: 3.7.1
+  resolution: "sort-package-json@npm:3.7.1"
   dependencies:
     detect-indent: "npm:^7.0.2"
     detect-newline: "npm:^4.0.1"
@@ -3718,7 +3718,7 @@ __metadata:
     tinyglobby: "npm:^0.2.15"
   bin:
     sort-package-json: cli.js
-  checksum: 10c0/977621b4541e6a107612524c8838a516425786b1d85fad9366416d3736989b1075d40511a28f0b3c47b9a0d7c1197f828af0cc3e350cdf793d1301d427178968
+  checksum: 10c0/2403faf859439c10a0562b02c34ff28480171fa8f3991bac6fe8652c8996cfe04f97409e220185f64eefb4c05a5fd83ba43a92d1c8d52a4cdb635bc81113faba
   languageName: node
   linkType: hard
 
