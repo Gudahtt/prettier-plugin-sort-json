@@ -16,4 +16,4 @@ jobs:
           token: ${{ secrets.RENOVATE_TOKEN }}
         env:
           LOG_LEVEL: ${{ vars.RENOVATE_LOG_LEVEL }}
-          RENOVATE_GIT_AUTHOR: "GudahttBot (Renovate) <gudahttbot+renovate@users.noreply.github.com>"
+          RENOVATE_GIT_AUTHOR: 'GudahttBot (Renovate) <gudahttbot+renovate@users.noreply.github.com>'
