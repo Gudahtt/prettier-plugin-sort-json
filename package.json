@@ -45,7 +45,7 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-import-resolver-typescript": "^3.6.3",
     "eslint-plugin-import-x": "^4.3.0",
-    "eslint-plugin-jsdoc": "^50.0.0",
+    "eslint-plugin-jsdoc": "^63.0.0",
     "eslint-plugin-n": "^17.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-promise": "^7.0.0",
