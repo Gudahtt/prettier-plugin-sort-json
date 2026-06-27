@@ -15,4 +15,4 @@ jobs:
           configurationFile: renovate-action.json5
           token: ${{ secrets.RENOVATE_TOKEN }}
         env:
-          LOG_LEVEL: ${{ env.RENOVATE_LOG_LEVEL }}
+          LOG_LEVEL: ${{ vars.RENOVATE_LOG_LEVEL }}
