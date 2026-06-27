@@ -42,12 +42,6 @@
       matchUpdateTypes: ['patch'],
       matchCategories: ['npm'],
     },
-    // Ignore MetaMask actions, Renovate will not be able to find updates for them
-    {
-      matchPackageNames: ['MetaMask/*'],
-      matchCategories: ['github-actions'],
-      enabled: false,
-    },
   ],
   postUpdateOptions: ['yarnDedupeHighest'],
   postUpgradeTasks: {
