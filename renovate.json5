@@ -6,50 +6,48 @@
   ignoreScripts: true,
   internalChecksFilter: 'strict',
   minimumReleaseAge: '30 days',
-  packageRules: [
-    {
-      groupName: 'Minor',
-      matchUpdateTypes: ['patch', 'minor'],
-      matchPackageNames: ['!prettier', '!typescript'],
-      matchCategories: ['npm'],
-    },
-    {
-      groupName: 'ESLint related',
-      matchPackageNames: [
-        '/^@metamask/eslint-config*/',
-        '/eslint/',
-        '/eslint-config-*/',
-        '/eslint-import-resolver-typescript/',
-        '/eslint-plugin-*/',
-        '/prettier/',
-        '/typescript-eslint/',
-      ],
-      matchCategories: ['npm'],
-    },
-    // Prettier handled separately because plugin API is not stable
-    {
-      groupName: 'Prettier',
-      matchPackageNames: ['prettier'],
-      matchUpdateTypes: ['patch', 'minor'],
-      matchCategories: ['npm'],
-    },
-    // TypeScript handled separately because it doesn't use SemVer
-    // The minor version is a peer dependency of the TypeScript ESLint
-    // configuration, so the minor bumps are left to that group.
-    {
-      groupName: 'TypeScript',
-      matchPackageNames: ['typescript'],
-      matchUpdateTypes: ['patch'],
-      matchCategories: ['npm'],
-    },
-  ],
-  postUpdateOptions: ['yarnDedupeHighest'],
-  postUpgradeTasks: {
-    commands: ['yarn run allow-scripts auto'],
-    executionMode: 'update',
-    fileFilters: ['package.json'],
-  },
   prConcurrentLimit: 10,
-  rangeStrategy: 'update-lockfile',
-  skipInstalls: false,
+  npm: {
+    packageRules: [
+      {
+        groupName: 'Minor',
+        matchUpdateTypes: ['patch', 'minor'],
+        matchPackageNames: ['!prettier', '!typescript'],
+      },
+      {
+        groupName: 'ESLint related',
+        matchPackageNames: [
+          '/^@metamask/eslint-config*/',
+          '/eslint/',
+          '/eslint-config-*/',
+          '/eslint-import-resolver-typescript/',
+          '/eslint-plugin-*/',
+          '/prettier/',
+          '/typescript-eslint/',
+        ],
+      },
+      // Prettier handled separately because plugin API is not stable
+      {
+        groupName: 'Prettier',
+        matchPackageNames: ['prettier'],
+        matchUpdateTypes: ['patch', 'minor'],
+      },
+      // TypeScript handled separately because it doesn't use SemVer
+      // The minor version is a peer dependency of the TypeScript ESLint
+      // configuration, so the minor bumps are left to that group.
+      {
+        groupName: 'TypeScript',
+        matchPackageNames: ['typescript'],
+        matchUpdateTypes: ['patch'],
+      },
+    ],
+    postUpdateOptions: ['yarnDedupeHighest'],
+    postUpgradeTasks: {
+      commands: ['yarn run allow-scripts auto'],
+      executionMode: 'update',
+      fileFilters: ['package.json'],
+    },
+    rangeStrategy: 'update-lockfile',
+    skipInstalls: false,
+  },
 }
