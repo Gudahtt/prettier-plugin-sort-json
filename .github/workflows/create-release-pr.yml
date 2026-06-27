@@ -30,7 +30,7 @@ jobs:
           # branch for all git operations and the release PR.
           ref: ${{ github.event.inputs.base-branch }}
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version-file: '.nvmrc'
       - uses: MetaMask/action-create-release-pr@v1
