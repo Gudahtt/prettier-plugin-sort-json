@@ -8,7 +8,7 @@ jobs:
     name: Prepare
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
@@ -26,7 +26,7 @@ jobs:
       matrix:
         node-version: [18.x, 20.x, 22.x, 24.x, 26.x]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
@@ -50,7 +50,7 @@ jobs:
       matrix:
         node-version: [24.x]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
@@ -80,7 +80,7 @@ jobs:
       matrix:
         node-version: [18.x, 20.x, 22.x, 24.x, 26.x]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
