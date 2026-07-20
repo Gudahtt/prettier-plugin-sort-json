@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@ava/typescript": "^6.0.0",
-    "@babel/types": "^7.18.10",
+    "@babel/types": "^8.0.0",
     "@lavamoat/allow-scripts": "^5.0.0",
     "@lavamoat/preinstall-always-fail": "^3.0.0",
     "@metamask/auto-changelog": "^6.0.0",
