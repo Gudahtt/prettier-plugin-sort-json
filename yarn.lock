@@ -5,13 +5,13 @@ __metadata:
   version: 10
   cacheKey: 10c0
 
-"@ava/typescript@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "@ava/typescript@npm:6.0.0"
+"@ava/typescript@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "@ava/typescript@npm:7.0.0"
   dependencies:
     escape-string-regexp: "npm:^5.0.0"
-    execa: "npm:^9.6.0"
-  checksum: 10c0/a2a97958cd973c2e716951664bafe4cb717c83c19bac24b6fa455c6cd1305859ace88ebb013f4d4fab9abd2935a45d75071df2f8e3f22149beea8c62c0959b19
+    execa: "npm:^9.6.1"
+  checksum: 10c0/4b22ab58dd0a9e6685554c84abedc133db062451b4e7e4963f5777c578993370bebf2c6d1adda566bdd9cf2572f70b2989eb388c7f8d6560bc70f7c54aeecafc
   languageName: node
   linkType: hard
 
@@ -2076,7 +2076,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"execa@npm:^9.6.0":
+"execa@npm:^9.6.1":
   version: 9.6.1
   resolution: "execa@npm:9.6.1"
   dependencies:
@@ -3424,7 +3424,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "prettier-plugin-sort-json@workspace:."
   dependencies:
-    "@ava/typescript": "npm:^6.0.0"
+    "@ava/typescript": "npm:^7.0.0"
     "@babel/types": "npm:^8.0.0"
     "@lavamoat/allow-scripts": "npm:^5.0.0"
     "@lavamoat/preinstall-always-fail": "npm:^3.0.0"
