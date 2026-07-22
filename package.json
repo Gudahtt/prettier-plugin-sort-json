@@ -41,12 +41,12 @@
     "@typescript-eslint/parser": "^8.0.0",
     "ava": "^6.0.0",
     "c8": "^11.0.0",
-    "eslint": "^9.0.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-import-resolver-typescript": "^3.6.3",
+    "eslint": "^10.0.0",
+    "eslint-config-prettier": "^10.0.0",
+    "eslint-import-resolver-typescript": "^4.0.0",
     "eslint-plugin-import-x": "^4.3.0",
-    "eslint-plugin-jsdoc": "^50.0.0",
-    "eslint-plugin-n": "^17.0.0",
+    "eslint-plugin-jsdoc": "^63.0.0",
+    "eslint-plugin-n": "^18.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-promise": "^7.0.0",
     "prettier": "^3.0.0",
@@ -64,7 +64,8 @@
   "lavamoat": {
     "allowScripts": {
       "@lavamoat/preinstall-always-fail": false,
-      "eslint-plugin-import-x>unrs-resolver": false
+      "eslint-plugin-import-x>unrs-resolver": false,
+      "eslint-import-resolver-typescript>unrs-resolver#1.12.2": false
     }
   }
 }
