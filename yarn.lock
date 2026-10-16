@@ -15,27 +15,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helper-string-parser@npm:^8.0.0":
-  version: 8.0.0
-  resolution: "@babel/helper-string-parser@npm:8.0.0"
-  checksum: 10c0/b2272a9eaa63a1bc9ce2673d580e69620fd79786f3e3cf1891f406801f8211810f194f2739fef920f01a97ae06ae465b2dfd238ab8037a3182d0869939ca9a5d
+"@babel/helper-string-parser@npm:^8.0.6":
+  version: 8.0.6
+  resolution: "@babel/helper-string-parser@npm:8.0.6"
+  checksum: 10c0/b59c0ff09e168d77b02538d363a2b6461b08697f30a7e1ea99a2f68f74307a2ce56a3cd7625494d5f21d4c48d5ddddeb2d2eec5791754345d524d092e415ae8d
   languageName: node
   linkType: hard
 
-"@babel/helper-validator-identifier@npm:^8.0.4":
-  version: 8.0.4
-  resolution: "@babel/helper-validator-identifier@npm:8.0.4"
-  checksum: 10c0/9d3c639a42b70613016fda026487a3b8056df918cb40221a48ef666a3bd2574475e315ee509c552baef4bef55a627ee8ea530e9af5b376512ab248c37aeab336
+"@babel/helper-validator-identifier@npm:^8.0.6":
+  version: 8.0.6
+  resolution: "@babel/helper-validator-identifier@npm:8.0.6"
+  checksum: 10c0/9170fe52f3c330945b259cfb5786fb0e1fb4bdafd4deedcb0d3cbe300e993c8df9ca2307734bd3009220799f3053d206557f78d942df0f41e565304e19d2595c
   languageName: node
   linkType: hard
 
 "@babel/types@npm:^8.0.0":
-  version: 8.0.4
-  resolution: "@babel/types@npm:8.0.4"
+  version: 8.0.6
+  resolution: "@babel/types@npm:8.0.6"
   dependencies:
-    "@babel/helper-string-parser": "npm:^8.0.0"
-    "@babel/helper-validator-identifier": "npm:^8.0.4"
-  checksum: 10c0/c1549372b5544a797c9dd3cfba27c17e0c986cfadb1c4a99246743073e3be99c7c671572326be1739b313a2194e3bfe5a74b1bd213d80c4bbc2c520c8cb4ff1f
+    "@babel/helper-string-parser": "npm:^8.0.6"
+    "@babel/helper-validator-identifier": "npm:^8.0.6"
+  checksum: 10c0/f97ac49f5e38ae44f20f702d78c1853438ec0d518da1623b6da9dc728c4132a1a7a3060390db021fa792850b64842637bea93c026a6d4eee2e42eaa023f1b778
   languageName: node
   linkType: hard
 
@@ -734,11 +734,11 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:^25.0.0":
-  version: 25.9.6
-  resolution: "@types/node@npm:25.9.6"
+  version: 25.9.9
+  resolution: "@types/node@npm:25.9.9"
   dependencies:
     undici-types: "npm:>=7.24.0 <7.24.7"
-  checksum: 10c0/1ee8d7cb629caa3906b0958200747c8d557c339b4cc4fb000eaf4be8715091394dc845f45302e76a96c715a16153b240dc7884cdd3e11d22c48273d244c5ecdf
+  checksum: 10c0/2ba08caa7118af2f2761f2f5db9b6304faf5bd027a2dcb72bf6fcae3dd9e470d17045fec27f89023c02e7d4e0661c6e5877174bd39794bef080db8b35ad4a1ea
   languageName: node
   linkType: hard
 
