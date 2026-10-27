@@ -1,6 +1,8 @@
 import type {
   ArrayExpression,
+  BooleanLiteral,
   Expression,
+  NumericLiteral,
   ObjectExpression,
   ObjectProperty,
   NullLiteral,
@@ -194,30 +196,84 @@ function valueIsArrayOrObjectExpression(
 }
 
 /**
+ * Determines whether the given array element is a JSON primitive value
+ * (i.e. a string, number, boolean, or null).
+ *
+ * @param element - The array element to check.
+ * @returns True if the element is a primitive value, false otherwise.
+ */
+function elementIsPrimitive(
+  element: null | Expression | SpreadElement,
+): element is
+  null | NullLiteral | StringLiteral | NumericLiteral | BooleanLiteral {
+  return (
+    element === null ||
+    element.type === 'NullLiteral' ||
+    element.type === 'StringLiteral' ||
+    element.type === 'NumericLiteral' ||
+    element.type === 'BooleanLiteral'
+  );
+}
+
+/**
+ * Get a string representation of a primitive array element's value, for use
+ * with a sort compare function.
+ *
+ * @param element - The primitive array element to convert.
+ * @returns A string representation of the element's value.
+ */
+function getPrimitiveSortKey(
+  element: null | NullLiteral | StringLiteral | NumericLiteral | BooleanLiteral,
+): string {
+  if (element === null || element.type === 'NullLiteral') {
+    return 'null';
+  }
+  if (element.type === 'StringLiteral') {
+    return element.value;
+  }
+  return String(element.value);
+}
+
+/**
  * Sort properties of JavaScript objects within an AST.
  *
  * @param ast - The AST to sort.
  * @param recursive - Whether to sort the object recursively or not.
  * @param sortCompareFunction - A custom sort function.
+ * @param sortArrays - Whether to sort arrays of primitive values or not.
  * @returns The sorted object.
  */
 function sortAst(
   ast: Expression,
   recursive: boolean,
   sortCompareFunction: (a: string, b: string) => number,
+  sortArrays: boolean,
 ): Expression {
-  if (ast.type === 'ArrayExpression' && recursive) {
+  if (ast.type === 'ArrayExpression' && (recursive || sortArrays)) {
     ast.elements = ast.elements.map(
       (element: null | NullLiteral | Expression | SpreadElement) => {
         if (element === null || element.type === 'NullLiteral') {
           return element;
         } /* c8 ignore start */ else if (element.type === 'SpreadElement') {
           throw new Error('Unreachable; SpreadElement is not allowed in JSON');
+        } /* c8 ignore stop */ else if (
+          recursive ||
+          element.type === 'ArrayExpression'
+        ) {
+          return sortAst(element, recursive, sortCompareFunction, sortArrays);
         }
-        /* c8 ignore stop */
-        return sortAst(element, recursive, sortCompareFunction);
+        return element;
       },
     );
+
+    if (sortArrays && ast.elements.every(elementIsPrimitive)) {
+      ast.elements = ast.elements.sort((elementA, elementB) =>
+        sortCompareFunction(
+          getPrimitiveSortKey(elementA),
+          getPrimitiveSortKey(elementB),
+        ),
+      );
+    }
   } else if (ast.type === 'ObjectExpression') {
     const { properties } = ast;
     assertObjectPropertyTypes(properties);
@@ -229,12 +285,20 @@ function sortAst(
       },
     );
 
-    if (recursive) {
+    if (recursive || sortArrays) {
       const recursivelySortedProperties = sortedProperties.map(
         (property: ObjectProperty) => {
           const { value } = property;
-          if (valueIsArrayOrObjectExpression(value)) {
-            property.value = sortAst(value, recursive, sortCompareFunction);
+          if (
+            (recursive && valueIsArrayOrObjectExpression(value)) ||
+            (sortArrays && value.type === 'ArrayExpression')
+          ) {
+            property.value = sortAst(
+              value,
+              recursive,
+              sortCompareFunction,
+              sortArrays,
+            );
           }
           return property;
         },
@@ -256,6 +320,11 @@ export type SortJsonOptions = {
    */
   jsonRecursiveSort?: boolean;
   /**
+   * Whether to sort arrays containing only primitive values (strings,
+   * numbers, booleans, and null)
+   */
+  jsonSortArrays?: boolean;
+  /**
    * A custom JSON sort order. See README for details on the format.
    */
   jsonSortOrder?: Record<string, CategorySort | null>;
@@ -266,8 +335,11 @@ export type SortJsonOptions = {
  *
  * Defaults set in the 'options' export have been applied by this point.
  */
-type ProcessedSortJsonOptions = Omit<SortJsonOptions, 'jsonRecursiveSort'> &
-  Required<Pick<SortJsonOptions, 'jsonRecursiveSort'>>;
+type ProcessedSortJsonOptions = Omit<
+  SortJsonOptions,
+  'jsonRecursiveSort' | 'jsonSortArrays'
+> &
+  Required<Pick<SortJsonOptions, 'jsonRecursiveSort' | 'jsonSortArrays'>>;
 
 /**
  * Parse JSON sort options from Prettier options.
@@ -285,9 +357,15 @@ function parseOptions(
       `Invalid 'jsonRecursiveSort' option; expected boolean, got '${typeof prettierOptions.jsonRecursiveSort}'`,
     );
   }
+  if (typeof prettierOptions.jsonSortArrays !== 'boolean') {
+    throw new Error(
+      `Invalid 'jsonSortArrays' option; expected boolean, got '${typeof prettierOptions.jsonSortArrays}'`,
+    );
+  }
   /* c8 ignore stop */
   const parsedJsonSortOptions: ProcessedSortJsonOptions = {
     jsonRecursiveSort: prettierOptions.jsonRecursiveSort,
+    jsonSortArrays: prettierOptions.jsonSortArrays,
   };
 
   if (prettierOptions.jsonSortOrder !== undefined) {
@@ -346,10 +424,11 @@ function parseOptions(
 function applyDefaultOptions(
   options: ProcessedSortJsonOptions,
 ): Required<ProcessedSortJsonOptions> {
-  const { jsonRecursiveSort, jsonSortOrder } = options;
+  const { jsonRecursiveSort, jsonSortArrays, jsonSortOrder } = options;
 
   return {
     jsonRecursiveSort, // Default already applied by Prettier
+    jsonSortArrays, // Default already applied by Prettier
     jsonSortOrder: jsonSortOrder ?? {},
   };
 }
@@ -446,9 +525,8 @@ function createParser(
   parser: JsonParser,
 ): (text: string, options: ParserOptions) => Promise<any> {
   return async (text: string, prettierOptions: ParserOptions): Promise<any> => {
-    const { jsonRecursiveSort, jsonSortOrder } = applyDefaultOptions(
-      parseOptions(prettierOptions),
-    );
+    const { jsonRecursiveSort, jsonSortArrays, jsonSortOrder } =
+      applyDefaultOptions(parseOptions(prettierOptions));
 
     const jsonRootAst = await babelParsers[parser].parse(text, prettierOptions);
 
@@ -457,19 +535,22 @@ function createParser(
     const ast = jsonRootAst.node;
 
     // Only objects are intended to be sorted by this plugin
-    // Arrays are considered only in recursive mode, so that we
-    // can get to nested objected.
-    if (
-      !(
-        ast.type === 'ObjectExpression' ||
-        (ast.type === 'ArrayExpression' && jsonRecursiveSort)
-      )
-    ) {
+    // Arrays are considered only in recursive mode, or when array sorting
+    // is enabled, so that we can get to nested objected.
+    if (!(
+      ast.type === 'ObjectExpression' ||
+      (ast.type === 'ArrayExpression' && (jsonRecursiveSort || jsonSortArrays))
+    )) {
       return jsonRootAst;
     }
 
     const sortCompareFunction = createSortCompareFunction(jsonSortOrder);
-    const sortedAst = sortAst(ast, jsonRecursiveSort, sortCompareFunction);
+    const sortedAst = sortAst(
+      ast,
+      jsonRecursiveSort,
+      sortCompareFunction,
+      jsonSortArrays,
+    );
 
     return {
       ...jsonRootAst,
@@ -493,6 +574,14 @@ export const options = {
     since: '0.0.2',
     type: 'boolean' as const,
   },
+  jsonSortArrays: {
+    category: 'json-sort',
+    default: false,
+    description:
+      'Sort arrays containing only primitive values (strings, numbers, booleans, and null)',
+    since: '4.3.0',
+    type: 'boolean' as const,
+  },
   jsonSortOrder: {
     category: 'json-sort',
     description: 'A JSON string specifying a custom sort order',
@@ -513,6 +602,13 @@ declare module 'prettier' {
      * @default false
      */
     jsonRecursiveSort?: boolean | undefined;
+
+    /**
+     * Sort arrays containing only primitive values (strings, numbers, booleans, and null).
+     *
+     * @default false
+     */
+    jsonSortArrays?: boolean | undefined;
 
     /**
      * Use a custom sort order. This is specified as a JSON string containing a set of sorting rules.

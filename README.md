@@ -102,6 +102,7 @@ Here are example Prettier configuration files with all default options set:
   {
     "plugins": ["prettier-plugin-sort-json"],
     "jsonRecursiveSort": false,
+    "jsonSortArrays": false,
     "jsonSortOrder": "{\"/.*/\": \"lexical\"}"
   }
   ```
@@ -112,6 +113,7 @@ Here are example Prettier configuration files with all default options set:
   module.exports = {
     plugins: ['prettier-plugin-sort-json'],
     jsonRecursiveSort: false,
+    jsonSortArrays: false,
     jsonSortOrder: JSON.stringify({ [/.*/]: 'lexical' }),
   };
   ```
@@ -123,6 +125,14 @@ Sort JSON objects recursively, including all nested objects. This also sorts obj
 | Default | CLI                     | Configuration               |
 | ------- | ----------------------- | --------------------------- |
 | `false` | `--json-recursive-sort` | `jsonRecursiveSort: <bool>` |
+
+### JSON Sort Arrays
+
+Arrays containing only primitive values (strings, numbers, booleans, and `null`) are sorted. Arrays that contain objects or other arrays keep their original order, but any nested arrays are still checked and sorted if they contain only primitives. Objects inside arrays are sorted only when [JSON Recursive Sort](#json-recursive-sort) is enabled. Values are compared as strings in the configured sort order, so numbers sort lexically (e.g. `10` comes before `2`).
+
+| Default | CLI                  | Configuration            |
+| ------- | -------------------- | ------------------------ |
+| `false` | `--json-sort-arrays` | `jsonSortArrays: <bool>` |
 
 ### JSON Sort Order
 
