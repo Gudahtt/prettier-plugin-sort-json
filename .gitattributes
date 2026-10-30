@@ -1,5 +1,9 @@
 * text=auto
 
+# AVA snapshots are binary. This prevents git from corrupting snapshots by
+# changing line endings.
+*.snap binary
+
 # Reviewing the lockfile contents is an important step in verifying that
 # we're using the dependencies we expect to be using
 yarn.lock linguist-generated=false
