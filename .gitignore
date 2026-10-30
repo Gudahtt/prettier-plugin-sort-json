@@ -19,7 +19,6 @@
 
 # Configuration files
 !.eslintrc.js
-!ava.config.js
 !.prettierrc.js
 
 # Logs
