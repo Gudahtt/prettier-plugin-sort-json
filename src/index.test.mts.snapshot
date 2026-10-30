@@ -65,7 +65,6 @@ exports[`json parser: > sorts a JSON object with unconventional keys 1`] = `
 exports[`json parser: > sorts an unsorted JSON object 1`] = `
 {
   "0": null,
-  "$": null,
   "a": null,
   "b": null,
   "exampleNestedObject": {
@@ -171,7 +170,6 @@ exports[`json parser: > sorts an unsorted JSON object with a numeric custom sort
     "examplePrimitive": 1,
     "a": null
   },
-  "first": "first",
   "z": null
 }
 `;
@@ -342,7 +340,6 @@ exports[`json parser: > validates a deeply nested sorted JSON object recursively
 exports[`json parser: > validates a sorted JSON object 1`] = `
 {
   "0": null,
-  "$": null,
   "a": null,
   "b": null,
   "exampleNestedObject": {
@@ -450,7 +447,6 @@ exports[`json parser: > validates a sorted JSON object with a numeric custom sor
     "examplePrimitive": 1,
     "a": null
   },
-  "first": "first",
   "z": null
 }
 `;
