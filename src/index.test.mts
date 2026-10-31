@@ -1,10 +1,7 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
+
 import assert from 'node:assert/strict';
-// eslint-disable-next-line n/no-unsupported-features/node-builtins
 import { test, suite } from 'node:test';
 import { format } from 'prettier';
-
-// eslint-disable-next-line import-x/no-useless-path-segments
 import * as SortJsonPlugin from './index.ts';
 
 const complexSort = {
