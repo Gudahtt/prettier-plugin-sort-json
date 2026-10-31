@@ -459,12 +459,10 @@ function createParser(
     // Only objects are intended to be sorted by this plugin
     // Arrays are considered only in recursive mode, so that we
     // can get to nested objected.
-    if (
-      !(
-        ast.type === 'ObjectExpression' ||
-        (ast.type === 'ArrayExpression' && jsonRecursiveSort)
-      )
-    ) {
+    if (!(
+      ast.type === 'ObjectExpression' ||
+      (ast.type === 'ArrayExpression' && jsonRecursiveSort)
+    )) {
       return jsonRootAst;
     }
 
