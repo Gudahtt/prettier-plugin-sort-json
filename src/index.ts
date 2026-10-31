@@ -534,9 +534,9 @@ function createParser(
     // This ast variable is the real document root
     const ast = jsonRootAst.node;
 
-    // Only objects are intended to be sorted by this plugin
-    // Arrays are considered only in recursive mode, or when array sorting
-    // is enabled, so that we can get to nested objected.
+    // Early-exit when the root node doesn't require sorting.
+    // Note that for Array root nodes, when `jsonRecursiveSort` is enabled we have to sort the
+    // AST to reach nested objects (even if `jsonSortArrays` is disabled).
     if (!(
       ast.type === 'ObjectExpression' ||
       (ast.type === 'ArrayExpression' && (jsonRecursiveSort || jsonSortArrays))
