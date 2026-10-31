@@ -102,6 +102,7 @@ for (const parser of supportedParsers) {
         plugins: [SortJsonPlugin],
         ...{
           jsonRecursiveSort: undefined,
+          jsonSortArrays: undefined,
           jsonSortOrder: undefined,
         },
       });
@@ -132,6 +133,22 @@ for (const parser of supportedParsers) {
           plugins: [SortJsonPlugin],
           ...{
             jsonRecursiveSort: 'yes',
+          },
+        });
+      },
+    );
+
+    test(
+      `throws if jsonSortArrays is not a boolean`,
+      { expectFailure: 'Invalid value' },
+      async () => {
+        // @ts-expect-error Testing invalid option type
+        await format('{}', {
+          filepath: `foo.${fileExtensions[parser]}`,
+          parser,
+          plugins: [SortJsonPlugin],
+          ...{
+            jsonSortArrays: 'yes',
           },
         });
       },
@@ -874,6 +891,157 @@ for (const parser of supportedParsers) {
             '/[a-z]+/': 'lexical',
             '/[A-Z]+/': 'none',
           }),
+        },
+      });
+
+      t.assert.snapshot(JSON.parse(output));
+    });
+
+    test(`does not sort arrays by default`, async (t) => {
+      const fixture = ['z', 'a', 'm'];
+
+      const input = JSON.stringify(fixture, null, 2);
+      const output = await format(input, {
+        filepath: `foo.${fileExtensions[parser]}`,
+        parser,
+        plugins: [SortJsonPlugin],
+      });
+
+      t.assert.snapshot(JSON.parse(output));
+    });
+
+    test(`validates a sorted array of strings`, async (t) => {
+      const fixture = ['a', 'm', 'z'];
+
+      const input = JSON.stringify(fixture, null, 2);
+      const output = await format(input, {
+        filepath: `foo.${fileExtensions[parser]}`,
+        parser,
+        plugins: [SortJsonPlugin],
+        ...{
+          jsonSortArrays: true,
+        },
+      });
+
+      t.assert.snapshot(JSON.parse(output));
+    });
+
+    test(`sorts an unsorted array of strings when jsonSortArrays is enabled`, async (t) => {
+      const fixture = ['z', 'a', 'm'];
+
+      const input = JSON.stringify(fixture, null, 2);
+      const output = await format(input, {
+        filepath: `foo.${fileExtensions[parser]}`,
+        parser,
+        plugins: [SortJsonPlugin],
+        ...{
+          jsonSortArrays: true,
+        },
+      });
+
+      t.assert.snapshot(JSON.parse(output));
+    });
+
+    test(`sorts an array of mixed primitive types when jsonSortArrays is enabled`, async (t) => {
+      const fixture = [true, null, 10, 'b', false];
+
+      const input = JSON.stringify(fixture, null, 2);
+      const output = await format(input, {
+        filepath: `foo.${fileExtensions[parser]}`,
+        parser,
+        plugins: [SortJsonPlugin],
+        ...{
+          jsonSortArrays: true,
+        },
+      });
+
+      t.assert.snapshot(JSON.parse(output));
+    });
+
+    test(`sorts a primitive array nested in an object property when jsonSortArrays is enabled`, async (t) => {
+      const fixture = {
+        b: null,
+        a: ['z', 'a', 'm'],
+      };
+
+      const input = JSON.stringify(fixture, null, 2);
+      const output = await format(input, {
+        filepath: `foo.${fileExtensions[parser]}`,
+        parser,
+        plugins: [SortJsonPlugin],
+        ...{
+          jsonSortArrays: true,
+        },
+      });
+
+      t.assert.snapshot(JSON.parse(output));
+    });
+
+    test(`does not reorder an array containing an object when jsonSortArrays is enabled`, async (t) => {
+      const fixture = [3, { b: 1, a: 2 }, 1];
+
+      const input = JSON.stringify(fixture, null, 2);
+      const output = await format(input, {
+        filepath: `foo.${fileExtensions[parser]}`,
+        parser,
+        plugins: [SortJsonPlugin],
+        ...{
+          jsonSortArrays: true,
+        },
+      });
+
+      t.assert.snapshot(JSON.parse(output));
+    });
+
+    test(`sorts a nested array within an array containing an object, without sorting the object, when jsonSortArrays is enabled without jsonRecursiveSort`, async (t) => {
+      const fixture = [{ arr: ['z', 'a'] }, 5, ['c', 'b']];
+
+      const input = JSON.stringify(fixture, null, 2);
+      const output = await format(input, {
+        filepath: `foo.${fileExtensions[parser]}`,
+        parser,
+        plugins: [SortJsonPlugin],
+        ...{
+          jsonSortArrays: true,
+        },
+      });
+
+      t.assert.snapshot(JSON.parse(output));
+    });
+
+    test(`sorts arrays nested within objects recursively when jsonSortArrays and jsonRecursiveSort are both enabled`, async (t) => {
+      const fixture = {
+        arr: ['z', 'a'],
+        nested: {
+          arr2: ['c', 'b'],
+        },
+      };
+
+      const input = JSON.stringify(fixture, null, 2);
+      const output = await format(input, {
+        filepath: `foo.${fileExtensions[parser]}`,
+        parser,
+        plugins: [SortJsonPlugin],
+        ...{
+          jsonRecursiveSort: true,
+          jsonSortArrays: true,
+        },
+      });
+
+      t.assert.snapshot(JSON.parse(output));
+    });
+
+    test(`sorts array values using a custom jsonSortOrder algorithm when jsonSortArrays is enabled`, async (t) => {
+      const fixture = ['10_x', '2_y', '1_z'];
+
+      const input = JSON.stringify(fixture, null, 2);
+      const output = await format(input, {
+        filepath: `foo.${fileExtensions[parser]}`,
+        parser,
+        plugins: [SortJsonPlugin],
+        ...{
+          jsonSortArrays: true,
+          jsonSortOrder: JSON.stringify({ '/.+/u': 'numeric' }),
         },
       });
 
