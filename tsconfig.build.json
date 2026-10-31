@@ -1,6 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "allowImportingTsExtensions": false,
     "declaration": true,
     "inlineSources": true,
     "noEmit": false,
@@ -8,6 +9,6 @@
     "rootDir": "src",
     "sourceMap": true
   },
-  "exclude": ["./src/**/*.test.ts"],
+  "exclude": ["./src/**/*.test.mts"],
   "include": ["./src/**/*.ts"]
 }
