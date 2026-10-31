@@ -926,7 +926,7 @@ for (const parser of supportedParsers) {
       t.assert.snapshot(output);
     });
 
-    test(`${parser}: sorts an unsorted array of strings when jsonSortArrays is enabled`, async (t) => {
+    test(`sorts an unsorted array of strings when jsonSortArrays is enabled`, async (t) => {
       const fixture = ['z', 'a', 'm'];
 
       const input = JSON.stringify(fixture, null, 2);
@@ -958,7 +958,7 @@ for (const parser of supportedParsers) {
       t.assert.snapshot(output);
     });
 
-    test(`${parser}: sorts a primitive array nested in an object property when jsonSortArrays is enabled`, async (t) => {
+    test(`sorts a primitive array nested in an object property when jsonSortArrays is enabled`, async (t) => {
       const fixture = {
         b: null,
         a: ['z', 'a', 'm'],
