@@ -907,7 +907,7 @@ for (const parser of supportedParsers) {
         plugins: [SortJsonPlugin],
       });
 
-      t.assert.snapshot(output);
+      t.assert.snapshot(JSON.parse(output));
     });
 
     test(`validates a sorted array of strings`, async (t) => {
@@ -923,7 +923,7 @@ for (const parser of supportedParsers) {
         },
       });
 
-      t.assert.snapshot(output);
+      t.assert.snapshot(JSON.parse(output));
     });
 
     test(`sorts an unsorted array of strings when jsonSortArrays is enabled`, async (t) => {
@@ -939,7 +939,7 @@ for (const parser of supportedParsers) {
         },
       });
 
-      t.assert.snapshot(output);
+      t.assert.snapshot(JSON.parse(output));
     });
 
     test(`sorts an array of mixed primitive types when jsonSortArrays is enabled`, async (t) => {
@@ -955,7 +955,7 @@ for (const parser of supportedParsers) {
         },
       });
 
-      t.assert.snapshot(output);
+      t.assert.snapshot(JSON.parse(output));
     });
 
     test(`sorts a primitive array nested in an object property when jsonSortArrays is enabled`, async (t) => {
@@ -974,7 +974,7 @@ for (const parser of supportedParsers) {
         },
       });
 
-      t.assert.snapshot(output);
+      t.assert.snapshot(JSON.parse(output));
     });
 
     test(`does not reorder an array containing an object when jsonSortArrays is enabled`, async (t) => {
@@ -990,7 +990,7 @@ for (const parser of supportedParsers) {
         },
       });
 
-      t.assert.snapshot(output);
+      t.assert.snapshot(JSON.parse(output));
     });
 
     test(`sorts a nested array within an array containing an object, without sorting the object, when jsonSortArrays is enabled without jsonRecursiveSort`, async (t) => {
@@ -1006,7 +1006,7 @@ for (const parser of supportedParsers) {
         },
       });
 
-      t.assert.snapshot(output);
+      t.assert.snapshot(JSON.parse(output));
     });
 
     test(`sorts arrays nested within objects recursively when jsonSortArrays and jsonRecursiveSort are both enabled`, async (t) => {
@@ -1028,7 +1028,7 @@ for (const parser of supportedParsers) {
         },
       });
 
-      t.assert.snapshot(output);
+      t.assert.snapshot(JSON.parse(output));
     });
 
     test(`sorts array values using a custom jsonSortOrder algorithm when jsonSortArrays is enabled`, async (t) => {
@@ -1045,7 +1045,7 @@ for (const parser of supportedParsers) {
         },
       });
 
-      t.assert.snapshot(output);
+      t.assert.snapshot(JSON.parse(output));
     });
   });
 }

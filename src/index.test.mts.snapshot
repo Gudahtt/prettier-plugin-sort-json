@@ -1,17 +1,20 @@
 exports[`json parser: > does not reorder an array containing an object when jsonSortArrays is enabled 1`] = `
-"[\\n  3,\\n  {\\n    \\"b\\": 1,\\n    \\"a\\": 2\\n  },\\n  1\\n]\\n"
+[
+  3,
+  {
+    "b": 1,
+    "a": 2
+  },
+  1
+]
 `;
 
 exports[`json parser: > does not sort arrays by default 1`] = `
-"[\\"z\\", \\"a\\", \\"m\\"]\\n"
-`;
-
-exports[`json parser: > json: sorts a primitive array nested in an object property when jsonSortArrays is enabled 1`] = `
-"{\\n  \\"a\\": [\\"a\\", \\"m\\", \\"z\\"],\\n  \\"b\\": null\\n}\\n"
-`;
-
-exports[`json parser: > json: sorts an unsorted array of strings when jsonSortArrays is enabled 1`] = `
-"[\\"a\\", \\"m\\", \\"z\\"]\\n"
+[
+  "z",
+  "a",
+  "m"
+]
 `;
 
 exports[`json parser: > sorts JSON objects recursively within a nested array 1`] = `
@@ -79,11 +82,40 @@ exports[`json parser: > sorts a JSON object with unconventional keys 1`] = `
 `;
 
 exports[`json parser: > sorts a nested array within an array containing an object, without sorting the object, when jsonSortArrays is enabled without jsonRecursiveSort 1`] = `
-"[\\n  {\\n    \\"arr\\": [\\"z\\", \\"a\\"]\\n  },\\n  5,\\n  [\\"b\\", \\"c\\"]\\n]\\n"
+[
+  {
+    "arr": [
+      "z",
+      "a"
+    ]
+  },
+  5,
+  [
+    "b",
+    "c"
+  ]
+]
+`;
+
+exports[`json parser: > sorts a primitive array nested in an object property when jsonSortArrays is enabled 1`] = `
+{
+  "a": [
+    "a",
+    "m",
+    "z"
+  ],
+  "b": null
+}
 `;
 
 exports[`json parser: > sorts an array of mixed primitive types when jsonSortArrays is enabled 1`] = `
-"[10, \\"b\\", false, null, true]\\n"
+[
+  10,
+  "b",
+  false,
+  null,
+  true
+]
 `;
 
 exports[`json parser: > sorts an unsorted JSON object 1`] = `
@@ -275,6 +307,14 @@ exports[`json parser: > sorts an unsorted JSON object within an array recursivel
 ]
 `;
 
+exports[`json parser: > sorts an unsorted array of strings when jsonSortArrays is enabled 1`] = `
+[
+  "a",
+  "m",
+  "z"
+]
+`;
+
 exports[`json parser: > sorts an unsorted deeply nested JSON object recursively 1`] = `
 {
   "0": null,
@@ -304,11 +344,26 @@ exports[`json parser: > sorts an unsorted deeply nested JSON object recursively 
 `;
 
 exports[`json parser: > sorts array values using a custom jsonSortOrder algorithm when jsonSortArrays is enabled 1`] = `
-"[\\"1_z\\", \\"2_y\\", \\"10_x\\"]\\n"
+[
+  "1_z",
+  "2_y",
+  "10_x"
+]
 `;
 
 exports[`json parser: > sorts arrays nested within objects recursively when jsonSortArrays and jsonRecursiveSort are both enabled 1`] = `
-"{\\n  \\"arr\\": [\\"a\\", \\"z\\"],\\n  \\"nested\\": {\\n    \\"arr2\\": [\\"b\\", \\"c\\"]\\n  }\\n}\\n"
+{
+  "arr": [
+    "a",
+    "z"
+  ],
+  "nested": {
+    "arr2": [
+      "b",
+      "c"
+    ]
+  }
+}
 `;
 
 exports[`json parser: > validates JSON objects recursively within a nested array 1`] = `
@@ -573,5 +628,9 @@ exports[`json parser: > validates a sorted JSON object within an array recursive
 `;
 
 exports[`json parser: > validates a sorted array of strings 1`] = `
-"[\\"a\\", \\"m\\", \\"z\\"]\\n"
+[
+  "a",
+  "m",
+  "z"
+]
 `;
