@@ -5,27 +5,27 @@ __metadata:
   version: 10
   cacheKey: 10c0
 
-"@babel/helper-string-parser@npm:^8.0.0":
-  version: 8.0.0
-  resolution: "@babel/helper-string-parser@npm:8.0.0"
-  checksum: 10c0/b2272a9eaa63a1bc9ce2673d580e69620fd79786f3e3cf1891f406801f8211810f194f2739fef920f01a97ae06ae465b2dfd238ab8037a3182d0869939ca9a5d
+"@babel/helper-string-parser@npm:^8.1.2":
+  version: 8.1.2
+  resolution: "@babel/helper-string-parser@npm:8.1.2"
+  checksum: 10c0/1daf91e756cc08a5a12047259a6ac0a9d1c20c649d26b79302b8a3517cb59195f6246876a639037ca6b5f3521b974800070f598464d6a47663e9abd921337e56
   languageName: node
   linkType: hard
 
-"@babel/helper-validator-identifier@npm:^8.0.4":
-  version: 8.0.4
-  resolution: "@babel/helper-validator-identifier@npm:8.0.4"
-  checksum: 10c0/9d3c639a42b70613016fda026487a3b8056df918cb40221a48ef666a3bd2574475e315ee509c552baef4bef55a627ee8ea530e9af5b376512ab248c37aeab336
+"@babel/helper-validator-identifier@npm:^8.0.6":
+  version: 8.0.6
+  resolution: "@babel/helper-validator-identifier@npm:8.0.6"
+  checksum: 10c0/9170fe52f3c330945b259cfb5786fb0e1fb4bdafd4deedcb0d3cbe300e993c8df9ca2307734bd3009220799f3053d206557f78d942df0f41e565304e19d2595c
   languageName: node
   linkType: hard
 
 "@babel/types@npm:^8.0.0":
-  version: 8.0.4
-  resolution: "@babel/types@npm:8.0.4"
+  version: 8.1.2
+  resolution: "@babel/types@npm:8.1.2"
   dependencies:
-    "@babel/helper-string-parser": "npm:^8.0.0"
-    "@babel/helper-validator-identifier": "npm:^8.0.4"
-  checksum: 10c0/c1549372b5544a797c9dd3cfba27c17e0c986cfadb1c4a99246743073e3be99c7c671572326be1739b313a2194e3bfe5a74b1bd213d80c4bbc2c520c8cb4ff1f
+    "@babel/helper-string-parser": "npm:^8.1.2"
+    "@babel/helper-validator-identifier": "npm:^8.0.6"
+  checksum: 10c0/67e1bc97bfff2aa75cca07da2b58747caca7142b4d357c8c268bfe796ad2778fffb5f0016d466839adb43c86ed339c58226ef62b38e1edd7c705f8059e326472
   languageName: node
   linkType: hard
 
@@ -281,9 +281,9 @@ __metadata:
   linkType: hard
 
 "@lavamoat/preinstall-always-fail@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "@lavamoat/preinstall-always-fail@npm:3.0.0"
-  checksum: 10c0/9f6b25e852aa81827d1aaa0e66694f73e2e2a8c7397af64461bd51d9826ce9d60812db26f918d7519777076b83ca09f6c024a2b527e30da82032cf1fd3f74290
+  version: 3.0.1
+  resolution: "@lavamoat/preinstall-always-fail@npm:3.0.1"
+  checksum: 10c0/1a0e36b2263c55748ff30b3f1b7f8660cdd6e773ece6ab3931d8b405792447b0b0ff123a8d2b9c7b9c95ca654703d2dc733e10c63fb1a704854e179156d0c116
   languageName: node
   linkType: hard
 
