@@ -128,7 +128,7 @@ Sort JSON objects recursively, including all nested objects. This also sorts obj
 
 ### JSON Sort Arrays
 
-Arrays containing only primitive values (strings, numbers, booleans, and `null`) are sorted. Arrays that contain objects or other arrays keep their original order, but any nested arrays are still checked and sorted if they contain only primitives. Objects inside arrays are sorted only when [JSON Recursive Sort](#json-recursive-sort) is enabled. Values are compared as strings in the configured sort order, so numbers sort lexically (e.g. `10` comes before `2`).
+Arrays containing only primitive values (strings, numbers, booleans, and `null`) are sorted. Arrays that contain objects or other arrays keep their original order, but any nested arrays are still checked and sorted if they contain only primitives. Objects inside arrays are sorted only when [JSON Recursive Sort](#json-recursive-sort) is enabled. Values are compared as strings in the configured sort order, which defaults to sorting lexically (e.g. `10` comes before `2`).
 
 | Default | CLI                  | Configuration            |
 | ------- | -------------------- | ------------------------ |
