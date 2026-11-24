@@ -249,17 +249,16 @@ function sortAst(
   sortCompareFunction: (a: string, b: string) => number,
   sortArrays: boolean,
 ): Expression {
-  if (ast.type === 'ArrayExpression' && (recursive || sortArrays)) {
+  // Arrays are only visited when they are the root or when `recursive` is set,
+  // because the object branch below only recurses when `recursive` is set.
+  if (ast.type === 'ArrayExpression') {
     ast.elements = ast.elements.map(
       (element: null | NullLiteral | Expression | SpreadElement) => {
         if (element === null || element.type === 'NullLiteral') {
           return element;
         } /* c8 ignore start */ else if (element.type === 'SpreadElement') {
           throw new Error('Unreachable; SpreadElement is not allowed in JSON');
-        } /* c8 ignore stop */ else if (
-          recursive ||
-          element.type === 'ArrayExpression'
-        ) {
+        } /* c8 ignore stop */ else if (recursive) {
           return sortAst(element, recursive, sortCompareFunction, sortArrays);
         }
         return element;
@@ -285,14 +284,11 @@ function sortAst(
       },
     );
 
-    if (recursive || sortArrays) {
+    if (recursive) {
       const recursivelySortedProperties = sortedProperties.map(
         (property: ObjectProperty) => {
           const { value } = property;
-          if (
-            (recursive && valueIsArrayOrObjectExpression(value)) ||
-            (sortArrays && value.type === 'ArrayExpression')
-          ) {
+          if (valueIsArrayOrObjectExpression(value)) {
             property.value = sortAst(
               value,
               recursive,

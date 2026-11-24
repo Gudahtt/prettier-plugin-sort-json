@@ -9,6 +9,22 @@ exports[`json parser: > does not reorder an array containing an object when json
 ]
 `;
 
+exports[`json parser: > does not sort a nested array within an array containing an object when jsonSortArrays is enabled without jsonRecursiveSort 1`] = `
+[
+  {
+    "arr": [
+      "z",
+      "a"
+    ]
+  },
+  5,
+  [
+    "c",
+    "b"
+  ]
+]
+`;
+
 exports[`json parser: > does not sort arrays by default 1`] = `
 [
   "z",
@@ -81,23 +97,7 @@ exports[`json parser: > sorts a JSON object with unconventional keys 1`] = `
 }
 `;
 
-exports[`json parser: > sorts a nested array within an array containing an object, without sorting the object, when jsonSortArrays is enabled without jsonRecursiveSort 1`] = `
-[
-  {
-    "arr": [
-      "z",
-      "a"
-    ]
-  },
-  5,
-  [
-    "b",
-    "c"
-  ]
-]
-`;
-
-exports[`json parser: > sorts a primitive array nested in an object property when jsonSortArrays is enabled 1`] = `
+exports[`json parser: > sorts a primitive array nested in an object property when jsonSortArrays and jsonRecursiveSort are enabled 1`] = `
 {
   "a": [
     "a",

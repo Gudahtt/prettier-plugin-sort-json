@@ -958,7 +958,7 @@ for (const parser of supportedParsers) {
       t.assert.snapshot(JSON.parse(output));
     });
 
-    test(`sorts a primitive array nested in an object property when jsonSortArrays is enabled`, async (t) => {
+    test(`sorts a primitive array nested in an object property when jsonSortArrays and jsonRecursiveSort are enabled`, async (t) => {
       const fixture = {
         b: null,
         a: ['z', 'a', 'm'],
@@ -970,6 +970,7 @@ for (const parser of supportedParsers) {
         parser,
         plugins: [SortJsonPlugin],
         ...{
+          jsonRecursiveSort: true,
           jsonSortArrays: true,
         },
       });
@@ -993,7 +994,7 @@ for (const parser of supportedParsers) {
       t.assert.snapshot(JSON.parse(output));
     });
 
-    test(`sorts a nested array within an array containing an object, without sorting the object, when jsonSortArrays is enabled without jsonRecursiveSort`, async (t) => {
+    test(`does not sort a nested array within an array containing an object when jsonSortArrays is enabled without jsonRecursiveSort`, async (t) => {
       const fixture = [{ arr: ['z', 'a'] }, 5, ['c', 'b']];
 
       const input = JSON.stringify(fixture, null, 2);
