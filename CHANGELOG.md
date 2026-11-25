@@ -7,12 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [4.3.0]
-
-### Added
-
-- Add `jsonSortArrays` option to sort arrays of primitives ([#405](https://github.com/Gudahtt/prettier-plugin-sort-json/pull/405))
-
 ## [4.2.0]
 
 ### Added
@@ -136,8 +130,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release
 
-[Unreleased]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v4.3.0...HEAD
-[4.3.0]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v4.2.0...v4.3.0
+[Unreleased]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v4.2.0...HEAD
 [4.2.0]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v4.1.1...v4.2.0
 [4.1.1]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v4.1.0...v4.1.1
 [4.1.0]: https://github.com/Gudahtt/prettier-plugin-sort-json/compare/v4.0.0...v4.1.0
