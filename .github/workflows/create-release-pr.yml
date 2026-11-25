@@ -14,6 +14,8 @@ on:
         description: 'A specific version to bump to. Mutually exclusive with "release-type".'
         required: false
 
+permissions: {}
+
 jobs:
   create-release-pr:
     runs-on: ubuntu-latest
@@ -29,6 +31,7 @@ jobs:
           # We check out the specified branch, which will be used as the base
           # branch for all git operations and the release PR.
           ref: ${{ github.event.inputs.base-branch }}
+          persist-credentials: false
       - name: Setup Node.js
         uses: actions/setup-node@v7
         with:

@@ -3,12 +3,17 @@ on:
   schedule:
     - cron: '0 0 * * *'
   workflow_dispatch:
+
+permissions: {}
+
 jobs:
   renovate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@2804199d260ad00c1fae0e9e842888369391c776 # v46.3.10
         with:

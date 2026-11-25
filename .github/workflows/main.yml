@@ -5,23 +5,29 @@ on:
     branches: [main]
   pull_request:
 
+permissions: {}
+
 jobs:
   check-workflows:
     name: Check workflows
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - name: Download actionlint
         id: download-actionlint
         run: bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/914e7df21a07ef503a81201c76d2b11c789d3fca/scripts/download-actionlint.bash) # v1.7.12
         shell: bash
       - name: Check workflow files
-        run: ${{ steps.download-actionlint.outputs.executable }} -color
+        env:
+          STEPS_DOWNLOAD_ACTIONLINT_OUTPUTS_EXECUTABLE: ${{ steps.download-actionlint.outputs.executable }}
+        run: ${STEPS_DOWNLOAD_ACTIONLINT_OUTPUTS_EXECUTABLE} -color
         shell: bash
 
   build-lint-test:
     name: Build, lint, and test
-    uses: ./.github/workflows/build-lint-test.yml
+    uses: $/.github/workflows/build-lint-test.yml
 
   all-jobs-completed:
     name: All jobs completed
@@ -43,8 +49,10 @@ jobs:
     needs: all-jobs-completed
     steps:
       - name: Check that all jobs have passed
+        env:
+          NEEDS_ALL_JOBS_COMPLETED_OUTPUTS_PASSED: ${{ needs.all-jobs-completed.outputs.PASSED }}
         run: |
-          passed="${{ needs.all-jobs-completed.outputs.PASSED }}"
+          passed="${NEEDS_ALL_JOBS_COMPLETED_OUTPUTS_PASSED}"
           if [[ $passed != "true" ]]; then
             exit 1
           fi
@@ -69,6 +77,6 @@ jobs:
     name: Publish release
     permissions:
       contents: write
-    uses: ./.github/workflows/publish-release.yml
+    uses: $/.github/workflows/publish-release.yml
     secrets:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
