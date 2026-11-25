@@ -67,6 +67,9 @@ jobs:
     environment: npm-publish
     runs-on: ubuntu-latest
     needs: publish-npm-dry-run
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v7
         with:
@@ -88,6 +91,7 @@ jobs:
       - name: Publish
         uses: MetaMask/action-npm-publish@v7
         with:
+          dry-run: false
           # This `NPM_TOKEN` needs to be manually set per-repository.
           # Look in the repository settings under "Environments", and set this token in the `npm-publish` environment.
           npm-token: ${{ secrets.NPM_TOKEN }}
